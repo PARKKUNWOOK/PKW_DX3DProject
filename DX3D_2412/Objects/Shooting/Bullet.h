@@ -1,24 +1,27 @@
 #pragma once
 
+class Enemy;
+
 class Bullet : public SphereCollider
 {
 private:
 	const float LIFE_TIME = 3.0f;
 
 public:
-	Bullet(Transform* transform);
+	Bullet();
 	~Bullet();
 
 	void Update();
 	void Render();
-	void Edit();
 
 	void Fire(Vector3 pos, Vector3 dir);
+	bool CollisionCheck(Enemy* enemy);
 
 private:
-	Transform* transform;
+	Sphere* sphere;
 
-	float speed = 5.0f;
+	float speed = 10.0f;
 	Vector3 velocity;
 	float lifeTime = 0.0f;
+	int damage = 3;
 };

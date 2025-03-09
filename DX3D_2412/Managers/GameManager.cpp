@@ -15,8 +15,8 @@ GameManager::GameManager()
 	SCENE->Create("Grid", new GridScene());
 	//SCENE->Create("Export", new ModelExportScene());
 	//SCENE->Create("Start", new CollisionScene());
-	SCENE->Create("Start", new CubeMapEditorScene());
-	//SCENE->Create("Start", new PlayScene());
+	//SCENE->Create("Start", new CubeMapEditorScene());
+	SCENE->Create("Start", new PlayScene());
 	//SCENE->Create("Start", new ModelRenderScene());
 	//SCENE->Create("Start", new InstancingScene());
 	//SCENE->Create("Start", new ModelInstancingScene());

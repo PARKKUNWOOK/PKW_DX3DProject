@@ -58,6 +58,16 @@ bool SphereCollider::IsCapsuleCollision(CapsuleCollider* collider)
     return false;
 }
 
+bool SphereCollider::Intersects(SphereCollider* other)
+{
+    if (!other) return false;
+
+    float distance = Vector3::Distance(this->GetLocalPosition(), other->GetLocalPosition());
+    float combinedRadius = this->GetRadius() + other->GetRadius();
+
+    return distance <= combinedRadius;
+}
+
 void SphereCollider::MakeMesh()
 {
     float thetaStep = XM_2PI / sliceCount;

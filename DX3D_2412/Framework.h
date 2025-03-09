@@ -160,7 +160,6 @@ typedef function<void(int)> IntParamEvent;
 #include "Objects/Test/Planet.h"
 
 #include "Objects/Shooting/Bullet.h"
-#include "Objects/Shooting/BulletManager.h"
 
 #include "Objects/MineCraft/Block.h"
 #include "Objects/MineCraft/BlockManager.h"
@@ -169,8 +168,10 @@ typedef function<void(int)> IntParamEvent;
 #include "Objects/MineCraft/Inventory.h"
 #include "Objects/MineCraft/UIManager.h"
 
-#include "Objects/TurnSRPG/MapEditor/CubeMapEditor.h"
-#include "Objects/TurnSRPG/MapEditor/MapManager.h"
+#include "Objects/Isaac/Character/Player.h"
+#include "Objects/Isaac/Character/Enemy.h"
+#include "Objects/Isaac/MapEditor/CubeMapEditor.h"
+#include "Objects/Isaac/MapEditor/MapManager.h"
 
 //Manager Head
 #include "Scenes/Scene.h"

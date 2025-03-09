@@ -20,6 +20,10 @@ public:
 			max(GetGlobalScale().y, GetGlobalScale().z));
 	}
 
+	bool Intersects(SphereCollider* other);
+
+	float GetRadius() const { return radius; }
+
 private:
 	virtual void MakeMesh() override;
 

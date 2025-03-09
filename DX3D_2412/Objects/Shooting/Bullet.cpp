@@ -1,16 +1,15 @@
 #include "Framework.h"
 
-Bullet::Bullet(Transform* transform)
-	: SphereCollider(0.2f), transform(transform)
+Bullet::Bullet() : SphereCollider(0.2f)
 {
-	SetTag(transform->GetTag() + "_Collider");
-	transform->SetParent(this);
-	transform->SetTag("Arrow_0");
-	transform->Load();
+	sphere = new Sphere(0.2f);
+	sphere->SetParent(this);
+	sphere->GetMaterial()->SetDiffuseMap(L"Resources/Textures/Block/Block1.png");
 }
 
 Bullet::~Bullet()
-{	
+{
+	delete sphere;
 }
 
 void Bullet::Update()
@@ -24,18 +23,14 @@ void Bullet::Update()
 
 	Translate(velocity * speed * DELTA);
 
-	UpdateWorld();	
+	UpdateWorld();
+	sphere->UpdateWorld();
 }
 
 void Bullet::Render()
 {
-	Collider::Render();	
-}
-
-void Bullet::Edit()
-{
-	//transform->Edit();
-	Transform::Edit();
+	Collider::Render();
+	sphere->Render();
 }
 
 void Bullet::Fire(Vector3 pos, Vector3 dir)
@@ -44,7 +39,18 @@ void Bullet::Fire(Vector3 pos, Vector3 dir)
 	velocity = dir;
 	lifeTime = 0.0f;
 
-	localRotation.y = atan2(dir.x, dir.z);
-
 	SetActive(true);
+}
+
+bool Bullet::CollisionCheck(Enemy* enemy)
+{
+	if (!IsActive() || !enemy->IsActive()) return false;
+
+	if (Intersects(enemy))
+	{
+		enemy->TakeDamage(damage);
+		return true;
+	}
+
+	return false;
 }
