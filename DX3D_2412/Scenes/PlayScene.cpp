@@ -13,7 +13,7 @@ PlayScene::PlayScene()
     enemyPool = new PoolingManager<Enemy>();
     enemyPool->Create(maxEnemies);
 
-    SpawnEnemies();
+    SpawnEnemies(spawnCount);
 }
 
 PlayScene::~PlayScene()
@@ -26,19 +26,29 @@ PlayScene::~PlayScene()
 
 void PlayScene::Update()
 {
-	MapManager::Get()->Update();
+    UIManager::Get()->Update();
 
+    if (player->IsGameOver()) return;
+
+	MapManager::Get()->Update();
 	player->Update();
+
+    int aliveEnemies = 0;
 
     for (Enemy* enemy : enemyPool->GetAllActive())
     {
         enemy->Update();
-
-        if (enemyPool->GetAllActive().size() < spawnCount)
+        if (enemy->IsActive())
         {
-            SpawnEnemies();
+            aliveEnemies++;
         }
     }
+
+    //if (aliveEnemies == 0)
+    //{
+    //    spawnCount;
+    //    SpawnEnemies(spawnCount);
+    //}
 }
 
 void PlayScene::PreRender()
@@ -67,43 +77,73 @@ void PlayScene::PostRender()
 
 void PlayScene::GUIRender()
 {
+    for (Enemy* enemy : enemyPool->GetAllActive())
+    {
+        enemy->Edit();
+    }
 }
 
-void PlayScene::SpawnEnemies()
+void PlayScene::SpawnEnemies(int count)
 {
     int mapSize = 20;
     float spawnY = 1.5f;
+    float minDistance = 2.0f;
 
-    for (int i = 0; i < spawnCount; i++)
+    for (int i = 0; i < count; i++)
     {
         Enemy* enemy = enemyPool->Pop();
         if (!enemy) return;
 
-        int side = rand() % 4;
         float x, z;
+        bool positionValid = false;
 
-        switch (side)
+        for (int attempt = 0; attempt < 10; attempt++)
         {
-        case 0:
-            x = 10;
-            z = static_cast<float>(rand() % mapSize);
-            break;
-        case 1:
-            x = static_cast<float>(mapSize - 1);
-            z = static_cast<float>(rand() % mapSize);
-            break;
-        case 2:
-            x = static_cast<float>(rand() % mapSize);
-            z = 10;
-            break;
-        case 3:
-            x = static_cast<float>(rand() % mapSize);
-            z = static_cast<float>(mapSize - 1);
-            break;
+            int side = rand() % 4;
+
+            switch (side)
+            {
+            case 0:
+                x = 20;
+                z = static_cast<float>(rand() % mapSize);
+                break;
+            case 1:
+                x = static_cast<float>(mapSize - 40);
+                z = static_cast<float>(rand() % mapSize);
+                break;
+            case 2:
+                x = static_cast<float>(rand() % mapSize);
+                z = 20;
+                break;
+            case 3:
+                x = static_cast<float>(rand() % mapSize);
+                z = static_cast<float>(mapSize - 40);
+                break;
+            }
+
+            positionValid = true;
+
+            for (Enemy* other : enemyPool->GetAllActive())
+            {
+                if (other->IsActive())
+                {
+                    float distance = Vector3::Distance(Vector3(x, spawnY, z), other->GetLocalPosition());
+                    if (distance < minDistance)
+                    {
+                        positionValid = false;
+                        break;
+                    }
+                }
+            }
+
+            if (positionValid) break;
         }
 
-        enemy->SetLocalPosition(x, spawnY, z);
-        enemy->SetTarget(player);
-        enemy->SetActive(true);
+        if (positionValid)
+        {
+            enemy->SetLocalPosition(x, spawnY, z);
+            enemy->SetTarget(player);
+            enemy->SetActive(true);
+        }
     }
 }
