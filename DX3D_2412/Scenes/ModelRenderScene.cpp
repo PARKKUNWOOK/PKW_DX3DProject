@@ -3,8 +3,8 @@
 
 ModelRenderScene::ModelRenderScene()
 {
-	model = new Model("Ghost");
-	//model->SetShader(L"Model/Model.hlsl");
+	model = new Model("Monster1");
+	model->Load();
 }
 
 ModelRenderScene::~ModelRenderScene()

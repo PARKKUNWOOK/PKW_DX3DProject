@@ -29,14 +29,24 @@ Player::~Player()
 
 void Player::Update()
 {
+    if (isGameOver) return;
+
     SetCursor();
     Control();
     Fire();
     Jump();
     Move();
 
-    UpdateWorld();
+    if (isInvincible)
+    {
+        invincibleTime -= DELTA;
+        if (invincibleTime <= 0)
+        {
+            isInvincible = false;
+        }
+    }
 
+    UpdateWorld();
     bullets->Update();
 }
 
@@ -57,6 +67,22 @@ void Player::Edit()
 PoolingManager<Bullet>* Player::GetBullets()
 {
     return bullets;
+}
+
+void Player::TakeDamage(int damage, Vector3 knockbackDir)
+{
+    if (isInvincible || isGameOver) return;
+
+    curHp -= damage;
+    if (curHp < 0) curHp = 0;
+
+    isInvincible = true;
+    invincibleTime = INVINCIBLE_DURATION;
+
+    knockbackDir.Normalize();
+    SetLocalPosition(GetLocalPosition() + knockbackDir * 2.0f);
+
+    CheckGameOver();
 }
 
 void Player::Control()
@@ -141,4 +167,18 @@ void Player::CreateBullets()
 void Player::SetCursor()
 {
     SetCursorPos(clientCenterPos.x, clientCenterPos.y);
+}
+
+void Player::CheckGameOver()
+{
+    if (curHp <= 0)
+    {
+        isGameOver = true;
+
+        int result = MessageBoxA(nullptr, "Game Over!", "Game Over", MB_OK);
+        if (result == IDOK)
+        {
+            PostQuitMessage(0);
+        }
+    }
 }

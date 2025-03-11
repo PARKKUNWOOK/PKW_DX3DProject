@@ -13,11 +13,11 @@ public:
 	virtual void GUIRender() override;
 
 private:
-	void SpawnEnemies();
+	void SpawnEnemies(int count);
 
 private:
 	Player* player;
 	PoolingManager<Enemy>* enemyPool;
-	const int maxEnemies = 30;
-	const int spawnCount = 5;
+	const int maxEnemies = 50;
+	const int spawnCount = 10;
 };

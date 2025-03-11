@@ -9,6 +9,7 @@ public:
 	void Update();
 	void Render();
 	void PostRender();
+	void Edit();
 
 	void SetTarget(Transform* target);
 	void Reset();
@@ -22,13 +23,11 @@ private:
 private:
 	Transform* target;
 
-	Cube* cube;
-	float speed = 0.5f;
+	ModelAnimator* model;
+	float speed = 1.0f;
 
 	static int enemyCount;
-	int id;
 
-	Quad* hpBar;
 	int maxHp = 20;
 	int curHp = 20;
 
