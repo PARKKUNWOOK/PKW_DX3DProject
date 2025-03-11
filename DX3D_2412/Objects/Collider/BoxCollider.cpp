@@ -92,12 +92,32 @@ bool BoxCollider::IsBoxCollision(BoxCollider* collider)
 
 bool BoxCollider::IsSphereCollision(SphereCollider* collider)
 {
-    return false;
+    ObbDesc box;
+    GetObb(box);
+
+    Vector3 closestPointToSphere = box.center;
+
+    for (UINT i = 0; i < 3; i++)
+    {
+        Vector3 direction = collider->Center() - box.center;
+
+        float length = Vector3::Dot(box.axis[i], direction);
+
+        float mult = (length < 0.0f) ? -1.0f : 1.0f;
+
+        length = min(abs(length), box.halfSize[i]);
+
+        closestPointToSphere += box.axis[i] * length * mult;
+    }
+
+    float distance = Vector3::Distance(collider->Center(), closestPointToSphere);
+
+    return distance <= collider->Radius();
 }
 
 bool BoxCollider::IsCapsuleCollision(CapsuleCollider* collider)
 {
-    return false;
+    return collider->IsBoxCollision(this);
 }
 
 void BoxCollider::MakeMesh()

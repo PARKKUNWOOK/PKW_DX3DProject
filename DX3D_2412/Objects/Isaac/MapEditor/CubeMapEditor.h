@@ -5,7 +5,7 @@ class CubeMapEditor : public Cube
 private:
 	enum EditType
 	{
-		None, Wall, StartPosition
+		None, Wall, Door
 	};
 
 public:
@@ -20,7 +20,7 @@ private:
 	void SetSelectTile();
 
 	void CreateWall();
-	void CreateStartPosition();
+	void CreateDoor();
 	void CreatePreview();
 
 	void DeleteObject();

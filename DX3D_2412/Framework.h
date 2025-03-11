@@ -161,11 +161,6 @@ typedef function<void(int)> IntParamEvent;
 
 #include "Objects/Shooting/Bullet.h"
 
-#include "Objects/MineCraft/Block.h"
-#include "Objects/MineCraft/BlockManager.h"
-#include "Objects/MineCraft/QuickSlotIcon.h"
-#include "Objects/MineCraft/InventorySlot.h"
-#include "Objects/MineCraft/Inventory.h"
 #include "Objects/MineCraft/UIManager.h"
 
 #include "Objects/Isaac/Character/Player.h"

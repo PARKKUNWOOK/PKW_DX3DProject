@@ -13,9 +13,14 @@ public:
 	void Render();
 
 	void Load(string file);
-	
+
+	float GetHeight(const Vector3& pos) const;
+	void ResolveCollisions(Player* player);
+	void MakeDoorsTransparent();
+
 private:
 	Cube* floor;
 	vector<Cube*> walls;
-	vector<Cube*> startPositions;
+	vector<Cube*> doors;
+	vector<Cube*> loweringDoors;
 };

@@ -4,22 +4,23 @@ int Enemy::enemyCount = 0;
 
 Enemy::Enemy()
 {
-	cube = new Cube(Vector3(1.5f, 1.5f, 1.5f));
-	cube->SetParent(this);
-	cube->GetMaterial()->SetDiffuseMap(L"Resources/Textures/Landscape/Floor.png");
+	model = new ModelAnimator("Monster1");
+	model->SetShader(L"Model/Model.hlsl");
+	model->ReadClip("Run");
+	model->ReadClip("Attack");
+	model->CreateTexture();
 
-	id = ++enemyCount;
+	model->SetParent(this);
+	model->SetLocalPosition(0.0f, -1.0f, 0.0f);
+	model->SetLocalScale(0.01f, 0.01f, 0.01f);
+	model->SetLocalRotation(0, XM_PI, 0);
 
-	hpBar = new Quad(Vector2(3.0f, 0.3f));
-	hpBar->GetMaterial()->SetDiffuseMap(L"Resources/Textures/HpBar/HpBar.png");
-	hpBar->SetPivot(Vector3(-1.0f, 3.0f, 0.0f));
-	hpBar->SetLocalRotation(Vector3(0.0f, 0.0f, 0.0f));
+	model->PlayClip(0);
 }
 
 Enemy::~Enemy()
 {
-	delete cube;
-	delete hpBar;
+	delete model;
 }
 
 void Enemy::Update()
@@ -34,9 +35,23 @@ void Enemy::Update()
 		return;
 	}
 
-	FollowTarget();
-	UpdateWorld();
+	if (isAttacking)
+	{
+		attackFrameCount--;
 
+		if (attackFrameCount <= 0)
+		{
+			isAttacking = false;
+			model->PlayClip(0);
+		}
+	}
+	else
+	{
+		FollowTarget();
+	}
+
+	UpdateWorld();
+	
 	for (Bullet* bullet : Player::Get()->GetBullets()->GetAllActive())
 	{
 		if (bullet->CollisionCheck(this))
@@ -47,48 +62,25 @@ void Enemy::Update()
 		}
 	}
 
-	cube->UpdateWorld();
+	Attack(Player::Get());
 
-	Vector3 basePosition = localPosition + Vector3(0, 7.0f, 0);
-	
-	float spacing = 0.4f;
-	float startX = basePosition.x - (spacing * 4.5f);
-	
-	for (int i = 0; i < 10; i++)
-	{
-		Vector3 hpPos = { startX + (i * spacing), basePosition.y, basePosition.z };
-		hpBar->SetLocalPosition(hpPos);
-		//hpBar->LookAt(CAM->GetLocalPosition());
-		hpBar->UpdateWorld();
-	}
-
-	direction = target->GetLocalPosition() - localPosition;
-	float distance = direction.Magnitude();
-
-	float angle = atan2(direction.x, direction.z);
-	hpBar->SetLocalRotation(Vector3::Up() * angle);
+	model->Update();
 }
 
 void Enemy::Render()
 {
 	Collider::Render();
-	cube->Render();
-
-	for (int i = 0; i < 10; i++)
-	{
-		hpBar->Render();
-	}
+	model->Render();
 }
 
 void Enemy::PostRender()
 {
-	if (!IsActive()) return;
+}
 
-	Vector3 namePosition = localPosition + Vector3(0, 2.0f, 0);
-	Vector2 screenPos = CAM->WorldToScreenPoint(namePosition);
-
-	string enemyName = "Enemy" + to_string(id);
-	Font::Get()->RenderText(enemyName, screenPos);
+void Enemy::Edit()
+{
+	Collider::Edit();
+	model->Edit();
 }
 
 void Enemy::SetTarget(Transform* target)
@@ -108,12 +100,24 @@ void Enemy::TakeDamage(int damage)
 	curHp -= damage;
 	if (curHp < 0) curHp = 0;
 
-	float hpRatio = (float)curHp / maxHp;
-	hpBar->SetLocalScale(Vector3(hpRatio, 1.0f, 1.0f));
-
 	if (curHp <= 0)
 	{
 		isDying = true;
+	}
+}
+
+void Enemy::Attack(Player* player)
+{
+	if (!IsActive() || player->IsGameOver()) return;
+
+	if (player->IsCollision(this) && !isAttacking)
+	{
+		Vector3 knockbackDir = player->GetLocalPosition() - GetLocalPosition();
+		player->TakeDamage(1, knockbackDir);
+
+		model->PlayClip(1);
+		isAttacking = true;
+		attackFrameCount = 680;
 	}
 }
 
@@ -122,14 +126,25 @@ void Enemy::FollowTarget()
 	if (target == nullptr || isDying) return;
 
 	direction = target->GetLocalPosition() - localPosition;
-	float distance = direction.Magnitude();
+	direction.y = 0.0f;
 
-	float angle = atan2(direction.x, direction.z);
-	SetLocalRotation(Vector3::Up() * angle);
+	float distance = direction.Magnitude();
 
 	if (distance > 0.1f)
 	{
 		direction.Normalize();
-		localPosition += direction * speed * DELTA;
+
+		Vector3 newPosition = localPosition + direction * speed * DELTA;
+		newPosition.y = localPosition.y;
+		SetLocalPosition(newPosition);
+	}
+
+	if (distance > 0.01f)
+	{
+		float targetAngle = atan2(direction.x, direction.z);
+		Vector3 currentRotation = GetLocalRotation();
+
+		float newAngle = GameMath::Lerp(currentRotation.y, targetAngle, 0.1f);
+		SetLocalRotation(Vector3(0.0f, newAngle, 0.0f));
 	}
 }

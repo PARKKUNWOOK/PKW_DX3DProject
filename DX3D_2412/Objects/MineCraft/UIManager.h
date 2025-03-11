@@ -34,12 +34,7 @@ private:
 	Quad* cursor;
 	Quad* hotBar;
 	Quad* hotBarSelect;
-	
-	vector<QuickSlotIcon*> blockIcons;	
-	Block* selectBlock;
 
 	bool isPopup = false;	
 	int selectBuildBlockIndex = 0;
-
-	Inventory* inventory;
 };

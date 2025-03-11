@@ -112,12 +112,43 @@ bool CapsuleCollider::IsRayCollision(IN const Ray& ray, OUT RaycastHit* hit)
 
 bool CapsuleCollider::IsBoxCollision(BoxCollider* collider)
 {
-    return false;
+    BoxCollider::ObbDesc box;
+    collider->GetObb(box);
+
+    Vector3 direction = GetUp();
+    Vector3 pa = Center() - direction * Height() * 0.5f;
+    Vector3 pb = Center() + direction * Height() * 0.5f;
+
+    Vector3 closestPointToSphere = box.center;
+    Vector3 pointOnLine = GameMath::ClosestPointOnLine(pa, pb, box.center);
+
+    for (UINT i = 0; i < 3; i++)
+    {
+        Vector3 direction = pointOnLine - box.center;
+        float length = Vector3::Dot(box.axis[i], direction);
+        float mult = (length < 0.0f) ? -1.0f : 1.0f;
+        length = min(abs(length), box.halfSize[i]);
+        closestPointToSphere += box.axis[i] * length * mult;
+    }
+
+    float distance = Vector3::Distance(pointOnLine, closestPointToSphere);
+
+    return distance <= Radius();
 }
 
 bool CapsuleCollider::IsSphereCollision(SphereCollider* collider)
 {
-    return false;
+    Vector3 direction = GetUp();
+    Vector3 pa = Center() - direction * Height() * 0.5f;
+    Vector3 pb = Center() + direction * Height() * 0.5f;
+
+    Vector3 P = collider->Center();
+
+    Vector3 pointOnLine = GameMath::ClosestPointOnLine(pa, pb, P);
+
+    float distance = Vector3::Distance(P, pointOnLine);
+
+    return distance <= (Radius() + collider->Radius());
 }
 
 bool CapsuleCollider::IsCapsuleCollision(CapsuleCollider* collider)

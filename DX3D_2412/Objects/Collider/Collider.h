@@ -55,7 +55,7 @@ public:
 
     Vector3 Center()
     {
-        return XMVector3TransformCoord(offset, world);        
+        return XMVector3TransformCoord(offset, world);
     }
 
 public:

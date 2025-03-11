@@ -69,7 +69,7 @@ void CubeMapEditor::Edit()
 	for (GameObject* object : objects)
 		object->Edit();
 
-	const char* list[] = {"None", "Wall", "StartPos"};
+	const char* list[] = {"None", "Wall", "Door"};
 	if (ImGui::Combo("Type", (int*)&editType, list, 3))
 	{
 		for(pair<EditType, GameObject*> preview : previews)
@@ -120,8 +120,8 @@ void CubeMapEditor::SetSelectTile()
 			case CubeMapEditor::Wall:
 				y = 8.0f;
 				break;
-			case CubeMapEditor::StartPosition:
-				y = 0.5f;
+			case CubeMapEditor::Door:
+				y = 8.0f;
 				break;
 			}
 
@@ -153,25 +153,25 @@ void CubeMapEditor::CreateWall()
 	types[index] = Wall;
 }
 
-void CubeMapEditor::CreateStartPosition()
+void CubeMapEditor::CreateDoor()
 {
 	Vector3 startPos = Vector3(mapSize.x * -0.5f, 0.0f, mapSize.y * -0.5f);
-	Vector3 pos = startPos + Vector3(selectTile.x + 0.5f, 0.5f, selectTile.y + 0.5f);
+	Vector3 pos = startPos + Vector3(selectTile.x + 0.5f, 8.0f, selectTile.y + 0.5f);
 
-	int index = selectTile.y * mapSize.x + selectTile.x;	
+	int index = selectTile.y * mapSize.x + selectTile.x;
 
 	if (objectData.count(index) > 0)
 		return;
 
-	Cube* startPosition = new Cube({ 1, 0.1f, 1 });
-	startPosition->SetLocalPosition(pos);
-	startPosition->GetMaterial()->GetData()->diffuse = { 0, 1, 1, 1 };
-	startPosition->Update();
+	Cube* door = new Cube({ 1, 15, 1 });
+	door->SetLocalPosition(pos);
+	door->GetMaterial()->SetDiffuseMap(L"Resources/Textures/Landscape/Wall.png");
+	door->Update();
 
-	objects.push_back(startPosition);
+	objects.push_back(door);
 
-	objectData[index] = startPosition;
-	types[index] = StartPosition;
+	objectData[index] = door;
+	types[index] = Door;
 }
 
 void CubeMapEditor::CreatePreview()
@@ -184,12 +184,13 @@ void CubeMapEditor::CreatePreview()
 
 	previews[Wall] = wall;
 
-	Cube* startPosition = new Cube({ 1, 0.1f, 1 });
-	startPosition->GetMaterial()->SetShader(L"Custom/Preview.hlsl");
-	startPosition->GetMaterial()->GetData()->emissive = { 0, 1, 1, 0.5f };
-	startPosition->SetActive(true);
+	Cube* door = new Cube({ 1, 15, 1 });
+	door->GetMaterial()->SetShader(L"Custom/Preview.hlsl");
+	door->GetMaterial()->SetDiffuseMap(L"Resources/Textures/Landscape/Wall.png");
+	door->GetMaterial()->GetData()->emissive = { 0, 1, 1, 0.5f };
+	door->SetActive(true);
 
-	previews[StartPosition] = startPosition;
+	previews[Door] = door;
 }
 
 void CubeMapEditor::DeleteObject()
@@ -207,20 +208,20 @@ void CubeMapEditor::DeleteObject()
 
 void CubeMapEditor::SetEdit()
 {
-	if (KEY->Down(VK_LBUTTON) && !ImGui::GetIO().WantCaptureMouse)
+	if (KEY->Press(VK_LBUTTON) && !ImGui::GetIO().WantCaptureMouse)
 	{
 		switch (editType)
 		{
 		case CubeMapEditor::Wall:
 			CreateWall();
 			break;
-		case CubeMapEditor::StartPosition:
-			CreateStartPosition();
+		case CubeMapEditor::Door:
+			CreateDoor();
 			break;
 		}
 	}
 
-	if (KEY->Down(VK_RBUTTON))
+	if (KEY->Down('M'))
 	{
 		DeleteObject();
 	}

@@ -199,11 +199,6 @@
     <ClInclude Include="Objects\Landscape\Skybox.h" />
     <ClInclude Include="Objects\Landscape\Terrain.h" />
     <ClInclude Include="Objects\Manager\PoolingManager.h" />
-    <ClInclude Include="Objects\MineCraft\Block.h" />
-    <ClInclude Include="Objects\MineCraft\BlockManager.h" />
-    <ClInclude Include="Objects\MineCraft\Inventory.h" />
-    <ClInclude Include="Objects\MineCraft\InventorySlot.h" />
-    <ClInclude Include="Objects\MineCraft\QuickSlotIcon.h" />
     <ClInclude Include="Objects\MineCraft\UIManager.h" />
     <ClInclude Include="Objects\Isaac\MapEditor\CubeMapEditor.h" />
     <ClInclude Include="Objects\Isaac\MapEditor\MapManager.h" />
@@ -220,8 +215,9 @@
     <ClInclude Include="Scenes\ModelExportScene.h" />
     <ClInclude Include="Scenes\ModelInstancingScene.h" />
     <ClInclude Include="Scenes\ModelRenderScene.h" />
-    <ClInclude Include="Scenes\PlayScene.h" />
+    <ClInclude Include="Scenes\Stage\MonsterStageScene.h" />
     <ClInclude Include="Scenes\Scene.h" />
+    <ClInclude Include="Scenes\Stage\StartStageScene.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -277,11 +273,6 @@
     <ClCompile Include="Objects\Isaac\Character\Player.cpp" />
     <ClCompile Include="Objects\Landscape\Skybox.cpp" />
     <ClCompile Include="Objects\Landscape\Terrain.cpp" />
-    <ClCompile Include="Objects\MineCraft\Block.cpp" />
-    <ClCompile Include="Objects\MineCraft\BlockManager.cpp" />
-    <ClCompile Include="Objects\MineCraft\Inventory.cpp" />
-    <ClCompile Include="Objects\MineCraft\InventorySlot.cpp" />
-    <ClCompile Include="Objects\MineCraft\QuickSlotIcon.cpp" />
     <ClCompile Include="Objects\MineCraft\UIManager.cpp" />
     <ClCompile Include="Objects\Isaac\MapEditor\CubeMapEditor.cpp" />
     <ClCompile Include="Objects\Isaac\MapEditor\MapManager.cpp" />
@@ -297,7 +288,8 @@
     <ClCompile Include="Scenes\ModelExportScene.cpp" />
     <ClCompile Include="Scenes\ModelInstancingScene.cpp" />
     <ClCompile Include="Scenes\ModelRenderScene.cpp" />
-    <ClCompile Include="Scenes\PlayScene.cpp" />
+    <ClCompile Include="Scenes\Stage\MonsterStageScene.cpp" />
+    <ClCompile Include="Scenes\Stage\StartStageScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX3D_2412.rc" />

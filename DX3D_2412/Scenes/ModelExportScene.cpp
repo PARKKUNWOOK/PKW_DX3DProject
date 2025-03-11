@@ -3,7 +3,7 @@
 
 ModelExportScene::ModelExportScene()
 {
-    string name = "Ghost";
+    string name = "Monster1";
     string extension = "fbx";
     string file = "Resources/Models/FBX/" + name + "." + extension;
 
@@ -12,26 +12,26 @@ ModelExportScene::ModelExportScene()
     //exporter->ExportMesh();
     //delete exporter;
 
-    string clipName = "Ghost_animation";
+    string clipName = "Idle";
     file = "Resources/Models/Animations/" + name + "/" + clipName + ".fbx";    
     
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
-    //
-    //clipName = "Run";
-    //file = "Resources/Models/Animations/" + name + "/" + clipName + ".fbx";
-    //
-    //exporter = new ModelExporter(name, file);
-    //exporter->ExportClip(clipName);
-    //delete exporter;
-    //
-    //clipName = "Attack";
-    //file = "Resources/Models/Animations/" + name + "/" + clipName + ".fbx";
-    //
-    //exporter = new ModelExporter(name, file);
-    //exporter->ExportClip(clipName);
-    //delete exporter;
+    
+    clipName = "Run";
+    file = "Resources/Models/Animations/" + name + "/" + clipName + ".fbx";
+    
+    exporter = new ModelExporter(name, file);
+    exporter->ExportClip(clipName);
+    delete exporter;
+    
+    clipName = "Attack";
+    file = "Resources/Models/Animations/" + name + "/" + clipName + ".fbx";
+    
+    exporter = new ModelExporter(name, file);
+    exporter->ExportClip(clipName);
+    delete exporter;
 }
 
 ModelExportScene::~ModelExportScene()
