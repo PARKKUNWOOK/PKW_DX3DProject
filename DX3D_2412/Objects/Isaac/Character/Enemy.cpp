@@ -11,8 +11,11 @@ Enemy::Enemy()
 	model->CreateTexture();
 
 	model->SetParent(this);
+	model->SetLocalPosition(0.0f, -1.0f, 0.0f);
 	model->SetLocalScale(0.01f, 0.01f, 0.01f);
 	model->SetLocalRotation(0, XM_PI, 0);
+
+	model->PlayClip(0);
 }
 
 Enemy::~Enemy()
@@ -32,7 +35,21 @@ void Enemy::Update()
 		return;
 	}
 
-	FollowTarget();
+	if (isAttacking)
+	{
+		attackFrameCount--;
+
+		if (attackFrameCount <= 0)
+		{
+			isAttacking = false;
+			model->PlayClip(0);
+		}
+	}
+	else
+	{
+		FollowTarget();
+	}
+
 	UpdateWorld();
 	
 	for (Bullet* bullet : Player::Get()->GetBullets()->GetAllActive())
@@ -45,7 +62,8 @@ void Enemy::Update()
 		}
 	}
 
-	model->PlayClip(0);
+	Attack(Player::Get());
+
 	model->Update();
 }
 
@@ -85,6 +103,21 @@ void Enemy::TakeDamage(int damage)
 	if (curHp <= 0)
 	{
 		isDying = true;
+	}
+}
+
+void Enemy::Attack(Player* player)
+{
+	if (!IsActive() || player->IsGameOver()) return;
+
+	if (player->IsCollision(this) && !isAttacking)
+	{
+		Vector3 knockbackDir = player->GetLocalPosition() - GetLocalPosition();
+		player->TakeDamage(1, knockbackDir);
+
+		model->PlayClip(1);
+		isAttacking = true;
+		attackFrameCount = 680;
 	}
 }
 

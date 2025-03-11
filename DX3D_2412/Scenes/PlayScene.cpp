@@ -26,6 +26,8 @@ PlayScene::~PlayScene()
 
 void PlayScene::Update()
 {
+    UIManager::Get()->Update();
+
     if (player->IsGameOver()) return;
 
 	MapManager::Get()->Update();
@@ -39,12 +41,6 @@ void PlayScene::Update()
         if (enemy->IsActive())
         {
             aliveEnemies++;
-
-            if (player->IsCollision(enemy))
-            {
-                Vector3 knockbackDir = player->GetLocalPosition() - enemy->GetLocalPosition();
-                player->TakeDamage(1, knockbackDir);
-            }
         }
     }
 
@@ -90,7 +86,7 @@ void PlayScene::GUIRender()
 void PlayScene::SpawnEnemies(int count)
 {
     int mapSize = 20;
-    float spawnY = 0.5f;
+    float spawnY = 1.5f;
     float minDistance = 2.0f;
 
     for (int i = 0; i < count; i++)

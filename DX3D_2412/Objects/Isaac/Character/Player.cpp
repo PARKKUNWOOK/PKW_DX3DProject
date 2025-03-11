@@ -31,6 +31,9 @@ void Player::Update()
 {
     if (isGameOver) return;
 
+    if (UIManager::Get()->IsPopup())
+        return;
+
     SetCursor();
     Control();
     Fire();

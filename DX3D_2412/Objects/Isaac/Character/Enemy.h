@@ -14,6 +14,7 @@ public:
 	void SetTarget(Transform* target);
 	void Reset();
 	void TakeDamage(int damage);
+	void Attack(Player* player);
 
 	int GetCurrentHealth() { return curHp; }
 
@@ -32,6 +33,9 @@ private:
 	int curHp = 20;
 
 	bool isDying = false;
+
+	bool isAttacking = false;
+	int attackFrameCount = 0;
 
 	Vector3 direction;
 };
