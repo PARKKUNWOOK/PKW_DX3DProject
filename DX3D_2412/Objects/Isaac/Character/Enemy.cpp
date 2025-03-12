@@ -16,6 +16,8 @@ Enemy::Enemy()
 	model->SetLocalRotation(0, XM_PI, 0);
 
 	model->PlayClip(0);
+
+	id = ++enemyCount;
 }
 
 Enemy::~Enemy()
@@ -75,6 +77,13 @@ void Enemy::Render()
 
 void Enemy::PostRender()
 {
+	if (!IsActive()) return;
+
+	Vector3 namePosition = localPosition + Vector3(0, 2.0f, 0);
+	Vector2 screenPos = CAM->WorldToScreenPoint(namePosition);
+
+	string enemyName = "Enemy" + to_string(id);
+	Font::Get()->RenderText(enemyName, screenPos);
 }
 
 void Enemy::Edit()

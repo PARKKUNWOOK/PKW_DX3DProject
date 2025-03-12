@@ -38,4 +38,6 @@ private:
 	int attackFrameCount = 0;
 
 	Vector3 direction;
+
+	int id;
 };
