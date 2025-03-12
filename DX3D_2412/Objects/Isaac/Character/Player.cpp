@@ -137,7 +137,7 @@ void Player::Jump()
 {
     velocity.y -= GRAVITY * DELTA;
 
-    float bottomHeight = BlockManager::Get()->GetHeight(localPosition);
+    float bottomHeight = MapManager::Get()->GetHeight(localPosition);
 
     if (velocity.y < 0 && localPosition.y - radius <= bottomHeight)
     {
@@ -159,6 +159,8 @@ void Player::Move()
     newPosition.z = horizontalPosition.z;
 
     SetLocalPosition(newPosition);
+
+    MapManager::Get()->ResolveCollisions(this);
 }
 
 void Player::CreateBullets()

@@ -3,7 +3,8 @@
 #include "Scenes/GridScene.h"
 #include "Scenes/CollisionScene.h"
 #include "Scenes/CubeMapEditorScene.h"
-#include "Scenes/PlayScene.h"
+#include "Scenes/Stage/StartStageScene.h"
+#include "Scenes/Stage/MonsterStageScene.h"
 #include "Scenes/ModelRenderScene.h"
 #include "Scenes/ModelExportScene.h"
 #include "Scenes/InstancingScene.h"
@@ -16,12 +17,12 @@ GameManager::GameManager()
 	//SCENE->Create("Export", new ModelExportScene());
 	//SCENE->Create("Start", new CollisionScene());
 	//SCENE->Create("Start", new CubeMapEditorScene());
-	SCENE->Create("Start", new PlayScene());
+	//SCENE->Create("Start", new StartStageScene());
+	SCENE->Create("Start", new MonsterStageScene());
 	//SCENE->Create("Start", new ModelRenderScene());
 	//SCENE->Create("Start", new InstancingScene());
 	//SCENE->Create("Start", new ModelInstancingScene());
 	//SCENE->Create("Start", new ModelAnimationScene());
-	
 
 	SCENE->Add("Grid");
 	SCENE->Add("Start");
