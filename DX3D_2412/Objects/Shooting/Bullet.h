@@ -28,7 +28,7 @@ private:
 	float speed = 10.0f;
 	Vector3 velocity;
 	float lifeTime = 0.0f;
-	int damage = 3;
+	int damage = 0;
 
 	bool isPlayerBullet = false;
 };

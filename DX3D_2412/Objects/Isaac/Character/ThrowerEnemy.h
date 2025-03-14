@@ -20,6 +20,7 @@ public:
 
 private:
 	void FollowTarget();
+	void Death();
 
 private:
 	Transform* target;

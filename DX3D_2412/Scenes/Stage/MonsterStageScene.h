@@ -19,6 +19,6 @@ private:
 	Player* player;
 	PoolingManager<AssaultEnemy>* assaultEnemyPool;
 	PoolingManager<ThrowerEnemy>* throwerEnemyPool;
-	const int maxEnemies = 50;
+	const int maxEnemies = 10;
 	const int spawnCount = 1;
 };

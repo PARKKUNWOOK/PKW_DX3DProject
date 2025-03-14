@@ -179,8 +179,8 @@ void MonsterStageScene::SpawnEnemies(int count)
             assaultEnemy->SetTarget(player);
             assaultEnemy->SetActive(true);
 
-            throwerEnemy->SetLocalPosition(x, spawnY, z);
             throwerEnemy->SetTarget(player);
+            throwerEnemy->SetLocalPosition(x, spawnY, z);
             throwerEnemy->SetActive(true);
         }
     }

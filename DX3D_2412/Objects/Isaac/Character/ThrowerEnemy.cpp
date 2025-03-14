@@ -9,6 +9,8 @@ ThrowerEnemy::ThrowerEnemy()
 	model->ReadClip("Death");
 	model->CreateTexture();
 
+	model->GetClip(2)->SetEvent(bind(&ThrowerEnemy::Death, this), 0.8f);
+
 	model->SetParent(this);
 	model->SetLocalPosition(0.0f, -1.0f, 0.0f);
 	model->SetLocalScale(0.01f, 0.01f, 0.01f);
@@ -37,7 +39,15 @@ void ThrowerEnemy::Update()
 		if (throwAttackFrameCount <= 0)
 		{
 			isThrowAttacking = false;
-			model->PlayClip(0);
+
+			if (!isDying)
+			{
+				model->PlayClip(0);
+			}
+			else
+			{
+				TakeDamage(1);
+			}
 		}
 	}
 	else
@@ -99,12 +109,6 @@ void ThrowerEnemy::TakeDamage(int damage)
 	{
 		isDying = true;
 		model->PlayClip(2);
-
-		model->GetClip(2)->SetEvent([this]()
-			{
-				this->SetActive(false);
-				this->isDying = false;
-			}, 1.0f);
 	}
 }
 
@@ -193,4 +197,9 @@ void ThrowerEnemy::FollowTarget()
 	Vector3 currentRotation = GetLocalRotation();
 	float newAngle = GameMath::Lerp(currentRotation.y, targetAngle, 0.1f);
 	SetLocalRotation(Vector3(0.0f, newAngle, 0.0f));
+}
+
+void ThrowerEnemy::Death()
+{
+	SetActive(false);
 }

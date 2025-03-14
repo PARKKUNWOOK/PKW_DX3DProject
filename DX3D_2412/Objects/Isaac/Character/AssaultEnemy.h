@@ -20,14 +20,13 @@ public:
 
 private:
 	void FollowTarget();
-
 	void Death();
 
 private:
 	Transform* target;
 
 	ModelAnimator* model;
-	float speed = 1.0f;
+	float speed = 3.0f;
 
 	static int enemyCount;
 

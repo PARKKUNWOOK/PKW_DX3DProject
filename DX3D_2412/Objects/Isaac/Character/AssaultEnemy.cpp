@@ -9,7 +9,7 @@ AssaultEnemy::AssaultEnemy()
 	model->ReadClip("Death");
 	model->CreateTexture();
 
-	model->GetClip(2)->SetEvent(bind(&AssaultEnemy::Death, this), 0.8f);
+	model->GetClip(2)->SetEvent(bind(&AssaultEnemy::Death, this), 0.8);
 
 	model->SetParent(this);
 	model->SetLocalPosition(0.0f, -1.0f, 0.0f);
@@ -35,7 +35,15 @@ void AssaultEnemy::Update()
 		if (assaultAttackFrameCount <= 0)
 		{
 			isAssaultAttacking = false;
-			model->PlayClip(0);
+
+			if (!isDying)
+			{
+				model->PlayClip(0);
+			}
+			else
+			{
+				TakeDamage(1);
+			}
 		}
 	}
 	else
@@ -99,12 +107,6 @@ void AssaultEnemy::TakeDamage(int damage)
 	{
 		isDying = true;
 		model->PlayClip(2);
-
-		//model->GetClip(2)->SetEvent([this]() 
-		//{
-		//	this->SetActive(false);
-		//	this->isDying = false;
-		//}, 1.0f);
 	}
 }
 
@@ -117,9 +119,17 @@ void AssaultEnemy::AssaultAttack(Player* player)
 		Vector3 knockbackDir = player->GetLocalPosition() - GetLocalPosition();
 		player->TakeDamage(1, knockbackDir);
 
-		model->PlayClip(1);
-		isAssaultAttacking = true;
-		assaultAttackFrameCount = 1000;
+		if (!isDying)
+		{
+			model->PlayClip(1);
+			isAssaultAttacking = true;
+			assaultAttackFrameCount = 1000;
+		}
+		else
+		{
+			TakeDamage(1);
+		}
+		
 	}
 }
 
