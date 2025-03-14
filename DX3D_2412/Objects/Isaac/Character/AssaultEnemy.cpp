@@ -9,6 +9,8 @@ AssaultEnemy::AssaultEnemy()
 	model->ReadClip("Death");
 	model->CreateTexture();
 
+	model->GetClip(2)->SetEvent(bind(&AssaultEnemy::Death, this), 0.8f);
+
 	model->SetParent(this);
 	model->SetLocalPosition(0.0f, -1.0f, 0.0f);
 	model->SetLocalScale(0.01f, 0.01f, 0.01f);
@@ -98,11 +100,11 @@ void AssaultEnemy::TakeDamage(int damage)
 		isDying = true;
 		model->PlayClip(2);
 
-		model->GetClip(2)->SetEvent([this]() 
-		{
-			this->SetActive(false);
-			this->isDying = false;
-		}, 1.0f);
+		//model->GetClip(2)->SetEvent([this]() 
+		//{
+		//	this->SetActive(false);
+		//	this->isDying = false;
+		//}, 1.0f);
 	}
 }
 
@@ -147,4 +149,9 @@ void AssaultEnemy::FollowTarget()
 		float newAngle = GameMath::Lerp(currentRotation.y, targetAngle, 0.1f);
 		SetLocalRotation(Vector3(0.0f, newAngle, 0.0f));
 	}
+}
+
+void AssaultEnemy::Death()
+{
+	SetActive(false);
 }
