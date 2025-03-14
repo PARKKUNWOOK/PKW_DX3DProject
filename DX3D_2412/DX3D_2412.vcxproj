@@ -194,8 +194,9 @@
     <ClInclude Include="Objects\Collider\Collider.h" />
     <ClInclude Include="Objects\Collider\RectCollider.h" />
     <ClInclude Include="Objects\Collider\SphereCollider.h" />
-    <ClInclude Include="Objects\Isaac\Character\Enemy.h" />
+    <ClInclude Include="Objects\Isaac\Character\AssaultEnemy.h" />
     <ClInclude Include="Objects\Isaac\Character\Player.h" />
+    <ClInclude Include="Objects\Isaac\Character\ThrowerEnemy.h" />
     <ClInclude Include="Objects\Landscape\Skybox.h" />
     <ClInclude Include="Objects\Landscape\Terrain.h" />
     <ClInclude Include="Objects\Manager\PoolingManager.h" />
@@ -269,8 +270,9 @@
     <ClCompile Include="Objects\Collider\Collider.cpp" />
     <ClCompile Include="Objects\Collider\RectCollider.cpp" />
     <ClCompile Include="Objects\Collider\SphereCollider.cpp" />
-    <ClCompile Include="Objects\Isaac\Character\Enemy.cpp" />
+    <ClCompile Include="Objects\Isaac\Character\AssaultEnemy.cpp" />
     <ClCompile Include="Objects\Isaac\Character\Player.cpp" />
+    <ClCompile Include="Objects\Isaac\Character\ThrowerEnemy.cpp" />
     <ClCompile Include="Objects\Landscape\Skybox.cpp" />
     <ClCompile Include="Objects\Landscape\Terrain.cpp" />
     <ClCompile Include="Objects\MineCraft\UIManager.cpp" />

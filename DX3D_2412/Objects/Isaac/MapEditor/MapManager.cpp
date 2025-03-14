@@ -32,7 +32,9 @@ void MapManager::Render()
 
 	for (Cube* wall : walls)
 		wall->Render();
-	for (Cube* door : doors)
+	for (Cube* door : doorxs)
+		door->Render();
+	for (Cube* door : doorzs)
 		door->Render();
 }
 
@@ -49,7 +51,8 @@ void MapManager::Load(string file)
 	int size = mapSize.x * mapSize.y;
 
 	walls.reserve(size);
-	doors.reserve(size);
+	doorxs.reserve(size);
+	doorzs.reserve(size);
 
 	int* types = new int[size];
 	reader->Byte((void**)&types, sizeof(int) * size);
@@ -80,12 +83,27 @@ void MapManager::Load(string file)
 			Vector3 startPos = Vector3(mapSize.x * -0.5f, 0.0f, mapSize.y * -0.5f);
 			Vector3 pos = startPos + Vector3(coord.x + 0.5f, 8.0f, coord.y + 0.5f);
 
-			Cube* door = new Cube({ 1, 15, 1 });
-			door->SetLocalPosition(pos);
-			door->GetMaterial()->SetDiffuseMap(L"Resources/Textures/Landscape/Wall.png");
-			door->Update();
+			Cube* doorx = new Cube({ 7, 15, 1 });
+			doorx->SetLocalPosition(pos);
+			doorx->GetMaterial()->SetDiffuseMap(L"Resources/Textures/Landscape/Wall.png");
+			doorx->Update();
 
-			doors.push_back(door);
+			doorxs.push_back(doorx);
+		}
+		break;
+		case 3:
+		{
+			Vector2 coord = Vector2(i % mapSize.x, i / mapSize.x);
+
+			Vector3 startPos = Vector3(mapSize.x * -0.5f, 0.0f, mapSize.y * -0.5f);
+			Vector3 pos = startPos + Vector3(coord.x + 0.5f, 8.0f, coord.y + 0.5f);
+
+			Cube* doorz = new Cube({ 1, 15, 7 });
+			doorz->SetLocalPosition(pos);
+			doorz->GetMaterial()->SetDiffuseMap(L"Resources/Textures/Landscape/Wall.png");
+			doorz->Update();
+
+			doorzs.push_back(doorz);
 		}
 		break;
 		}
@@ -130,7 +148,20 @@ void MapManager::ResolveCollisions(Player* player)
 		}
 	}
 
-	for (Cube* door : doors)
+	for (Cube* door : doorxs)
+	{
+		BoxCollider* doorCollider = door->GetCollider();
+		if (doorCollider->IsSphereCollision(playerCollider))
+		{
+			Vector3 pushDirection = playerPos - door->GetLocalPosition();
+			pushDirection.Normalize();
+
+			player->SetLocalPosition(playerPos + pushDirection * 0.1f);
+			door->SetLocalPosition(door->GetLocalPosition() - pushDirection * 0.1f);
+		}
+	}
+
+	for (Cube* door : doorzs)
 	{
 		BoxCollider* doorCollider = door->GetCollider();
 		if (doorCollider->IsSphereCollision(playerCollider))
@@ -144,20 +175,35 @@ void MapManager::ResolveCollisions(Player* player)
 	}
 }
 
-void MapManager::MakeDoorsTransparent()
+void MapManager::OpenDoorX(int index)
 {
-	//int halfSize = doors.size() / 2; // 문 벡터의 절반 크기 계산
-	//
-	//FOR(halfSize)
-	//{
-	//	Material* doorMaterial = doors[i]->GetMaterial();
-	//	doorMaterial->GetData()->diffuse.w = 0.0f; // 알파 값을 0으로 설정하여 투명하게 만듦
-	//}
-
-	int halfSize = doors.size();
-
-	for (int i = 0; i < halfSize; i++)
+	if (index >= 0 && index < doorxs.size())
 	{
-		loweringDoors.push_back(doors[i]);
+		loweringDoors.push_back(doorxs[index]);
 	}
 }
+
+void MapManager::OpenDoorZ(int index)
+{
+	if (index >= 0 && index < doorzs.size())
+	{
+		loweringDoors.push_back(doorzs[index]);
+	}
+}
+
+void MapManager::OpenAllDoorsX()
+{
+	for (Cube* door : doorxs)
+	{
+		loweringDoors.push_back(door);
+	}
+}
+
+void MapManager::OpenAllDoorsZ()
+{
+	for (Cube* door : doorzs)
+	{
+		loweringDoors.push_back(door);
+	}
+}
+

@@ -3,7 +3,7 @@
 
 ModelRenderScene::ModelRenderScene()
 {
-	model = new Model("Monster1");
+	model = new Model("ThrowerEnemy");
 	model->Load();
 }
 

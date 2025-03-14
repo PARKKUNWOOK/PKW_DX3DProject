@@ -10,8 +10,11 @@ MonsterStageScene::MonsterStageScene()
 	player = new Player();
 	player->SetLocalPosition(1, 5, 1);
 
-    enemyPool = new PoolingManager<Enemy>();
-    enemyPool->Create(maxEnemies);
+    assaultEnemyPool = new PoolingManager<AssaultEnemy>();
+    assaultEnemyPool->Create(maxEnemies);
+
+    throwerEnemyPool = new PoolingManager<ThrowerEnemy>();
+    throwerEnemyPool->Create(maxEnemies);
 
     SpawnEnemies(spawnCount);
 }
@@ -21,7 +24,8 @@ MonsterStageScene::~MonsterStageScene()
 	MapManager::Delete();
 
 	delete player;
-    delete enemyPool;
+    delete assaultEnemyPool;
+    delete throwerEnemyPool;
 }
 
 void MonsterStageScene::Update()
@@ -35,10 +39,19 @@ void MonsterStageScene::Update()
 
     int aliveEnemies = 0;
 
-    for (Enemy* enemy : enemyPool->GetAllActive())
+    for (AssaultEnemy* assaultEnemy : assaultEnemyPool->GetAllActive())
     {
-        enemy->Update();
-        if (enemy->IsActive())
+        assaultEnemy->Update();
+        if (assaultEnemy->IsActive())
+        {
+            aliveEnemies++;
+        }
+    }
+
+    for (ThrowerEnemy* throwerEnemy : throwerEnemyPool->GetAllActive())
+    {
+        throwerEnemy->Update();
+        if (throwerEnemy->IsActive())
         {
             aliveEnemies++;
         }
@@ -46,7 +59,7 @@ void MonsterStageScene::Update()
 
     if (aliveEnemies == 0)
     {
-        MapManager::Get()->MakeDoorsTransparent();
+        MapManager::Get()->OpenAllDoorsZ();
     }
 }
 
@@ -60,25 +73,31 @@ void MonsterStageScene::Render()
 
 	player->Render();
 
-    for (Enemy* enemy : enemyPool->GetAllActive())
+    for (AssaultEnemy* assaultEnemy : assaultEnemyPool->GetAllActive())
     {
-        enemy->Render();
+        assaultEnemy->Render();
+    }
+
+    for (ThrowerEnemy* throwerEnemy : throwerEnemyPool->GetAllActive())
+    {
+        throwerEnemy->Render();
     }
 }
 
 void MonsterStageScene::PostRender()
 {
-    for (Enemy* enemy : enemyPool->GetAllActive())
-    {
-        enemy->PostRender();
-    }
 }
 
 void MonsterStageScene::GUIRender()
 {
-    for (Enemy* enemy : enemyPool->GetAllActive())
+    for (AssaultEnemy* assaultEnemy : assaultEnemyPool->GetAllActive())
     {
-        enemy->Edit();
+        assaultEnemy->Edit();
+    }
+
+    for (ThrowerEnemy* throwerEnemy : throwerEnemyPool->GetAllActive())
+    {
+        throwerEnemy->Edit();
     }
 }
 
@@ -90,8 +109,11 @@ void MonsterStageScene::SpawnEnemies(int count)
 
     for (int i = 0; i < count; i++)
     {
-        Enemy* enemy = enemyPool->Pop();
-        if (!enemy) return;
+        AssaultEnemy* assaultEnemy = assaultEnemyPool->Pop();
+        if (!assaultEnemy) return;
+
+        ThrowerEnemy* throwerEnemy = throwerEnemyPool->Pop();
+        if (!throwerEnemy) return;
 
         float x, z;
         bool positionValid = false;
@@ -122,7 +144,20 @@ void MonsterStageScene::SpawnEnemies(int count)
 
             positionValid = true;
 
-            for (Enemy* other : enemyPool->GetAllActive())
+            for (AssaultEnemy* other : assaultEnemyPool->GetAllActive())
+            {
+                if (other->IsActive())
+                {
+                    float distance = Vector3::Distance(Vector3(x, spawnY, z), other->GetLocalPosition());
+                    if (distance < minDistance)
+                    {
+                        positionValid = false;
+                        break;
+                    }
+                }
+            }
+
+            for (ThrowerEnemy* other : throwerEnemyPool->GetAllActive())
             {
                 if (other->IsActive())
                 {
@@ -140,9 +175,13 @@ void MonsterStageScene::SpawnEnemies(int count)
 
         if (positionValid)
         {
-            enemy->SetLocalPosition(x, spawnY, z);
-            enemy->SetTarget(player);
-            enemy->SetActive(true);
+            assaultEnemy->SetLocalPosition(x, spawnY, z);
+            assaultEnemy->SetTarget(player);
+            assaultEnemy->SetActive(true);
+
+            throwerEnemy->SetLocalPosition(x, spawnY, z);
+            throwerEnemy->SetTarget(player);
+            throwerEnemy->SetActive(true);
         }
     }
 }

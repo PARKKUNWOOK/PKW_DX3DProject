@@ -8,6 +8,7 @@ ModelAnimationScene::ModelAnimationScene()
 	model->ReadClip("Idle");
 	model->ReadClip("Run");
 	model->ReadClip("Attack");
+	model->ReadClip("Death");
 	model->CreateTexture();
 }
 
@@ -29,6 +30,10 @@ void ModelAnimationScene::Update()
 	if (KEY->Down('3'))
 	{
 		model->PlayClip(2);
+	}
+	if (KEY->Down('4'))
+	{
+		model->PlayClip(3);
 	}
 
 	model->Update();

@@ -32,6 +32,13 @@ ModelExportScene::ModelExportScene()
     exporter = new ModelExporter(name, file);
     exporter->ExportClip(clipName);
     delete exporter;
+
+    clipName = "Death";
+    file = "Resources/Models/Animations/" + name + "/" + clipName + ".fbx";
+
+    exporter = new ModelExporter(name, file);
+    exporter->ExportClip(clipName);
+    delete exporter;
 }
 
 ModelExportScene::~ModelExportScene()

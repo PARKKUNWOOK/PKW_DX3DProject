@@ -52,4 +52,6 @@ private:
 	POINT clientCenterPos;
 
 	PoolingManager<Bullet>* bullets;
+
+	Vector3 knockbackDir;
 };

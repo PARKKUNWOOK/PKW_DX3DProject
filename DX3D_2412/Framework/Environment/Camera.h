@@ -18,11 +18,16 @@ public:
     void TargetOptionSave(string file);
     void TargetOptionLoad(string file);
 
+    bool ContainPoint(Vector3 point);
+    bool ContainSphere(Vector3 center, float radius);
+
     void SetTarget(Transform* target) { this->target = target; }
 
 private:
     void FreeMode();
     void FollowMode();
+
+    void Frustum();
 
 private:
     ViewBuffer* viewBuffer;
@@ -53,4 +58,7 @@ private:
     bool isLookAtTargetY = true;
 
     char file[128];
+
+    Vector3 planes[6];
+    float a, b, c, d;
 };

@@ -129,7 +129,7 @@ void Player::Fire()
         Vector3 fireDirection = CAM->GetForward();
         fireDirection.Normalize();
 
-        bullet->Fire(firePosition, fireDirection);
+        bullet->Fire(firePosition, fireDirection, true);
     }
 }
 

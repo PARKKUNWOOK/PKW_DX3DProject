@@ -22,6 +22,8 @@ void StartStageScene::Update()
 	MapManager::Get()->Update();
 
 	player->Update();
+
+	MapManager::Get()->OpenDoorX(0);
 }
 
 void StartStageScene::PreRender()
