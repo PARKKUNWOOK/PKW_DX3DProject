@@ -55,4 +55,5 @@ void MonsterStageScene::PostRender()
 
 void MonsterStageScene::GUIRender()
 {
+    EnemyManager::Get()->Edit();
 }

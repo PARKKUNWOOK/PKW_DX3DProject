@@ -6,10 +6,12 @@ public:
 	Enemy();
 	virtual ~Enemy();
 
-	virtual void Update();
+	void Update();
 	virtual void Render();
 	virtual void PostRender();
 	virtual void Edit();
+
+	virtual void AttackAction() = 0;
 
 	void SetTarget(Transform* target);
 	void TakeDamage(int damage);

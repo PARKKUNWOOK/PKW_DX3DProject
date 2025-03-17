@@ -11,6 +11,7 @@ private:
 public:
 	void Update();
 	void Render();
+	void Edit();
 	void SpawnEnemies(int count, Player* player);
 	bool IsAllDead();
 
@@ -20,5 +21,8 @@ private:
 private:
 	list<AssaultEnemy*> assaultEnemies;
 	list<ThrowerEnemy*> throwerEnemies;
+
+	//map<int, vector<Enemy*>> enemies;
+
 	int maxEnemies = 10;
 };

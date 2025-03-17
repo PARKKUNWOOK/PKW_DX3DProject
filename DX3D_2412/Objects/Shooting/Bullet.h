@@ -18,7 +18,7 @@ public:
 
 	void Fire(Vector3 pos, Vector3 dir, bool isPlayer);
 	bool AssaultEnemyCollisionCheck(AssaultEnemy* assaultEnemy);
-	bool ThrowerEnemyCollisionCheck(ThrowerEnemy* throwerEnemy);
+	bool ThrowerEnemyCollisionCheck(ThrowerEnemy* throwerEnemy);	
 	bool PlayerCollisionCheck(Player* player);
 
 private:

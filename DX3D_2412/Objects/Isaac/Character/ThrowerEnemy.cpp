@@ -2,6 +2,8 @@
 
 ThrowerEnemy::ThrowerEnemy()
 {
+	tag = "Throw";
+
 	model = new ModelAnimator("ThrowerEnemy");
 	model->SetShader(L"Model/Model.hlsl");
 	model->ReadClip("Walking");
@@ -28,48 +30,6 @@ ThrowerEnemy::ThrowerEnemy()
 ThrowerEnemy::~ThrowerEnemy()
 {
 	delete bullets;
-}
-
-void ThrowerEnemy::Update()
-{
-	if (!IsActive()) return;
-
-	if (isThrowAttacking)
-	{
-		throwAttackFrameCount--;
-
-		if (throwAttackFrameCount <= 0)
-		{
-			isThrowAttacking = false;
-
-			if (!isDying)
-			{
-				model->PlayClip(0);
-			}
-			else
-			{
-				TakeDamage(1);
-			}
-		}
-	}
-	else
-	{
-		FollowTarget();
-	}
-
-	Enemy::Update();
-
-	for (Bullet* bullet : Player::Get()->GetBullets()->GetAllActive())
-	{
-		if (bullet->ThrowerEnemyCollisionCheck(this))
-		{
-			bullet->SetActive(false);
-			TakeDamage(1);
-			return;
-		}
-	}
-
-	bullets->Update();
 }
 
 void ThrowerEnemy::Render()
@@ -115,6 +75,44 @@ void ThrowerEnemy::Attack(Player* player)
 		Vector3 firePosition = GetLocalPosition() + fireDirection * 1.0f;
 		bullet->Fire(firePosition, fireDirection, false);
 	}
+}
+
+void ThrowerEnemy::AttackAction()
+{
+	if (isThrowAttacking)
+	{
+		throwAttackFrameCount--;
+
+		if (throwAttackFrameCount <= 0)
+		{
+			isThrowAttacking = false;
+
+			if (!isDying)
+			{
+				model->PlayClip(0);
+			}
+			else
+			{
+				TakeDamage(1);
+			}
+		}
+	}
+	else
+	{
+		FollowTarget();
+	}
+
+	for (Bullet* bullet : Player::Get()->GetBullets()->GetAllActive())
+	{
+		if (bullet->ThrowerEnemyCollisionCheck(this))
+		{
+			bullet->SetActive(false);
+			TakeDamage(1);
+			return;
+		}
+	}
+
+	bullets->Update();
 }
 
 void ThrowerEnemy::FollowTarget()

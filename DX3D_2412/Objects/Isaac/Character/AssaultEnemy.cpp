@@ -2,6 +2,8 @@
 
 AssaultEnemy::AssaultEnemy()
 {
+	tag = "Assault";
+
 	model = new ModelAnimator("Monster1");
 	model->SetShader(L"Model/Model.hlsl");
 	model->ReadClip("Run");
@@ -24,48 +26,6 @@ AssaultEnemy::AssaultEnemy()
 
 AssaultEnemy::~AssaultEnemy()
 {
-}
-
-void AssaultEnemy::Update()
-{
-	if (!IsActive()) return;
-
-	if (isAssaultAttacking)
-	{
-		assaultAttackFrameCount--;
-
-		if (assaultAttackFrameCount <= 0)
-		{
-			isAssaultAttacking = false;
-
-			if (!isDying)
-			{
-				model->PlayClip(0);
-			}
-			else
-			{
-				TakeDamage(1);
-			}
-		}
-	}
-	else
-	{
-		FollowTarget();
-	}
-
-	Enemy::Update();
-
-	for (Bullet* bullet : Player::Get()->GetBullets()->GetAllActive())
-	{
-		if (bullet->AssaultEnemyCollisionCheck(this))
-		{
-			bullet->SetActive(false);
-			TakeDamage(1);
-			return;
-		}
-	}
-
-	Attack(Player::Get());
 }
 
 void AssaultEnemy::Render()
@@ -94,6 +54,44 @@ void AssaultEnemy::Attack(Player* player)
 		}
 		
 	}
+}
+
+void AssaultEnemy::AttackAction()
+{
+	if (isAssaultAttacking)
+	{
+		assaultAttackFrameCount--;
+
+		if (assaultAttackFrameCount <= 0)
+		{
+			isAssaultAttacking = false;
+
+			if (!isDying)
+			{
+				model->PlayClip(0);
+			}
+			else
+			{
+				TakeDamage(1);
+			}
+		}
+	}
+	else
+	{
+		FollowTarget();
+	}
+
+	for (Bullet* bullet : Player::Get()->GetBullets()->GetAllActive())
+	{
+		if (bullet->AssaultEnemyCollisionCheck(this))
+		{
+			bullet->SetActive(false);
+			TakeDamage(1);
+			return;
+		}
+	}
+
+	Attack(Player::Get());
 }
 
 void AssaultEnemy::FollowTarget()

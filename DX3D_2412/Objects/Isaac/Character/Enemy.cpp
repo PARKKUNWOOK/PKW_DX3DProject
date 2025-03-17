@@ -11,6 +11,8 @@ Enemy::Enemy()
     isDying = false;
 
     Collider::SetLocalPosition(0.0f, 1.5f, 0.0f);
+
+    isActive = false;
 }
 
 Enemy::~Enemy()
@@ -22,6 +24,7 @@ void Enemy::Update()
 {
     if (!IsActive()) return;
 
+    AttackAction();
     Collider::Update();
     if (model) model->Update();
 

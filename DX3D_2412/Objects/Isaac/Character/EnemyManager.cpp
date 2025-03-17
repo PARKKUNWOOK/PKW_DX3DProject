@@ -64,6 +64,19 @@ void EnemyManager::Render()
     }
 }
 
+void EnemyManager::Edit()
+{
+    for (AssaultEnemy* enemy : assaultEnemies)
+    {
+        enemy->Edit();
+    }
+
+    for (ThrowerEnemy* enemy : throwerEnemies)
+    {
+        enemy->Edit();
+    }
+}
+
 void EnemyManager::SpawnEnemies(int count, Player* player)
 {
     for (int i = 0; i < count; i++)
@@ -102,30 +115,31 @@ bool EnemyManager::IsAllDead()
 Vector3 EnemyManager::GetRandomSpawnPosition()
 {
     Vector2 mapSize = MapManager::Get()->GetMapSize();
-    int width = static_cast<int>(mapSize.x);
-    int height = static_cast<int>(mapSize.y);
+    float halfWidth = mapSize.x * 0.5f;
+    float halfHeight = mapSize.y * 0.5f;
 
-    int side = rand() % 4;
+    //int side = rand() % 4;
+    int side = 0;
     float x = 0, z = 0;
 
     switch (side)
     {
     case 0: //상단
-        x = static_cast<float>(rand() % width);
-        z = static_cast<float>(height - 1);
+        x = GameMath::Random(-halfWidth, +halfWidth);
+            z = halfHeight;
         break;
-    case 1: //하단
-        x = static_cast<float>(rand() % width);
-        z = 0;
-        break;
-    case 2: //좌측
-        x = 0;
-        z = static_cast<float>(rand() % height);;
-        break;
-    case 3: //우측
-        x = static_cast<float>(width - 1);
-        z = static_cast<float>(rand() % height);
-        break;
+    //case 1: //하단
+    //    x = static_cast<float>(rand() % width);
+    //    z = 0;
+    //    break;
+    //case 2: //좌측
+    //    x = 0;
+    //    z = static_cast<float>(rand() % height);;
+    //    break;
+    //case 3: //우측
+    //    x = static_cast<float>(width - 1);
+    //    z = static_cast<float>(rand() % height);
+    //    break;
     }
 
     float groundY = MapManager::Get()->GetHeight(Vector3(x, 0, z));
