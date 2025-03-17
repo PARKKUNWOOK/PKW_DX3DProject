@@ -104,7 +104,7 @@ void ThrowerEnemy::AttackAction()
 
 	for (Bullet* bullet : Player::Get()->GetBullets()->GetAllActive())
 	{
-		if (bullet->ThrowerEnemyCollisionCheck(this))
+		if (bullet->EnemyCollisionCheck(this))
 		{
 			bullet->SetActive(false);
 			TakeDamage(1);

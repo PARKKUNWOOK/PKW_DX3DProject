@@ -115,11 +115,11 @@ bool EnemyManager::IsAllDead()
 Vector3 EnemyManager::GetRandomSpawnPosition()
 {
     Vector2 mapSize = MapManager::Get()->GetMapSize();
-    float halfWidth = mapSize.x * 0.5f;
-    float halfHeight = mapSize.y * 0.5f;
+    float halfWidth = mapSize.x * 0.4f;
+    float halfHeight = mapSize.y * 0.4f;
 
     int side = rand() % 4;
-    //int side = 3;
+    //int side = 0;
     float x = 0, z = 0;
 
     switch (side)

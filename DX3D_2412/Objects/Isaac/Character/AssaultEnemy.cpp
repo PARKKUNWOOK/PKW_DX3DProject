@@ -83,7 +83,7 @@ void AssaultEnemy::AttackAction()
 
 	for (Bullet* bullet : Player::Get()->GetBullets()->GetAllActive())
 	{
-		if (bullet->AssaultEnemyCollisionCheck(this))
+		if (bullet->EnemyCollisionCheck(this))
 		{
 			bullet->SetActive(false);
 			TakeDamage(1);

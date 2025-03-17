@@ -8,9 +8,9 @@ MonsterStageScene::MonsterStageScene()
 	MapManager::Get()->Load("Resources/TextData/Pacman.map");
 
 	player = new Player();
-	player->SetLocalPosition(5, 5, 1);
+	player->SetLocalPosition(1, 5, 1);
 
-    EnemyManager::Get()->SpawnEnemies(1, player);
+    EnemyManager::Get()->SpawnEnemies(5, player);
 }
 
 MonsterStageScene::~MonsterStageScene()

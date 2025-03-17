@@ -52,26 +52,13 @@ void Bullet::Fire(Vector3 pos, Vector3 dir, bool isPlayer)
 	SetActive(true);
 }
 
-bool Bullet::AssaultEnemyCollisionCheck(AssaultEnemy* assaultEnemy)
+bool Bullet::EnemyCollisionCheck(Enemy* enemy)
 {
-	if (!IsActive() || !assaultEnemy->IsActive()) return false;
+	if (!IsActive() || !enemy->IsActive()) return false;
 
-	if (Intersects(assaultEnemy))
+	if (Intersects(enemy))
 	{
-		assaultEnemy->TakeDamage(damage);
-		return true;
-	}
-
-	return false;
-}
-
-bool Bullet::ThrowerEnemyCollisionCheck(ThrowerEnemy* throwerEnemy)
-{
-	if (!IsActive() || !throwerEnemy->IsActive()) return false;
-
-	if (Intersects(throwerEnemy))
-	{
-		throwerEnemy->TakeDamage(damage);
+		enemy->TakeDamage(damage);
 		return true;
 	}
 

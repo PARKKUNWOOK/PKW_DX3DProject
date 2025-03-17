@@ -1,7 +1,6 @@
 #pragma once
 
-class AssaultEnemy;
-class ThrowerEnemy;
+class Enemy;
 class Player;
 
 class Bullet : public SphereCollider
@@ -17,8 +16,7 @@ public:
 	void Render();
 
 	void Fire(Vector3 pos, Vector3 dir, bool isPlayer);
-	bool AssaultEnemyCollisionCheck(AssaultEnemy* assaultEnemy);
-	bool ThrowerEnemyCollisionCheck(ThrowerEnemy* throwerEnemy);	
+	bool EnemyCollisionCheck(Enemy* enemy);
 	bool PlayerCollisionCheck(Player* player);
 
 private:
