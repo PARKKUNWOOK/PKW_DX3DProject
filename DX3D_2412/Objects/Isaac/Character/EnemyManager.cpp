@@ -118,28 +118,28 @@ Vector3 EnemyManager::GetRandomSpawnPosition()
     float halfWidth = mapSize.x * 0.5f;
     float halfHeight = mapSize.y * 0.5f;
 
-    //int side = rand() % 4;
-    int side = 0;
+    int side = rand() % 4;
+    //int side = 3;
     float x = 0, z = 0;
 
     switch (side)
     {
     case 0: //상단
         x = GameMath::Random(-halfWidth, +halfWidth);
-            z = halfHeight;
+        z = halfHeight;
         break;
-    //case 1: //하단
-    //    x = static_cast<float>(rand() % width);
-    //    z = 0;
-    //    break;
-    //case 2: //좌측
-    //    x = 0;
-    //    z = static_cast<float>(rand() % height);;
-    //    break;
-    //case 3: //우측
-    //    x = static_cast<float>(width - 1);
-    //    z = static_cast<float>(rand() % height);
-    //    break;
+    case 1: //하단
+        x = GameMath::Random(-halfWidth, +halfWidth);
+        z = -halfHeight;
+        break;
+    case 2: //좌측
+        x = -halfWidth;
+        z = GameMath::Random(-halfHeight, +halfHeight);
+        break;
+    case 3: //우측
+        x = +halfWidth;
+        z = GameMath::Random(-halfHeight, +halfHeight);
+        break;
     }
 
     float groundY = MapManager::Get()->GetHeight(Vector3(x, 0, z));
