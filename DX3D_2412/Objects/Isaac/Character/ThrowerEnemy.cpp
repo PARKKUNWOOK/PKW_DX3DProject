@@ -18,13 +18,15 @@ ThrowerEnemy::ThrowerEnemy()
 
 	model->PlayClip(0);
 
+	speed = 1.0f;
+	maxHp = curHp = 1;
+
 	bullets = new PoolingManager<Bullet>();
 	bullets->Create(10);
 }
 
 ThrowerEnemy::~ThrowerEnemy()
 {
-	delete model;
 	delete bullets;
 }
 
@@ -55,7 +57,7 @@ void ThrowerEnemy::Update()
 		FollowTarget();
 	}
 
-	UpdateWorld();
+	Enemy::Update();
 
 	for (Bullet* bullet : Player::Get()->GetBullets()->GetAllActive())
 	{
@@ -68,51 +70,15 @@ void ThrowerEnemy::Update()
 	}
 
 	bullets->Update();
-	model->Update();
 }
 
 void ThrowerEnemy::Render()
 {
-	Collider::Render();
+	Enemy::Render();
 	bullets->Render();
-	model->Render();
 }
 
-void ThrowerEnemy::PostRender()
-{
-}
-
-void ThrowerEnemy::Edit()
-{
-	Collider::Edit();
-	model->Edit();
-}
-
-void ThrowerEnemy::SetTarget(Transform* target)
-{
-	this->target = target;
-}
-
-void ThrowerEnemy::Reset()
-{
-	SetActive(false);
-}
-
-void ThrowerEnemy::TakeDamage(int damage)
-{
-	if (curHp <= 0) return;
-
-	curHp -= damage;
-	if (curHp < 0) curHp = 0;
-
-	if (curHp <= 0)
-	{
-		isDying = true;
-		model->PlayClip(2);
-	}
-}
-
-void ThrowerEnemy::ThrowAttack(Player* player)
+void ThrowerEnemy::Attack(Player* player)
 {
 	if (!IsActive() || player->IsGameOver()) return;
 
@@ -170,7 +136,7 @@ void ThrowerEnemy::FollowTarget()
 		float targetAngle = atan2(direction.x, direction.z);
 		SetLocalRotation(Vector3(0.0f, targetAngle, 0.0f));
 
-		ThrowAttack(dynamic_cast<Player*>(target));
+		Attack(dynamic_cast<Player*>(target));
 		return;
 	}
 
@@ -197,9 +163,4 @@ void ThrowerEnemy::FollowTarget()
 	Vector3 currentRotation = GetLocalRotation();
 	float newAngle = GameMath::Lerp(currentRotation.y, targetAngle, 0.1f);
 	SetLocalRotation(Vector3(0.0f, newAngle, 0.0f));
-}
-
-void ThrowerEnemy::Death()
-{
-	SetActive(false);
 }

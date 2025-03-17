@@ -255,6 +255,12 @@
     <ClInclude Include="Objects\Isaac\Character\AssaultEnemy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Objects\Isaac\Character\Enemy.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Isaac\Character\EnemyManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DX3D_2412.cpp">
@@ -459,6 +465,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Isaac\Character\AssaultEnemy.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Isaac\Character\Enemy.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Isaac\Character\EnemyManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

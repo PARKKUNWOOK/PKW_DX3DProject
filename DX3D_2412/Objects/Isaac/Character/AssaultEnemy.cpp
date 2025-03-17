@@ -17,11 +17,13 @@ AssaultEnemy::AssaultEnemy()
 	model->SetLocalRotation(0, XM_PI, 0);
 
 	model->PlayClip(0);
+
+	speed = 3.0f;
+	maxHp = curHp = 2;
 }
 
 AssaultEnemy::~AssaultEnemy()
 {
-	delete model;
 }
 
 void AssaultEnemy::Update()
@@ -51,7 +53,7 @@ void AssaultEnemy::Update()
 		FollowTarget();
 	}
 
-	UpdateWorld();
+	Enemy::Update();
 
 	for (Bullet* bullet : Player::Get()->GetBullets()->GetAllActive())
 	{
@@ -63,56 +65,17 @@ void AssaultEnemy::Update()
 		}
 	}
 
-	AssaultAttack(Player::Get());
-
-	model->Update();
+	Attack(Player::Get());
 }
 
 void AssaultEnemy::Render()
 {
-	if (!IsActive()) return;
-
-	Collider::Render();
-	model->Render();
+	Enemy::Render();
 }
 
-void AssaultEnemy::PostRender()
+void AssaultEnemy::Attack(Player* player)
 {
-}
-
-void AssaultEnemy::Edit()
-{
-	Collider::Edit();
-	model->Edit();
-}
-
-void AssaultEnemy::SetTarget(Transform* target)
-{
-	this->target = target;
-}
-
-void AssaultEnemy::Reset()
-{
-	SetActive(false);
-}
-
-void AssaultEnemy::TakeDamage(int damage)
-{
-	if (curHp <= 0) return;
-
-	curHp -= damage;
-	if (curHp < 0) curHp = 0;
-
-	if (curHp <= 0)
-	{
-		isDying = true;
-		model->PlayClip(2);
-	}
-}
-
-void AssaultEnemy::AssaultAttack(Player* player)
-{
-	if (!IsActive() || player->IsGameOver()) return;
+	if (!IsActive() || player->IsGameOver() || isDying) return;
 
 	if (player->IsCollision(this) && !isAssaultAttacking)
 	{
@@ -159,9 +122,4 @@ void AssaultEnemy::FollowTarget()
 		float newAngle = GameMath::Lerp(currentRotation.y, targetAngle, 0.1f);
 		SetLocalRotation(Vector3(0.0f, newAngle, 0.0f));
 	}
-}
-
-void AssaultEnemy::Death()
-{
-	SetActive(false);
 }

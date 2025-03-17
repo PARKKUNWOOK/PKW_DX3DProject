@@ -195,6 +195,8 @@
     <ClInclude Include="Objects\Collider\RectCollider.h" />
     <ClInclude Include="Objects\Collider\SphereCollider.h" />
     <ClInclude Include="Objects\Isaac\Character\AssaultEnemy.h" />
+    <ClInclude Include="Objects\Isaac\Character\Enemy.h" />
+    <ClInclude Include="Objects\Isaac\Character\EnemyManager.h" />
     <ClInclude Include="Objects\Isaac\Character\Player.h" />
     <ClInclude Include="Objects\Isaac\Character\ThrowerEnemy.h" />
     <ClInclude Include="Objects\Landscape\Skybox.h" />
@@ -271,6 +273,8 @@
     <ClCompile Include="Objects\Collider\RectCollider.cpp" />
     <ClCompile Include="Objects\Collider\SphereCollider.cpp" />
     <ClCompile Include="Objects\Isaac\Character\AssaultEnemy.cpp" />
+    <ClCompile Include="Objects\Isaac\Character\Enemy.cpp" />
+    <ClCompile Include="Objects\Isaac\Character\EnemyManager.cpp" />
     <ClCompile Include="Objects\Isaac\Character\Player.cpp" />
     <ClCompile Include="Objects\Isaac\Character\ThrowerEnemy.cpp" />
     <ClCompile Include="Objects\Landscape\Skybox.cpp" />
