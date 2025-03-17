@@ -45,6 +45,9 @@ void MapManager::Load(string file)
 	POINT mapSize = reader->Data<POINT>();
 	POINT mapTiling = reader->Data<POINT>();
 
+	mapWidth = mapSize.x;
+	mapHeight = mapSize.y;
+
 	floor = new Cube(Vector3(mapSize.x, 1.0f, mapSize.y), mapTiling);
 	floor->GetMaterial()->Load("Resources/Materials/PacmanMap.mat");
 

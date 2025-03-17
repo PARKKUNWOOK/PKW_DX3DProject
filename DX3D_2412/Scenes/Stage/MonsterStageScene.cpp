@@ -8,9 +8,9 @@ MonsterStageScene::MonsterStageScene()
 	MapManager::Get()->Load("Resources/TextData/Pacman.map");
 
 	player = new Player();
-	player->SetLocalPosition(1, 5, 1);
+	player->SetLocalPosition(5, 5, 1);
 
-    SpawnEnemies(5);
+    EnemyManager::Get()->SpawnEnemies(1, player);
 }
 
 MonsterStageScene::~MonsterStageScene()
@@ -18,6 +18,8 @@ MonsterStageScene::~MonsterStageScene()
 	MapManager::Delete();
 
 	delete player;
+
+    EnemyManager::Delete();
 }
 
 void MonsterStageScene::Update()
@@ -53,9 +55,4 @@ void MonsterStageScene::PostRender()
 
 void MonsterStageScene::GUIRender()
 {
-}
-
-void MonsterStageScene::SpawnEnemies(int count)
-{
-    EnemyManager::Get()->SpawnEnemies(count, player);
 }

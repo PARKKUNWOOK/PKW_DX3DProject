@@ -101,33 +101,34 @@ bool EnemyManager::IsAllDead()
 
 Vector3 EnemyManager::GetRandomSpawnPosition()
 {
-    int mapSize = 20;
+    Vector2 mapSize = MapManager::Get()->GetMapSize();
+    int width = static_cast<int>(mapSize.x);
+    int height = static_cast<int>(mapSize.y);
+
     int side = rand() % 4;
     float x = 0, z = 0;
 
     switch (side)
     {
-    case 0: // 상단
-        x = static_cast<float>(rand() % mapSize);
-        z = static_cast<float>(mapSize - 1);
+    case 0: //상단
+        x = static_cast<float>(rand() % width);
+        z = static_cast<float>(height - 1);
         break;
-    case 1: // 하단
-        x = static_cast<float>(rand() % mapSize);
+    case 1: //하단
+        x = static_cast<float>(rand() % width);
         z = 0;
         break;
-    case 2: // 좌측
+    case 2: //좌측
         x = 0;
-        z = static_cast<float>(rand() % mapSize);
+        z = static_cast<float>(rand() % height);;
         break;
-    case 3: // 우측
-        x = static_cast<float>(mapSize - 1);
-        z = static_cast<float>(rand() % mapSize);
+    case 3: //우측
+        x = static_cast<float>(width - 1);
+        z = static_cast<float>(rand() % height);
         break;
     }
 
     float groundY = MapManager::Get()->GetHeight(Vector3(x, 0, z));
 
-    float enemyHeight = 1.5f;
-
-    return Vector3(x, groundY + enemyHeight, z);
+    return Vector3(x, groundY + 1.5f, z);
 }

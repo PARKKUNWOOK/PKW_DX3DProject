@@ -22,10 +22,15 @@ public:
 	void OpenAllDoorsX();
 	void OpenAllDoorsZ();
 
+	Vector2 GetMapSize() const { return Vector2(mapWidth, mapHeight); }
+
 private:
 	Cube* floor;
 	vector<Cube*> walls;
 	vector<Cube*> doorxs;
 	vector<Cube*> doorzs;
 	vector<Cube*> loweringDoors;
+
+	int mapWidth = 0;
+	int mapHeight = 0;
 };

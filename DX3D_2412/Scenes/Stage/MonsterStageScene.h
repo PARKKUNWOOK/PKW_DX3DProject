@@ -13,8 +13,5 @@ public:
 	virtual void GUIRender() override;
 
 private:
-	void SpawnEnemies(int count);
-
-private:
 	Player* player;
 };
