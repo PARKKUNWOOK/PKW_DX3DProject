@@ -19,6 +19,8 @@ public:
 	bool EnemyCollisionCheck(Enemy* enemy);
 	bool PlayerCollisionCheck(Player* player);
 
+	bool IsPlayerBullet() { return isPlayerBullet; }
+
 private:
 	Sphere* sphere;
 	Vector3 direction;

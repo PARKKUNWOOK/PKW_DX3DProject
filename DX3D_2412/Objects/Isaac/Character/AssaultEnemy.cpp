@@ -21,7 +21,7 @@ AssaultEnemy::AssaultEnemy()
 	model->PlayClip(0);
 
 	speed = 3.0f;
-	maxHp = curHp = 2;
+	maxHp = curHp = 5;
 }
 
 AssaultEnemy::~AssaultEnemy()
@@ -81,9 +81,11 @@ void AssaultEnemy::AttackAction()
 		FollowTarget();
 	}
 
-	for (Bullet* bullet : Player::Get()->GetBullets()->GetAllActive())
+	for (Bullet* bullet : BulletManager::Get()->GetBullets())
 	{
-		if (bullet->EnemyCollisionCheck(this))
+		if (!bullet->IsActive()) continue;
+
+		if (bullet->IsPlayerBullet() && bullet->EnemyCollisionCheck(this))
 		{
 			bullet->SetActive(false);
 			TakeDamage(1);

@@ -23,9 +23,7 @@ public:
 	void PostRender();
 	void Edit();
 
-	PoolingManager<Bullet>* GetBullets();
 	void TakeDamage(int damage, Vector3 knockbackDir);
-
 	bool IsGameOver() { return isGameOver; }
 
 private:
@@ -33,7 +31,6 @@ private:
 	void Fire();
 	void Jump();
 	void Move();
-	void CreateBullets();
 	void SetCursor();
 	void CheckGameOver();
 
@@ -50,8 +47,6 @@ private:
 
 	Vector3 velocity;
 	POINT clientCenterPos;
-
-	PoolingManager<Bullet>* bullets;
 
 	Vector3 knockbackDir;
 };

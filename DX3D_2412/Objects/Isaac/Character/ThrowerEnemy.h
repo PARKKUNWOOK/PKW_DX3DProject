@@ -15,7 +15,6 @@ private:
 	void FollowTarget() override;
 
 private:
-	PoolingManager<Bullet>* bullets;
 	bool isThrowAttacking = false;
 	int throwAttackFrameCount = 0;
 };

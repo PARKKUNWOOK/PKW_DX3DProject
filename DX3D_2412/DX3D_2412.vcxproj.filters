@@ -261,6 +261,9 @@
     <ClInclude Include="Objects\Isaac\Character\EnemyManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Objects\Shooting\BulletManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DX3D_2412.cpp">
@@ -471,6 +474,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Isaac\Character\EnemyManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Shooting\BulletManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

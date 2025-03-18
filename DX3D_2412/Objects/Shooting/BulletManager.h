@@ -3,7 +3,7 @@
 class BulletManager : public Singleton<BulletManager>
 {
 private:
-	const UINT SIZE = 50;
+	const UINT SIZE = 100;
 
 private:
 	friend class Singleton;
@@ -16,10 +16,10 @@ public:
 	void Render();
 	void Edit();
 
-	void Fire(Vector3 pos, Vector3 direction);
+	void Fire(Vector3 pos, Vector3 direction, bool isPlayer);
+
+	const vector<Bullet*>& GetBullets() { return bullets; }
 
 private:
-	ModelInstancing* modelInstancing;
-
 	vector<Bullet*> bullets;
 };

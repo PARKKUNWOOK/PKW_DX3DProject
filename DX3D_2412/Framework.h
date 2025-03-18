@@ -160,6 +160,7 @@ typedef function<void(int)> IntParamEvent;
 #include "Objects/Test/Planet.h"
 
 #include "Objects/Shooting/Bullet.h"
+#include "Objects/Shooting/BulletManager.h"
 
 #include "Objects/MineCraft/UIManager.h"
 

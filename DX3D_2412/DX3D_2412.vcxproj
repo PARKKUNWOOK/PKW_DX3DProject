@@ -206,6 +206,7 @@
     <ClInclude Include="Objects\Isaac\MapEditor\CubeMapEditor.h" />
     <ClInclude Include="Objects\Isaac\MapEditor\MapManager.h" />
     <ClInclude Include="Objects\Shooting\Bullet.h" />
+    <ClInclude Include="Objects\Shooting\BulletManager.h" />
     <ClInclude Include="Objects\Test\Planet.h" />
     <ClInclude Include="Objects\UI\Button.h" />
     <ClInclude Include="Objects\UI\ProgressBar.h" />
@@ -283,6 +284,7 @@
     <ClCompile Include="Objects\Isaac\MapEditor\CubeMapEditor.cpp" />
     <ClCompile Include="Objects\Isaac\MapEditor\MapManager.cpp" />
     <ClCompile Include="Objects\Shooting\Bullet.cpp" />
+    <ClCompile Include="Objects\Shooting\BulletManager.cpp" />
     <ClCompile Include="Objects\Test\Planet.cpp" />
     <ClCompile Include="Objects\UI\Button.cpp" />
     <ClCompile Include="Objects\UI\ProgressBar.cpp" />

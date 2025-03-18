@@ -15,8 +15,6 @@ Player::Player()
     SetCursorPos(clientCenterPos.x, clientCenterPos.y);
     ShowCursor(false);
 
-    CreateBullets();
-
     CAM->SetLocalPosition(0, 0, 0);
     CAM->SetLocalRotation(0, 0, 0);
     CAM->SetParent(this);
@@ -24,7 +22,6 @@ Player::Player()
 
 Player::~Player()
 {
-    delete bullets;
 }
 
 void Player::Update()
@@ -50,13 +47,14 @@ void Player::Update()
     }
 
     UpdateWorld();
-    bullets->Update();
+
+    BulletManager::Get()->Update();
 }
 
 void Player::Render()
 {
     Collider::Render();
-    bullets->Render();
+    BulletManager::Get()->Render();
 }
 
 void Player::PostRender()
@@ -65,11 +63,6 @@ void Player::PostRender()
 
 void Player::Edit()
 {
-}
-
-PoolingManager<Bullet>* Player::GetBullets()
-{
-    return bullets;
 }
 
 void Player::TakeDamage(int damage, Vector3 knockbackDir)
@@ -121,15 +114,11 @@ void Player::Fire()
 {
     if (KEY->Down(VK_LBUTTON))
     {
-        Bullet* bullet = bullets->Pop();
-        if (!bullet) return;
-
         Vector3 firePosition = GetLocalPosition();
-
         Vector3 fireDirection = CAM->GetForward();
         fireDirection.Normalize();
 
-        bullet->Fire(firePosition, fireDirection, true);
+        BulletManager::Get()->Fire(firePosition, fireDirection, true);
     }
 }
 
@@ -161,12 +150,6 @@ void Player::Move()
     SetLocalPosition(newPosition);
 
     MapManager::Get()->ResolveCollisions(this);
-}
-
-void Player::CreateBullets()
-{
-    bullets = new PoolingManager<Bullet>();
-    bullets->Create(10);
 }
 
 void Player::SetCursor()

@@ -21,21 +21,16 @@ ThrowerEnemy::ThrowerEnemy()
 	model->PlayClip(0);
 
 	speed = 1.0f;
-	maxHp = curHp = 1;
-
-	bullets = new PoolingManager<Bullet>();
-	bullets->Create(10);
+	maxHp = curHp = 3;
 }
 
 ThrowerEnemy::~ThrowerEnemy()
 {
-	delete bullets;
 }
 
 void ThrowerEnemy::Render()
 {
 	Enemy::Render();
-	bullets->Render();
 }
 
 void ThrowerEnemy::Attack(Player* player)
@@ -64,16 +59,12 @@ void ThrowerEnemy::Attack(Player* player)
 		// 모델 애니메이션을 "Throw"로 변경
 		model->PlayClip(1);
 
-		// 총알 발사
-		Bullet* bullet = bullets->Pop();
-		if (!bullet) return;
-		
 		//몬스터가 바라보는 방향
 		Vector3 fireDirection = Vector3(sin(GetLocalRotation().y), 0.0f, cos(GetLocalRotation().y));
 		fireDirection.Normalize();
 
 		Vector3 firePosition = GetLocalPosition() + fireDirection * 1.0f;
-		bullet->Fire(firePosition, fireDirection, false);
+		BulletManager::Get()->Fire(firePosition, fireDirection, false);
 	}
 }
 
@@ -102,17 +93,17 @@ void ThrowerEnemy::AttackAction()
 		FollowTarget();
 	}
 
-	for (Bullet* bullet : Player::Get()->GetBullets()->GetAllActive())
+	for (Bullet* bullet : BulletManager::Get()->GetBullets())
 	{
-		if (bullet->EnemyCollisionCheck(this))
+		if (!bullet->IsActive()) continue;
+
+		if (bullet->IsPlayerBullet() && bullet->EnemyCollisionCheck(this))
 		{
 			bullet->SetActive(false);
 			TakeDamage(1);
 			return;
 		}
 	}
-
-	bullets->Update();
 }
 
 void ThrowerEnemy::FollowTarget()
