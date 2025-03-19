@@ -164,12 +164,12 @@ typedef function<void(int)> IntParamEvent;
 
 #include "Objects/MineCraft/UIManager.h"
 
-#include "Objects/Isaac/Character/Player.h"
-#include "Objects/Isaac/Character/PlayerManager.h"
-#include "Objects/Isaac/Character/Enemy.h"
-#include "Objects/Isaac/Character/AssaultEnemy.h"
-#include "Objects/Isaac/Character/ThrowerEnemy.h"
-#include "Objects/Isaac/Character/EnemyManager.h"
+#include "Objects/Isaac/Character/Player/Player.h"
+#include "Objects/Isaac/Character/Player/PlayerManager.h"
+#include "Objects/Isaac/Character/Enemy/Enemy.h"
+#include "Objects/Isaac/Character/Enemy/AssaultEnemy.h"
+#include "Objects/Isaac/Character/Enemy/ThrowerEnemy.h"
+#include "Objects/Isaac/Character/Enemy/EnemyManager.h"
 #include "Objects/Isaac/MapEditor/CubeMapEditor.h"
 #include "Objects/Isaac/MapEditor/MapManager.h"
 

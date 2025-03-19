@@ -243,28 +243,28 @@
     <ClInclude Include="Objects\Basic\Pyramid.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Isaac\Character\Player.h">
+    <ClInclude Include="Objects\Isaac\Character\Player\Player.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Scenes\Stage\StartStageScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Isaac\Character\ThrowerEnemy.h">
+    <ClInclude Include="Objects\Isaac\Character\Enemy\ThrowerEnemy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Isaac\Character\AssaultEnemy.h">
+    <ClInclude Include="Objects\Isaac\Character\Enemy\AssaultEnemy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Isaac\Character\Enemy.h">
+    <ClInclude Include="Objects\Isaac\Character\Enemy\Enemy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Isaac\Character\EnemyManager.h">
+    <ClInclude Include="Objects\Isaac\Character\Enemy\EnemyManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Shooting\BulletManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Isaac\Character\PlayerManager.h">
+    <ClInclude Include="Objects\Isaac\Character\Player\PlayerManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -461,28 +461,28 @@
     <ClCompile Include="Objects\Basic\Pyramid.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Isaac\Character\Player.cpp">
+    <ClCompile Include="Objects\Isaac\Character\Player\Player.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scenes\Stage\StartStageScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Isaac\Character\ThrowerEnemy.cpp">
+    <ClCompile Include="Objects\Isaac\Character\Enemy\ThrowerEnemy.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Isaac\Character\AssaultEnemy.cpp">
+    <ClCompile Include="Objects\Isaac\Character\Enemy\AssaultEnemy.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Isaac\Character\Enemy.cpp">
+    <ClCompile Include="Objects\Isaac\Character\Enemy\Enemy.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Isaac\Character\EnemyManager.cpp">
+    <ClCompile Include="Objects\Isaac\Character\Enemy\EnemyManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Shooting\BulletManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Isaac\Character\PlayerManager.cpp">
+    <ClCompile Include="Objects\Isaac\Character\Player\PlayerManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
