@@ -13,18 +13,18 @@
 
 GameManager::GameManager()
 {
-	SCENE->Create("Grid", new GridScene());
+	//SCENE->Create("Grid", new GridScene());
 	//SCENE->Create("Export", new ModelExportScene());
 	//SCENE->Create("Start", new CollisionScene());
 	//SCENE->Create("Start", new CubeMapEditorScene());
-	//SCENE->Create("Start", new StartStageScene());
-	SCENE->Create("Start", new MonsterStageScene());
+	SCENE->Create("Start", new StartStageScene());
+	SCENE->Create("Monster", new MonsterStageScene());
 	//SCENE->Create("Start", new ModelRenderScene());
 	//SCENE->Create("Start", new InstancingScene());
 	//SCENE->Create("Start", new ModelInstancingScene());
 	//SCENE->Create("Start", new ModelAnimationScene());
 
-	SCENE->Add("Grid");
+	//SCENE->Add("Grid");
 	SCENE->Add("Start");
 
 	Create();
@@ -39,6 +39,18 @@ void GameManager::Update()
 {
 	Keyboard::Get()->Update();
 	Timer::Get()->Update();
+
+	if (KEY->Down('Q'))
+	{
+		SCENE->Remove("Start");
+		SCENE->Add("Monster");
+	}
+
+	if (KEY->Down('E'))
+	{
+		SCENE->Remove("Monster");
+		SCENE->Add("Start");
+	}
 
 	SCENE->Update();
 

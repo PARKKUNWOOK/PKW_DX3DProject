@@ -4,15 +4,10 @@
 StartStageScene::StartStageScene()
 {
 	MapManager::Get()->Load("Resources/TextData/Pacman.map");
-	player = new Player();
-	player->SetLocalPosition(1, 5, 1);
 }
 
 StartStageScene::~StartStageScene()
 {
-	MapManager::Delete();
-
-	delete player;
 }
 
 void StartStageScene::Update()
@@ -21,7 +16,7 @@ void StartStageScene::Update()
 
 	MapManager::Get()->Update();
 
-	player->Update();
+	PlayerManager::Get()->Update();
 
 	MapManager::Get()->OpenDoorX(0);
 }
@@ -34,7 +29,7 @@ void StartStageScene::Render()
 {
 	MapManager::Get()->Render();
 
-	player->Render();
+	PlayerManager::Get()->Render();
 }
 
 void StartStageScene::PostRender()

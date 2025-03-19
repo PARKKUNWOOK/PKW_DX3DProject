@@ -153,6 +153,8 @@ void MapManager::ResolveCollisions(Player* player)
 
 	for (Cube* door : doorxs)
 	{
+		if (!door->IsActive()) return;
+
 		BoxCollider* doorCollider = door->GetCollider();
 		if (doorCollider->IsSphereCollision(playerCollider))
 		{
@@ -166,6 +168,8 @@ void MapManager::ResolveCollisions(Player* player)
 
 	for (Cube* door : doorzs)
 	{
+		if (!door->IsActive()) return;
+
 		BoxCollider* doorCollider = door->GetCollider();
 		if (doorCollider->IsSphereCollision(playerCollider))
 		{
@@ -176,6 +180,21 @@ void MapManager::ResolveCollisions(Player* player)
 			door->SetLocalPosition(door->GetLocalPosition() - pushDirection * 0.1f);
 		}
 	}
+}
+
+void MapManager::AllCloseDoors()
+{
+	for (Cube* door : doorxs)
+	{
+		door->SetActive(true);
+	}
+
+	for (Cube* door : doorzs)
+	{
+		door->SetActive(true);
+	}
+
+	loweringDoors.clear();
 }
 
 void MapManager::OpenDoorX(int index)

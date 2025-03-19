@@ -4,21 +4,10 @@
 MonsterStageScene::MonsterStageScene()
 {
     srand(static_cast<unsigned int>(time(nullptr)));
-
-	MapManager::Get()->Load("Resources/TextData/Pacman.map");
-
-	player = new Player();
-	player->SetLocalPosition(1, 5, 1);
-
-    EnemyManager::Get()->SpawnEnemies(5, player);
 }
 
 MonsterStageScene::~MonsterStageScene()
 {
-	MapManager::Delete();
-
-	delete player;
-
     EnemyManager::Delete();
 }
 
@@ -26,11 +15,15 @@ void MonsterStageScene::Update()
 {
     UIManager::Get()->Update();
 
-    if (player->IsGameOver()) return;
-
 	MapManager::Get()->Update();
-	player->Update();
+    PlayerManager::Get()->Update();
     EnemyManager::Get()->Update();
+
+    if (!EnemyManager::Get()->IsAllDead())
+    {
+        MapManager::Get()->AllCloseDoors();
+    }
+
 
     if (EnemyManager::Get()->IsAllDead())
     {
@@ -45,7 +38,7 @@ void MonsterStageScene::PreRender()
 void MonsterStageScene::Render()
 {
     MapManager::Get()->Render();
-	player->Render();
+    PlayerManager::Get()->Render();
     EnemyManager::Get()->Render();
 }
 

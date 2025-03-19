@@ -198,6 +198,7 @@
     <ClInclude Include="Objects\Isaac\Character\Enemy.h" />
     <ClInclude Include="Objects\Isaac\Character\EnemyManager.h" />
     <ClInclude Include="Objects\Isaac\Character\Player.h" />
+    <ClInclude Include="Objects\Isaac\Character\PlayerManager.h" />
     <ClInclude Include="Objects\Isaac\Character\ThrowerEnemy.h" />
     <ClInclude Include="Objects\Landscape\Skybox.h" />
     <ClInclude Include="Objects\Landscape\Terrain.h" />
@@ -277,6 +278,7 @@
     <ClCompile Include="Objects\Isaac\Character\Enemy.cpp" />
     <ClCompile Include="Objects\Isaac\Character\EnemyManager.cpp" />
     <ClCompile Include="Objects\Isaac\Character\Player.cpp" />
+    <ClCompile Include="Objects\Isaac\Character\PlayerManager.cpp" />
     <ClCompile Include="Objects\Isaac\Character\ThrowerEnemy.cpp" />
     <ClCompile Include="Objects\Landscape\Skybox.cpp" />
     <ClCompile Include="Objects\Landscape\Terrain.cpp" />

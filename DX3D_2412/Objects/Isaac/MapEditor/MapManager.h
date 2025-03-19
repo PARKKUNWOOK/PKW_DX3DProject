@@ -17,6 +17,7 @@ public:
 	float GetHeight(const Vector3& pos) const;
 	void ResolveCollisions(Player* player);
 
+	void AllCloseDoors();
 	void OpenDoorX(int index);
 	void OpenDoorZ(int index);
 	void OpenAllDoorsX();
