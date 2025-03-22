@@ -34,15 +34,15 @@
 #include <queue>
 #include <list>
 #include <functional>
-#include <fstream>
-#include <sstream>
 
 #include <d3d11.h>
 #include <d3dcompiler.h>
 #include <DirectXMath.h>
+#include <DirectXCollision.h>
 
 using namespace std;
 using namespace DirectX;
+using namespace DirectX::TriangleTests;
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dcompiler.lib")
@@ -75,6 +75,11 @@ using namespace DirectX;
 
 #pragma comment(lib, "assimp-vc143-mtd.lib")
 
+//FMOD
+#include <FMOD/fmod.hpp>
+
+#pragma comment(lib, "fmod_vc.lib")
+
 typedef XMMATRIX Matrix;
 typedef XMFLOAT4 Float4;
 typedef XMFLOAT3 Float3;
@@ -101,22 +106,29 @@ typedef function<void(int)> IntParamEvent;
 #include "Framework/Utility/Font.h"
 #include "Framework/Utility/Observer.h"
 #include "Framework/Utility/tinyxml2.h"
+#include "Framework/Utility/Audio.h"
 
 #include "Framework/Device/Device.h"
 
 #include "Framework/Shader/Shader.h"
 #include "Framework/Shader/VertexShader.h"
 #include "Framework/Shader/PixelShader.h"
+#include "Framework/Shader/ComputeShader.h"
+#include "Framework/Shader/GeometryShader.h"
 
 #include "Framework/Buffer/VertexBuffer.h"
 #include "Framework/Buffer/IndexBuffer.h"
 #include "Framework/Buffer/ConstBuffer.h"
+#include "Framework/Buffer/RawBuffer.h"
+#include "Framework/Buffer/StructuredBuffer.h"
 #include "Framework/Buffer/GlobalBuffer.h"
 #include "Framework/Buffer/VertexLayouts.h"
 
 #include "Framework/Render/Texture.h"
 #include "Framework/Render/Material.h"
 #include "Framework/Render/Mesh.h"
+#include "Framework/Render/DepthStencil.h"
+#include "Framework/Render/RenderTarget.h"
 
 #include "Framework/State/RasterizerState.h"
 #include "Framework/State/SamplerState.h"
@@ -125,6 +137,9 @@ typedef function<void(int)> IntParamEvent;
 
 #include "Framework/Environment/Camera.h"
 #include "Framework/Environment/Environment.h"
+#include "Framework/Environment/Reflection.h"
+#include "Framework/Environment/Refraction.h"
+#include "Framework/Environment/Shadow.h"
 
 #include "Framework/Model/ModelData.h"
 #include "Framework/Model/ModelExporter.h"
@@ -149,29 +164,43 @@ typedef function<void(int)> IntParamEvent;
 #include "Objects/Collider/CapsuleCollider.h"
 #include "Objects/Collider/RectCollider.h"
 
+#include "Objects/Algorithm/Node.h"
+#include "Objects/Algorithm/Heap.h"
+#include "Objects/Algorithm/AStar.h"
+
 #include "Objects/UI/Button.h"
 #include "Objects/UI/ProgressBar.h"
+#include "Objects/UI/UIManager.h"
 
 #include "Objects/Landscape/Terrain.h"
+#include "Objects/Landscape/TerrainEditor.h"
 #include "Objects/Landscape/Skybox.h"
+#include "Objects/Landscape/Water.h"
 
 #include "Objects/Manager/PoolingManager.h"
 
-#include "Objects/Test/Planet.h"
+#include "Objects/Particle/Particle.h"
+#include "Objects/Particle/Spark.h"
+#include "Objects/Particle/Sprite.h"
+#include "Objects/Particle/Rain.h"
+#include "Objects/Particle/Snow.h"
+#include "Objects/Particle/ParticleSystem.h"
+
+#include "Objects/Test/TestModel.h"
+
+#include "Objects/Character/Ghost.h"
 
 #include "Objects/Shooting/Bullet.h"
 #include "Objects/Shooting/BulletManager.h"
 
-#include "Objects/MineCraft/UIManager.h"
-
-#include "Objects/Isaac/Character/Player/Player.h"
-#include "Objects/Isaac/Character/Player/PlayerManager.h"
-#include "Objects/Isaac/Character/Enemy/Enemy.h"
-#include "Objects/Isaac/Character/Enemy/AssaultEnemy.h"
-#include "Objects/Isaac/Character/Enemy/ThrowerEnemy.h"
-#include "Objects/Isaac/Character/Enemy/EnemyManager.h"
-#include "Objects/Isaac/MapEditor/CubeMapEditor.h"
-#include "Objects/Isaac/MapEditor/MapManager.h"
+#include "Objects/HellfireDescent/Character/Player.h"
+#include "Objects/HellfireDescent/Character/PlayerManager.h"
+#include "Objects/HellfireDescent/Character/Enemy.h"
+#include "Objects/HellfireDescent/Character/AssaultEnemy.h"
+#include "Objects/HellfireDescent/Character/ThrowerEnemy.h"
+#include "Objects/HellfireDescent/Character/EnemyManager.h"
+#include "Objects/HellfireDescent/MapEditor/CubeMapEditor.h"
+#include "Objects/HellfireDescent/MapEditor/MapManager.h"
 
 //Manager Head
 #include "Scenes/Scene.h"

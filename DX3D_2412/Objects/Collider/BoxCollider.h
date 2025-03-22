@@ -25,6 +25,7 @@ public:
 	void GetObb(ObbDesc& obbDesc);
 
 	void UpdateMesh(const Vector3& size);
+	Vector3 GetSize() { return size; }
 
 private:
 	virtual void MakeMesh() override;

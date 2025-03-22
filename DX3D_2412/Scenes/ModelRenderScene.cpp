@@ -3,8 +3,8 @@
 
 ModelRenderScene::ModelRenderScene()
 {
-	model = new Model("ThrowerEnemy");
-	model->Load();
+	model = new Model("Ghost");
+	//model->SetShader(L"Model/Model.hlsl");
 }
 
 ModelRenderScene::~ModelRenderScene()

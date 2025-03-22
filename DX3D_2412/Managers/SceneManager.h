@@ -21,8 +21,6 @@ public:
     void Add(string key);
     void Remove(string key);
 
-    Scene* GetScene(string key) { return scenes[key]; }
-
 private:
     void AddScene();
     void RemoveScene();

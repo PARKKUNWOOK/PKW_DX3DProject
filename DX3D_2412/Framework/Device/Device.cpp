@@ -65,20 +65,13 @@ void Device::CreateDeviceAndSwapChain()
     depthViewDesc.Format = depthDesc.Format;
     depthViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 
-    device->CreateDepthStencilView(depthBuffer, &depthViewDesc, &depthStencilView);
-
-    deviceContext->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
-    //
-    D3D11_VIEWPORT viewport = {};
-    viewport.Width = SCREEN_WIDTH;
-    viewport.Height = SCREEN_HEIGHT;
-    viewport.MaxDepth = 1.0f;
-
-    deviceContext->RSSetViewports(1, &viewport);
+    device->CreateDepthStencilView(depthBuffer, &depthViewDesc, &depthStencilView);    
 }
 
 void Device::Clear()
 {
+    deviceContext->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
+
     float clearColor[4] = { 0.0f, 0.125f, 0.3f, 1.0f };
     deviceContext->ClearRenderTargetView(renderTargetView, clearColor);
     deviceContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);

@@ -18,7 +18,7 @@ struct LightPixelInput
     float3 tangent : TANGENT;
     float3 binormal : BINORMAL;
     float3 worldPos : POSITION0;
-    float3 viewPos : POSITION1;
+    float3 viewPos : POSITION1;    
 };
 
 struct Light

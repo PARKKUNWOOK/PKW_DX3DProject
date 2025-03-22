@@ -13,6 +13,4 @@ private:
 	void Create();
 	void Release();
 
-private:
-	Scene* scene;
 };

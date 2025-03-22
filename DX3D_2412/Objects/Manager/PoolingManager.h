@@ -14,7 +14,6 @@ public:
 	T* Pop();
 
 	void Create(UINT size);
-	vector<T*> GetAllActive();
 
 private:
 	vector<T*> objects;
@@ -71,18 +70,4 @@ inline void PoolingManager<T>::Create(UINT size)
 		object->SetActive(false);
 		objects.push_back(object);
 	}
-}
-
-template<typename T>
-inline vector<T*> PoolingManager<T>::GetAllActive()
-{
-	vector<T*> activeObjects;
-	for (T* object : objects)
-	{
-		if (object->IsActive())
-		{
-			activeObjects.push_back(object);
-		}
-	}
-	return activeObjects;
 }

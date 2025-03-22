@@ -3,7 +3,7 @@
 
 ModelInstancingScene::ModelInstancingScene()
 {
-    model = new ModelInstancing("FemaleA", 100);
+    model = new ModelInstancing("Ghost", 100);
 
     for (float z = 0; z < 10; z++)
     {

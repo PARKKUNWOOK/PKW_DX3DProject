@@ -145,11 +145,16 @@
     <ClInclude Include="Framework\Buffer\ConstBuffer.h" />
     <ClInclude Include="Framework\Buffer\GlobalBuffer.h" />
     <ClInclude Include="Framework\Buffer\IndexBuffer.h" />
+    <ClInclude Include="Framework\Buffer\RawBuffer.h" />
+    <ClInclude Include="Framework\Buffer\StructuredBuffer.h" />
     <ClInclude Include="Framework\Buffer\VertexBuffer.h" />
     <ClInclude Include="Framework\Buffer\VertexLayouts.h" />
     <ClInclude Include="Framework\Device\Device.h" />
     <ClInclude Include="Framework\Environment\Camera.h" />
     <ClInclude Include="Framework\Environment\Environment.h" />
+    <ClInclude Include="Framework\Environment\Reflection.h" />
+    <ClInclude Include="Framework\Environment\Refraction.h" />
+    <ClInclude Include="Framework\Environment\Shadow.h" />
     <ClInclude Include="Framework\Math\GameMath.h" />
     <ClInclude Include="Framework\Math\Transform.h" />
     <ClInclude Include="Framework\Math\Vector2.h" />
@@ -161,9 +166,13 @@
     <ClInclude Include="Framework\Model\ModelExporter.h" />
     <ClInclude Include="Framework\Model\ModelInstancing.h" />
     <ClInclude Include="Framework\Model\ModelMesh.h" />
+    <ClInclude Include="Framework\Render\DepthStencil.h" />
     <ClInclude Include="Framework\Render\Material.h" />
     <ClInclude Include="Framework\Render\Mesh.h" />
+    <ClInclude Include="Framework\Render\RenderTarget.h" />
     <ClInclude Include="Framework\Render\Texture.h" />
+    <ClInclude Include="Framework\Shader\ComputeShader.h" />
+    <ClInclude Include="Framework\Shader\GeometryShader.h" />
     <ClInclude Include="Framework\Shader\PixelShader.h" />
     <ClInclude Include="Framework\Shader\Shader.h" />
     <ClInclude Include="Framework\Shader\VertexShader.h" />
@@ -171,6 +180,7 @@
     <ClInclude Include="Framework\State\DepthStencilState.h" />
     <ClInclude Include="Framework\State\RasterizerState.h" />
     <ClInclude Include="Framework\State\SamplerState.h" />
+    <ClInclude Include="Framework\Utility\Audio.h" />
     <ClInclude Include="Framework\Utility\BinaryReader.h" />
     <ClInclude Include="Framework\Utility\BinaryWriter.h" />
     <ClInclude Include="Framework\Utility\Font.h" />
@@ -182,6 +192,9 @@
     <ClInclude Include="Framework\Utility\Utility.h" />
     <ClInclude Include="Managers\GameManager.h" />
     <ClInclude Include="Managers\SceneManager.h" />
+    <ClInclude Include="Objects\Algorithm\AStar.h" />
+    <ClInclude Include="Objects\Algorithm\Heap.h" />
+    <ClInclude Include="Objects\Algorithm\Node.h" />
     <ClInclude Include="Objects\Basic\Cone.h" />
     <ClInclude Include="Objects\Basic\Cube.h" />
     <ClInclude Include="Objects\Basic\GameObject.h" />
@@ -189,40 +202,62 @@
     <ClInclude Include="Objects\Basic\Pyramid.h" />
     <ClInclude Include="Objects\Basic\Quad.h" />
     <ClInclude Include="Objects\Basic\Sphere.h" />
+    <ClInclude Include="Objects\Character\Ghost.h" />
     <ClInclude Include="Objects\Collider\BoxCollider.h" />
     <ClInclude Include="Objects\Collider\CapsuleCollider.h" />
     <ClInclude Include="Objects\Collider\Collider.h" />
     <ClInclude Include="Objects\Collider\RectCollider.h" />
     <ClInclude Include="Objects\Collider\SphereCollider.h" />
-    <ClInclude Include="Objects\Isaac\Character\Enemy\AssaultEnemy.h" />
-    <ClInclude Include="Objects\Isaac\Character\Enemy\Enemy.h" />
-    <ClInclude Include="Objects\Isaac\Character\Enemy\EnemyManager.h" />
-    <ClInclude Include="Objects\Isaac\Character\Player\Player.h" />
-    <ClInclude Include="Objects\Isaac\Character\Player\PlayerManager.h" />
-    <ClInclude Include="Objects\Isaac\Character\Enemy\ThrowerEnemy.h" />
+    <ClInclude Include="Objects\HellfireDescent\Character\AssaultEnemy.h" />
+    <ClInclude Include="Objects\HellfireDescent\Character\Enemy.h" />
+    <ClInclude Include="Objects\HellfireDescent\Character\EnemyManager.h" />
+    <ClInclude Include="Objects\HellfireDescent\Character\Player.h" />
+    <ClInclude Include="Objects\HellfireDescent\Character\PlayerManager.h" />
+    <ClInclude Include="Objects\HellfireDescent\Character\ThrowerEnemy.h" />
+    <ClInclude Include="Objects\HellfireDescent\MapEditor\CubeMapEditor.h" />
+    <ClInclude Include="Objects\HellfireDescent\MapEditor\MapManager.h" />
     <ClInclude Include="Objects\Landscape\Skybox.h" />
     <ClInclude Include="Objects\Landscape\Terrain.h" />
+    <ClInclude Include="Objects\Landscape\TerrainEditor.h" />
+    <ClInclude Include="Objects\Landscape\Water.h" />
     <ClInclude Include="Objects\Manager\PoolingManager.h" />
-    <ClInclude Include="Objects\MineCraft\UIManager.h" />
-    <ClInclude Include="Objects\Isaac\MapEditor\CubeMapEditor.h" />
-    <ClInclude Include="Objects\Isaac\MapEditor\MapManager.h" />
+    <ClInclude Include="Objects\Particle\Particle.h" />
+    <ClInclude Include="Objects\Particle\ParticleSystem.h" />
+    <ClInclude Include="Objects\Particle\Rain.h" />
+    <ClInclude Include="Objects\Particle\Snow.h" />
+    <ClInclude Include="Objects\Particle\Spark.h" />
+    <ClInclude Include="Objects\Particle\Sprite.h" />
     <ClInclude Include="Objects\Shooting\Bullet.h" />
     <ClInclude Include="Objects\Shooting\BulletManager.h" />
-    <ClInclude Include="Objects\Test\Planet.h" />
+    <ClInclude Include="Objects\Test\TestModel.h" />
     <ClInclude Include="Objects\UI\Button.h" />
     <ClInclude Include="Objects\UI\ProgressBar.h" />
+    <ClInclude Include="Objects\UI\UIManager.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Scenes\AStarScene.h" />
+    <ClInclude Include="Scenes\BillboardScene.h" />
     <ClInclude Include="Scenes\CollisionScene.h" />
     <ClInclude Include="Scenes\CubeMapEditorScene.h" />
     <ClInclude Include="Scenes\GridScene.h" />
+    <ClInclude Include="Scenes\HellfireDescentScenes\Room\StoreRoomScene.h" />
     <ClInclude Include="Scenes\InstancingScene.h" />
+    <ClInclude Include="Scenes\LightScene.h" />
+    <ClInclude Include="Scenes\MapEditorScene.h" />
     <ClInclude Include="Scenes\ModelAnimationScene.h" />
+    <ClInclude Include="Scenes\ModelEquipScene.h" />
     <ClInclude Include="Scenes\ModelExportScene.h" />
     <ClInclude Include="Scenes\ModelInstancingScene.h" />
     <ClInclude Include="Scenes\ModelRenderScene.h" />
-    <ClInclude Include="Scenes\Stage\MonsterStageScene.h" />
+    <ClInclude Include="Scenes\OutlineScene.h" />
+    <ClInclude Include="Scenes\ParticleEditorScene.h" />
+    <ClInclude Include="Scenes\RenderTargetScene.h" />
     <ClInclude Include="Scenes\Scene.h" />
-    <ClInclude Include="Scenes\Stage\StartStageScene.h" />
+    <ClInclude Include="Scenes\ShadowScene.h" />
+    <ClInclude Include="Scenes\HellfireDescentScenes\Room\MonsterRoomScene.h" />
+    <ClInclude Include="Scenes\HellfireDescentScenes\Room\StartRoomScene.h" />
+    <ClInclude Include="Scenes\TerrainScene.h" />
+    <ClInclude Include="Scenes\WaterScene.h" />
+    <ClInclude Include="Scenes\WeatherScene.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -232,10 +267,15 @@
     </ClCompile>
     <ClCompile Include="Framework\Buffer\ConstBuffer.cpp" />
     <ClCompile Include="Framework\Buffer\IndexBuffer.cpp" />
+    <ClCompile Include="Framework\Buffer\RawBuffer.cpp" />
+    <ClCompile Include="Framework\Buffer\StructuredBuffer.cpp" />
     <ClCompile Include="Framework\Buffer\VertexBuffer.cpp" />
     <ClCompile Include="Framework\Device\Device.cpp" />
     <ClCompile Include="Framework\Environment\Camera.cpp" />
     <ClCompile Include="Framework\Environment\Environment.cpp" />
+    <ClCompile Include="Framework\Environment\Reflection.cpp" />
+    <ClCompile Include="Framework\Environment\Refraction.cpp" />
+    <ClCompile Include="Framework\Environment\Shadow.cpp" />
     <ClCompile Include="Framework\Math\GameMath.cpp" />
     <ClCompile Include="Framework\Math\Transform.cpp" />
     <ClCompile Include="Framework\Model\Model.cpp" />
@@ -244,8 +284,12 @@
     <ClCompile Include="Framework\Model\ModelExporter.cpp" />
     <ClCompile Include="Framework\Model\ModelInstancing.cpp" />
     <ClCompile Include="Framework\Model\ModelMesh.cpp" />
+    <ClCompile Include="Framework\Render\DepthStencil.cpp" />
     <ClCompile Include="Framework\Render\Material.cpp" />
+    <ClCompile Include="Framework\Render\RenderTarget.cpp" />
     <ClCompile Include="Framework\Render\Texture.cpp" />
+    <ClCompile Include="Framework\Shader\ComputeShader.cpp" />
+    <ClCompile Include="Framework\Shader\GeometryShader.cpp" />
     <ClCompile Include="Framework\Shader\PixelShader.cpp" />
     <ClCompile Include="Framework\Shader\Shader.cpp" />
     <ClCompile Include="Framework\Shader\VertexShader.cpp" />
@@ -253,6 +297,7 @@
     <ClCompile Include="Framework\State\DepthStencilState.cpp" />
     <ClCompile Include="Framework\State\RasterizerState.cpp" />
     <ClCompile Include="Framework\State\SamplerState.cpp" />
+    <ClCompile Include="Framework\Utility\Audio.cpp" />
     <ClCompile Include="Framework\Utility\BinaryReader.cpp" />
     <ClCompile Include="Framework\Utility\BinaryWriter.cpp" />
     <ClCompile Include="Framework\Utility\Font.cpp" />
@@ -263,43 +308,68 @@
     <ClCompile Include="Framework\Utility\Utility.cpp" />
     <ClCompile Include="Managers\GameManager.cpp" />
     <ClCompile Include="Managers\SceneManager.cpp" />
+    <ClCompile Include="Objects\Algorithm\AStar.cpp" />
+    <ClCompile Include="Objects\Algorithm\Heap.cpp" />
+    <ClCompile Include="Objects\Algorithm\Node.cpp" />
     <ClCompile Include="Objects\Basic\Cone.cpp" />
     <ClCompile Include="Objects\Basic\Cube.cpp" />
     <ClCompile Include="Objects\Basic\Plane.cpp" />
     <ClCompile Include="Objects\Basic\Pyramid.cpp" />
     <ClCompile Include="Objects\Basic\Quad.cpp" />
     <ClCompile Include="Objects\Basic\Sphere.cpp" />
+    <ClCompile Include="Objects\Character\Ghost.cpp" />
     <ClCompile Include="Objects\Collider\BoxCollider.cpp" />
     <ClCompile Include="Objects\Collider\CapsuleCollider.cpp" />
     <ClCompile Include="Objects\Collider\Collider.cpp" />
     <ClCompile Include="Objects\Collider\RectCollider.cpp" />
     <ClCompile Include="Objects\Collider\SphereCollider.cpp" />
-    <ClCompile Include="Objects\Isaac\Character\Enemy\AssaultEnemy.cpp" />
-    <ClCompile Include="Objects\Isaac\Character\Enemy\Enemy.cpp" />
-    <ClCompile Include="Objects\Isaac\Character\Enemy\EnemyManager.cpp" />
-    <ClCompile Include="Objects\Isaac\Character\Player\Player.cpp" />
-    <ClCompile Include="Objects\Isaac\Character\Player\PlayerManager.cpp" />
-    <ClCompile Include="Objects\Isaac\Character\Enemy\ThrowerEnemy.cpp" />
+    <ClCompile Include="Objects\HellfireDescent\Character\AssaultEnemy.cpp" />
+    <ClCompile Include="Objects\HellfireDescent\Character\Enemy.cpp" />
+    <ClCompile Include="Objects\HellfireDescent\Character\EnemyManager.cpp" />
+    <ClCompile Include="Objects\HellfireDescent\Character\Player.cpp" />
+    <ClCompile Include="Objects\HellfireDescent\Character\PlayerManager.cpp" />
+    <ClCompile Include="Objects\HellfireDescent\Character\ThrowerEnemy.cpp" />
+    <ClCompile Include="Objects\HellfireDescent\MapEditor\CubeMapEditor.cpp" />
+    <ClCompile Include="Objects\HellfireDescent\MapEditor\MapManager.cpp" />
     <ClCompile Include="Objects\Landscape\Skybox.cpp" />
     <ClCompile Include="Objects\Landscape\Terrain.cpp" />
-    <ClCompile Include="Objects\MineCraft\UIManager.cpp" />
-    <ClCompile Include="Objects\Isaac\MapEditor\CubeMapEditor.cpp" />
-    <ClCompile Include="Objects\Isaac\MapEditor\MapManager.cpp" />
+    <ClCompile Include="Objects\Landscape\TerrainEditor.cpp" />
+    <ClCompile Include="Objects\Landscape\Water.cpp" />
+    <ClCompile Include="Objects\Particle\Particle.cpp" />
+    <ClCompile Include="Objects\Particle\ParticleSystem.cpp" />
+    <ClCompile Include="Objects\Particle\Rain.cpp" />
+    <ClCompile Include="Objects\Particle\Snow.cpp" />
+    <ClCompile Include="Objects\Particle\Spark.cpp" />
+    <ClCompile Include="Objects\Particle\Sprite.cpp" />
     <ClCompile Include="Objects\Shooting\Bullet.cpp" />
     <ClCompile Include="Objects\Shooting\BulletManager.cpp" />
-    <ClCompile Include="Objects\Test\Planet.cpp" />
+    <ClCompile Include="Objects\Test\TestModel.cpp" />
     <ClCompile Include="Objects\UI\Button.cpp" />
     <ClCompile Include="Objects\UI\ProgressBar.cpp" />
+    <ClCompile Include="Objects\UI\UIManager.cpp" />
+    <ClCompile Include="Scenes\AStarScene.cpp" />
+    <ClCompile Include="Scenes\BillboardScene.cpp" />
     <ClCompile Include="Scenes\CollisionScene.cpp" />
     <ClCompile Include="Scenes\CubeMapEditorScene.cpp" />
     <ClCompile Include="Scenes\GridScene.cpp" />
+    <ClCompile Include="Scenes\HellfireDescentScenes\Room\StoreRoomScene.cpp" />
     <ClCompile Include="Scenes\InstancingScene.cpp" />
+    <ClCompile Include="Scenes\LightScene.cpp" />
+    <ClCompile Include="Scenes\MapEditorScene.cpp" />
     <ClCompile Include="Scenes\ModelAnimationScene.cpp" />
+    <ClCompile Include="Scenes\ModelEquipScene.cpp" />
     <ClCompile Include="Scenes\ModelExportScene.cpp" />
     <ClCompile Include="Scenes\ModelInstancingScene.cpp" />
     <ClCompile Include="Scenes\ModelRenderScene.cpp" />
-    <ClCompile Include="Scenes\Stage\MonsterStageScene.cpp" />
-    <ClCompile Include="Scenes\Stage\StartStageScene.cpp" />
+    <ClCompile Include="Scenes\OutlineScene.cpp" />
+    <ClCompile Include="Scenes\ParticleEditorScene.cpp" />
+    <ClCompile Include="Scenes\RenderTargetScene.cpp" />
+    <ClCompile Include="Scenes\ShadowScene.cpp" />
+    <ClCompile Include="Scenes\HellfireDescentScenes\Room\MonsterRoomScene.cpp" />
+    <ClCompile Include="Scenes\HellfireDescentScenes\Room\StartRoomScene.cpp" />
+    <ClCompile Include="Scenes\TerrainScene.cpp" />
+    <ClCompile Include="Scenes\WaterScene.cpp" />
+    <ClCompile Include="Scenes\WeatherScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX3D_2412.rc" />
@@ -327,6 +397,28 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
+    <FxCompile Include="Resources\Shaders\Compute\ByteAddress.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CS</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Compute\ComputePicking.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CS</EntryPointName>
+    </FxCompile>
     <FxCompile Include="Resources\Shaders\Custom\MapEditor.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
@@ -345,7 +437,43 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
+    <FxCompile Include="Resources\Shaders\Geometry\Billboard.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Geometry\Rain.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Geometry\Snow.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Geometry\Spark.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Geometry\Sprite.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
     <FxCompile Include="Resources\Shaders\Instancing\ModelInstancing.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Instancing\Particle.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
@@ -357,7 +485,44 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
+    <FxCompile Include="Resources\Shaders\Landscape\Reflection.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Landscape\Refraction.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
     <FxCompile Include="Resources\Shaders\Landscape\Skybox.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Landscape\Terrain.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Landscape\TerrainEditor.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Landscape\Water.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Light\DepthMap.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
@@ -375,11 +540,53 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
+    <FxCompile Include="Resources\Shaders\Light\Shadow.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
     <FxCompile Include="Resources\Shaders\Model\Model.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\Blur.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\Grayscale.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\Mosaic.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\Outline.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\RadialBlur.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\Sepia.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\Tutorial.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>

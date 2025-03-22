@@ -26,6 +26,7 @@ public:
     }
 
     static Vector3 ClosestPointOnLine(const Vector3& start, const Vector3& end, const Vector3& point);
+    static Vector3 PolygonToNormal(const Vector3& v0, const Vector3& v1, const Vector3& v2);
 };
 
 template<typename T>

@@ -3,12 +3,13 @@
 
 ModelAnimationScene::ModelAnimationScene()
 {
-	model = new ModelAnimator("Monster1");	
+	model = new ModelAnimator("Ghost");	
 	model->SetShader(L"Model/Model.hlsl");
-	model->ReadClip("Idle");
-	model->ReadClip("Run");
-	model->ReadClip("Attack");
-	model->ReadClip("Death");
+	FOR(6)
+		model->ReadClip("Ghost_animation", i);
+	//model->ReadClip("Idle");
+	//model->ReadClip("Run");
+	//model->ReadClip("Attack");
 	model->CreateTexture();
 }
 

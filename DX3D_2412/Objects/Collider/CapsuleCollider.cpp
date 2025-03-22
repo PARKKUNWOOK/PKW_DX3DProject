@@ -154,12 +154,12 @@ bool CapsuleCollider::IsSphereCollision(SphereCollider* collider)
 bool CapsuleCollider::IsCapsuleCollision(CapsuleCollider* collider)
 {
     Vector3 aDirection = GetUp();
-    Vector3 aA = GetGlobalPosition() - aDirection * Height() * 0.5f;
-    Vector3 aB = GetGlobalPosition() + aDirection * Height() * 0.5f;
+    Vector3 aA = Center() - aDirection * Height() * 0.5f;
+    Vector3 aB = Center() + aDirection * Height() * 0.5f;
 
     Vector3 bDirection = collider->GetUp();
-    Vector3 bA = collider->GetGlobalPosition() - bDirection * collider->Height() * 0.5f;
-    Vector3 bB = collider->GetGlobalPosition() + bDirection * collider->Height() * 0.5f;
+    Vector3 bA = collider->Center() - bDirection * collider->Height() * 0.5f;
+    Vector3 bB = collider->Center() + bDirection * collider->Height() * 0.5f;
 
     Vector3 v0 = bA - aA;
     Vector3 v1 = bB - aA;

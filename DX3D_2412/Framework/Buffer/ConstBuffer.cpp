@@ -27,3 +27,15 @@ void ConstBuffer::SetPS(UINT slot)
     DC->UpdateSubresource(buffer, 0, nullptr, data, 0, 0);
     DC->PSSetConstantBuffers(slot, 1, &buffer);
 }
+
+void ConstBuffer::SetCS(UINT slot)
+{
+    DC->UpdateSubresource(buffer, 0, nullptr, data, 0, 0);
+    DC->CSSetConstantBuffers(slot, 1, &buffer);
+}
+
+void ConstBuffer::SetGS(UINT slot)
+{
+    DC->UpdateSubresource(buffer, 0, nullptr, data, 0, 0);
+    DC->GSSetConstantBuffers(slot, 1, &buffer);
+}

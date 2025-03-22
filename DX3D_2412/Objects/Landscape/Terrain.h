@@ -12,6 +12,10 @@ public:
 
 	void Render();
 
+	float GetHeight(const Vector3& pos, Vector3* normal = nullptr);
+	Vector3 Picking();
+
+	Vector2 GetSize() { return Vector2(width, height); }
 private:
 	void MakeMesh();	
 
@@ -19,4 +23,6 @@ private:
 	UINT width, height;
 
 	Texture* heightMap;
+	Texture* alphaMap;
+	Texture* secondMap;
 };

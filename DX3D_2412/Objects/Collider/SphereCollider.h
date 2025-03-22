@@ -29,7 +29,7 @@ private:
 
 protected:
 	float radius;
-	
+
 private:	
 	UINT stackCount, sliceCount;
 };

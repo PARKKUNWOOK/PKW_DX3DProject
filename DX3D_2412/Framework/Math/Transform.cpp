@@ -1,4 +1,4 @@
-#include "Framework.h"
+﻿#include "Framework.h"
 
 Transform::Transform()
 {
@@ -103,6 +103,33 @@ void Transform::SetGlobalPosition(const Vector3& position)
 
     if (parent)
         localPosition -= parent->GetGlobalPosition();
+}
+
+void Transform::SetGlobalRotation(const Vector3& rotation)
+{
+    Matrix worldRotationMatrix = XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
+
+    if (parent)
+    {
+        // 2️⃣ 부모의 월드 회전 행렬을 가져와서 역행렬을 구함
+        Matrix parentWorldRotationMatrix = XMMatrixRotationRollPitchYawFromVector(parent->GetGlobalRotation());
+        Matrix invParentRotationMatrix = XMMatrixInverse(nullptr, parentWorldRotationMatrix);
+
+        // 3️⃣ 로컬 회전 행렬 계산 (부모 역행렬을 곱하여 보정)
+        Matrix localRotationMatrix = invParentRotationMatrix * worldRotationMatrix;
+
+        XMFLOAT4X4 localRotationFloat4x4;
+        XMStoreFloat4x4(&localRotationFloat4x4, localRotationMatrix);
+
+        // 5️⃣ 라디안 값을 계산하여 localRotation에 저장
+        localRotation.x = atan2(localRotationFloat4x4._32, localRotationFloat4x4._33);
+        localRotation.y = asin(-localRotationFloat4x4._31);
+        localRotation.z = atan2(localRotationFloat4x4._21, localRotationFloat4x4._11);
+    }
+    else
+    {     
+        localRotation = rotation;
+    }    
 }
 
 bool Transform::IsActive()

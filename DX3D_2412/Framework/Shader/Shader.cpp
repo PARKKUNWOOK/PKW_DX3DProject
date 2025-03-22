@@ -32,6 +32,36 @@ PixelShader* Shader::AddPS(wstring file)
     return (PixelShader*)shaders[key];
 }
 
+ComputeShader* Shader::AddCS(wstring file)
+{
+    wstring key = file + L"CS";
+
+    if (shaders.count(key) > 0)
+        return (ComputeShader*)shaders[key];
+
+    wstring path = L"Resources/Shaders/" + file;
+
+    shaders[key] = new ComputeShader(path);
+    shaders[key]->file = file;
+
+    return (ComputeShader*)shaders[key];
+}
+
+GeometryShader* Shader::AddGS(wstring file)
+{
+    wstring key = file + L"GS";
+
+    if (shaders.count(key) > 0)
+        return (GeometryShader*)shaders[key];
+
+    wstring path = L"Resources/Shaders/" + file;
+
+    shaders[key] = new GeometryShader(path);
+    shaders[key]->file = file;
+
+    return (GeometryShader*)shaders[key];
+}
+
 void Shader::Delete()
 {
     for (pair<wstring, Shader*> shader : shaders)

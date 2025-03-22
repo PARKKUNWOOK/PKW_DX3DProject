@@ -39,12 +39,14 @@ public:
 	Vector3 GetGlobalScale() const { return globalScale; }
 
 	Matrix GetWorld() { return world; }
+	void SetWorld(const Matrix& matrix) { world = matrix; }
 
 	void SetLocalPosition(const Vector3& position) { localPosition = position; }
 	void SetLocalRotation(const Vector3& rotation) { localRotation = rotation; }
 	void SetLocalScale(const Vector3& scale) { localScale = scale; }
 
 	void SetGlobalPosition(const Vector3& position);
+	void SetGlobalRotation(const Vector3& rotation);
 
 	void SetLocalPosition(const float& x, const float& y, const float& z) { localPosition = Vector3(x, y, z); }
 	void SetLocalRotation(const float& x, const float& y, const float& z) { localRotation = Vector3(x, y, z); }

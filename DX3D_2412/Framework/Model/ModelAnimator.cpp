@@ -158,7 +158,30 @@ void ModelAnimator::CreateTexture()
 
 Matrix ModelAnimator::GetTransformByNode(int nodeIndex)
 {
-    return Matrix();
+    Matrix curAnim;
+
+    {
+        Frame& frame = frameBuffer->GetData()->cur;
+
+        Matrix cur = nodeTransforms[frame.clip].transform[frame.curFrame][nodeIndex];
+        Matrix next = nodeTransforms[frame.clip].transform[frame.curFrame + 1][nodeIndex];
+
+        curAnim = GameMath::Lerp(cur, next, frame.time) * world;
+    }
+
+    {
+        Frame& frame = frameBuffer->GetData()->next;
+
+        if (frame.clip < 0)
+            return curAnim;
+
+        Matrix cur = nodeTransforms[frame.clip].transform[frame.curFrame][nodeIndex];
+        Matrix next = nodeTransforms[frame.clip].transform[frame.curFrame + 1][nodeIndex];
+
+        Matrix nextAnim = GameMath::Lerp(cur, next, frame.time) * world;
+
+        return GameMath::Lerp(curAnim, nextAnim, frameBuffer->GetData()->tweenTime);
+    }
 }
 
 void ModelAnimator::CreateClipTransform(UINT index)

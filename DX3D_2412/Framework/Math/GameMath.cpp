@@ -42,6 +42,14 @@ Vector3 GameMath::ClosestPointOnLine(const Vector3& start, const Vector3& end, c
     return start + line * t;
 }
 
+Vector3 GameMath::PolygonToNormal(const Vector3& v0, const Vector3& v1, const Vector3& v2)
+{
+    Vector3 e0 = v1 - v0;
+    Vector3 e1 = v2 - v0;
+
+    return Vector3::Cross(e0, e1).GetNormalized();
+}
+
 //float GameMath::Lerp(const float& start, const float& end, const float& t)
 //{
 //    return start + (end - start) * t;

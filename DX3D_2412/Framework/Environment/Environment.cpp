@@ -18,8 +18,10 @@ Environment::~Environment()
     delete rasterizerState[1];
     delete blendState[0];
     delete blendState[1];
+    delete blendState[2];
     delete depthStencilState[0];
     delete depthStencilState[1];
+    delete depthStencilState[2];
 
     delete uiViewBuffer;
     delete uiProjectionBuffer;
@@ -80,14 +82,43 @@ void Environment::Edit()
 
 void Environment::SetAlphaBlend(bool isAlpha)
 {
-    blendState[1]->Alpha(isAlpha);
-    blendState[1]->SetState();
+    blendState[2]->Alpha(isAlpha);
+    blendState[2]->AlphaToCoverage(false);
+    blendState[2]->SetState();
 }
 
 void Environment::SetAdditive()
 {
-    blendState[1]->Additive();
-    blendState[1]->SetState();
+    blendState[2]->Additive();
+    blendState[2]->AlphaToCoverage(false);
+    blendState[2]->SetState();
+}
+
+void Environment::SetAlphaToCoverage()
+{
+    blendState[2]->AlphaToCoverage(true);
+    blendState[2]->SetState();
+}
+
+void Environment::SetDepthEnable(bool isDepthEnable)
+{
+    depthStencilState[2]->DepthEnable(isDepthEnable);
+    depthStencilState[2]->SetState();
+}
+
+void Environment::SetDepthWriteMask(D3D11_DEPTH_WRITE_MASK mask)
+{
+    depthStencilState[2]->DepthWriteMask(mask);
+    depthStencilState[2]->SetState();
+}
+
+void Environment::SetViewport(UINT width, UINT height)
+{
+    viewport.Width = width;
+    viewport.Height = height;
+    viewport.MaxDepth = 1.0f;
+
+    DC->RSSetViewports(1, &viewport);
 }
 
 void Environment::CreateState()
@@ -102,10 +133,12 @@ void Environment::CreateState()
     blendState[0] = new BlendState();
     blendState[1] = new BlendState();
     blendState[1]->Alpha(true);
+    blendState[2] = new BlendState();
 
     depthStencilState[0] = new DepthStencilState();
     depthStencilState[1] = new DepthStencilState();
     depthStencilState[1]->DepthEnable(false);
+    depthStencilState[2] = new DepthStencilState();
 }
 
 void Environment::CreateUIBuffer()

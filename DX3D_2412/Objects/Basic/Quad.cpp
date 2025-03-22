@@ -4,6 +4,7 @@ Quad::Quad(Vector2 size) : size(size)
 {
     tag = "Quad";
 
+    material->SetShader(L"Basic/Texture.hlsl");
     material->SetDiffuseMap(L"Resources/Textures/Colors/White.png");
 
     vector<VertexUV>& vertices = mesh->GetVertices();

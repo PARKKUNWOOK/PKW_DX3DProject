@@ -2,29 +2,55 @@
 
 #include "Scenes/GridScene.h"
 #include "Scenes/CollisionScene.h"
+#include "Scenes/LightScene.h"
+#include "Scenes/TerrainScene.h"
 #include "Scenes/CubeMapEditorScene.h"
-#include "Scenes/Stage/StartStageScene.h"
-#include "Scenes/Stage/MonsterStageScene.h"
 #include "Scenes/ModelRenderScene.h"
 #include "Scenes/ModelExportScene.h"
 #include "Scenes/InstancingScene.h"
 #include "Scenes/ModelInstancingScene.h"
 #include "Scenes/ModelAnimationScene.h"
+#include "Scenes/ModelEquipScene.h"
+#include "Scenes/MapEditorScene.h"
+#include "Scenes/AStarScene.h"
+#include "Scenes/RenderTargetScene.h"
+#include "Scenes/OutlineScene.h"
+#include "Scenes/WaterScene.h"
+#include "Scenes/BillboardScene.h"
+#include "Scenes/WeatherScene.h"
+#include "Scenes/ParticleEditorScene.h"
+#include "Scenes/ShadowScene.h"
+#include "Scenes/HellfireDescentScenes/Room/StartRoomScene.h"
+#include "Scenes/HellfireDescentScenes/Room/MonsterRoomScene.h"
+#include "Scenes/HellfireDescentScenes/Room/StoreRoomScene.h"
 
 GameManager::GameManager()
 {
-	//SCENE->Create("Grid", new GridScene());
+	SCENE->Create("Grid", new GridScene());
 	//SCENE->Create("Export", new ModelExportScene());
 	//SCENE->Create("Start", new CollisionScene());
+	//SCENE->Create("Start", new LightScene());
+	//SCENE->Create("Start", new TerrainScene());
 	//SCENE->Create("Start", new CubeMapEditorScene());
-	SCENE->Create("Start", new StartStageScene());
-	SCENE->Create("Monster", new MonsterStageScene());
 	//SCENE->Create("Start", new ModelRenderScene());
 	//SCENE->Create("Start", new InstancingScene());
 	//SCENE->Create("Start", new ModelInstancingScene());
 	//SCENE->Create("Start", new ModelAnimationScene());
+	//SCENE->Create("Start", new ModelEquipScene());
+	//SCENE->Create("Start", new MapEditorScene());
+	//SCENE->Create("Start", new AStarScene());
+	//SCENE->Create("Start", new RenderTargetScene());
+	//SCENE->Create("Start", new OutlineScene());
+	//SCENE->Create("Start", new WaterScene());
+	//SCENE->Create("Start", new BillboardScene());	
+	//SCENE->Create("Start", new WeatherScene());
+	//SCENE->Create("Start", new ParticleEditorScene());
+	//SCENE->Create("Start", new ShadowScene());
+	SCENE->Create("Start", new StartRoomScene());
+	SCENE->Create("Monster", new MonsterRoomScene());
+	SCENE->Create("Store", new StoreRoomScene());
 
-	//SCENE->Add("Grid");
+	SCENE->Add("Grid");
 	SCENE->Add("Start");
 
 	Create();
@@ -39,18 +65,31 @@ void GameManager::Update()
 {
 	Keyboard::Get()->Update();
 	Timer::Get()->Update();
+	Audio::Get()->Update();
 
-	if (KEY->Down('Q'))
-	{
-		SCENE->Remove("Start");
-		SCENE->Add("Monster");
-	}
-
-	if (KEY->Down('E'))
-	{
-		SCENE->Remove("Monster");
-		SCENE->Add("Start");
-	}
+	//if (KEY->Down('Z'))
+	//{
+	//	SCENE->Remove("Monster");
+	//	SCENE->Add("Start");
+	//}
+	//
+	//if (KEY->Down('X'))
+	//{
+	//	SCENE->Remove("Start");
+	//	SCENE->Add("Monster");
+	//}
+	//
+	//if (KEY->Down('C'))
+	//{
+	//	SCENE->Remove("Monster");
+	//	SCENE->Add("Store");
+	//}
+	//
+	//if (KEY->Down('V'))
+	//{
+	//	SCENE->Remove("Store");
+	//	SCENE->Add("Monster");
+	//}
 
 	SCENE->Update();
 
@@ -64,6 +103,7 @@ void GameManager::Render()
 	Device::Get()->Clear();
 
 	Environment::Get()->SetRender();
+	Environment::Get()->SetViewport();
 	SCENE->Render();
 
 	ImGui_ImplDX11_NewFrame();
@@ -98,6 +138,7 @@ void GameManager::Create()
 	SceneManager::Get();
 	Font::Get();
 	Observer::Get();
+	Audio::Get();
 
 	ImGui::CreateContext();
 	ImGui::StyleColorsDark();
@@ -121,6 +162,7 @@ void GameManager::Release()
 	SceneManager::Delete();
 	Font::Delete();
 	Observer::Delete();
+	Audio::Delete();
 
 	Shader::Delete();
 	Texture::Delete();
