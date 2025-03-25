@@ -61,14 +61,17 @@ void MonsterRoomScene::CheckSceneTransition()
 
     bool touchingPortal = false;
 
-    const vector<Cube*>& portals = MapManager::Get()->GetPortals();
+    const vector<Portal*>& portals = MapManager::Get()->GetPortals();
 
     for (int i = 0; i < portals.size(); i++)
     {
-        Cube* portal = portals[i];
+        Portal* portal = portals[i];
 
         if (player->GetCollider()->IsBoxCollision(portal->GetCollider()))
         {
+            if (!portal->IsActive())
+                continue;
+
             touchingPortal = true;
 
             if (!isTouchingPortal)

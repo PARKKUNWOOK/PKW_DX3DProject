@@ -2,7 +2,7 @@
 
 class Snow : public Particle
 {
-private:
+protected:
     struct VertexParticle
     {
         Float3 pos = {};
@@ -18,10 +18,13 @@ public:
     void Render();
     void GUIRender();
 
-private:
+    void SetActive(bool active);
+    bool IsActive() const { return isActive; }
+
+protected:
     void Create();
 
-private:
+protected:
     WeatherBuffer* buffer;
     vector<VertexParticle> vertices;
 };

@@ -200,6 +200,7 @@ typedef function<void(int)> IntParamEvent;
 #include "Objects/HellfireDescent/Character/ThrowerEnemy.h"
 #include "Objects/HellfireDescent/Character/EnemyManager.h"
 #include "Objects/HellfireDescent/MapEditor/CubeMapEditor.h"
+#include "Objects/HellfireDescent/MapEditor/Portal.h"
 #include "Objects/HellfireDescent/MapEditor/MapManager.h"
 
 //Manager Head

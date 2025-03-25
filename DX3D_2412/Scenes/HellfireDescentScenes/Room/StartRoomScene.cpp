@@ -49,10 +49,13 @@ void StartRoomScene::CheckSceneTransition()
 
     bool touchingPortal = false;
 
-    for (Cube* portal : MapManager::Get()->GetPortals())
+    for (Portal* portal : MapManager::Get()->GetPortals())
     {
         if (player->GetCollider()->IsBoxCollision(portal->GetCollider()))
         {
+            if (!portal->IsActive())
+                continue;
+
             touchingPortal = true;
 
             if (!isTouchingPortal)

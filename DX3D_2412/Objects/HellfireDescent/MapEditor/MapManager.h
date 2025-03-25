@@ -3,6 +3,9 @@
 class MapManager : public Singleton<MapManager>
 {
 private:
+	int PORTAL_POOL_SIZE = 4;
+
+private:
 	friend class Singleton;
 
 	MapManager();
@@ -36,7 +39,7 @@ public:
 
 	Vector2 GetMapSize() const { return Vector2(mapWidth, mapHeight); }
 	void UpdatePortals();
-	vector<Cube*>& GetPortals() { return portals; }
+	vector<Portal*>& GetPortals() { return portals; }
 
 private:
 	Cube* floor;
@@ -44,7 +47,7 @@ private:
 	vector<Cube*> doorxs;
 	vector<Cube*> doorzs;
 	vector<Cube*> loweringDoors;
-	vector<Cube*> portals;
+	vector<Portal*> portals;
 
 	int mapWidth = 0;
 	int mapHeight = 0;

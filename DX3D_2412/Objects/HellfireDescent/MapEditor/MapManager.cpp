@@ -1,7 +1,13 @@
 #include "Framework.h"
 
 MapManager::MapManager()
-{	
+{
+	FOR(PORTAL_POOL_SIZE)
+	{
+		Portal* portal = new Portal({ 1, 1, 1 });
+		portal->SetActive(false);
+		portals.push_back(portal);
+	}
 }
 
 MapManager::~MapManager()
@@ -25,7 +31,7 @@ void MapManager::Update()
 		}
 	}
 
-	for (Cube* portal : portals)
+	for (Portal* portal : portals)
 	{
 		portal->Update();
 	}
@@ -41,7 +47,7 @@ void MapManager::Render()
 		door->Render();
 	for (Cube* door : doorzs)
 		door->Render();
-	for (Cube* portal : portals)
+	for (Portal* portal : portals)
 		portal->Render();
 }
 
@@ -279,37 +285,32 @@ bool MapManager::IsDoorZOpen(int index)
 
 void MapManager::UpdatePortals()
 {
-	for (Cube* portal : portals)
-		delete portal;
-	portals.clear();
+	for (Portal* portal : portals)
+		portal->SetActive(false);
+
+	int portalIndex = 0;
 
 	// X축 문이 열려 있으면 포탈 생성
 	for (int i = 0; i < doorxs.size(); i++)
 	{
-		if (IsDoorXOpen(i))
+		if (IsDoorXOpen(i) && portalIndex < portals.size())
 		{
-			Cube* portal = new Cube({ 7, 15, 0.1f });
-			Vector3 pos = doorxs[i]->GetLocalPosition();
-			portal->SetLocalPosition(pos);
-			portal->GetMaterial()->GetData()->diffuse = { 0, 1, 1, 1 };
-			portal->Update();
-
-			portals.push_back(portal);
+			portals[portalIndex]->SetLocalPosition(doorxs[i]->GetLocalPosition());
+			portals[portalIndex]->SetLocalScale(Vector3(7, 15, 0.1f));
+			portals[portalIndex]->SetActive(true);
+			portalIndex++;
 		}
 	}
 
 	// Z축 문이 열려 있으면 포탈 생성
 	for (int i = 0; i < doorzs.size(); i++)
 	{
-		if (IsDoorZOpen(i))
+		if (IsDoorZOpen(i) && portalIndex < portals.size())
 		{
-			Cube* portal = new Cube({ 0.1f, 15, 7 });
-			Vector3 pos = doorzs[i]->GetLocalPosition();
-			portal->SetLocalPosition(pos);
-			portal->GetMaterial()->GetData()->diffuse = { 0, 1, 1, 1 };
-			portal->Update();
-
-			portals.push_back(portal);
+			portals[portalIndex]->SetLocalPosition(doorzs[i]->GetLocalPosition());
+			portals[portalIndex]->SetLocalScale(Vector3(0.1f, 15, 7));
+			portals[portalIndex]->SetActive(true);
+			portalIndex++;
 		}
 	}
 }

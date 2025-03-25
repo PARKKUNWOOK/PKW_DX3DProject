@@ -9,14 +9,15 @@ WeatherScene::WeatherScene()
 	//particle = new Sprite(L"Resources/Textures/FX/Lightning_8x1.png", 50, 10, 1, 8);
     //particle = new Spark(L"Resources/Textures/FX/star.png", true);
     //particle = new Rain();
-    //particle = new Snow();
-    particle = new ParticleSystem("Resources/FX/Explosion.fx");
+    particle = new Snow();
+    particleSystem = new ParticleSystem("Resources/FX/Explosion.fx");
 }
 
 WeatherScene::~WeatherScene()
 {
 	delete collider;
 	delete particle;
+    delete particleSystem;
 }
 
 void WeatherScene::Update()
@@ -32,11 +33,12 @@ void WeatherScene::Update()
 
             Vector3 rot;
             rot.x = atan2(hit.normal.x, hit.normal.z);
-            particle->SetLocalRotation(rot);
+            particleSystem->SetLocalRotation(rot);
         }
     }
 
     particle->Update();
+    particleSystem->Update();
 }
 
 void WeatherScene::PreRender()
@@ -47,6 +49,7 @@ void WeatherScene::Render()
 {
 	collider->Render();
     particle->Render();
+    particleSystem->Render();
 }
 
 void WeatherScene::PostRender()
@@ -55,5 +58,5 @@ void WeatherScene::PostRender()
 
 void WeatherScene::GUIRender()
 {
-    //particle->GUIRender();
+    particle->GUIRender();
 }

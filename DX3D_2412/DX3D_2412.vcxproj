@@ -216,6 +216,7 @@
     <ClInclude Include="Objects\HellfireDescent\Character\ThrowerEnemy.h" />
     <ClInclude Include="Objects\HellfireDescent\MapEditor\CubeMapEditor.h" />
     <ClInclude Include="Objects\HellfireDescent\MapEditor\MapManager.h" />
+    <ClInclude Include="Objects\HellfireDescent\MapEditor\Portal.h" />
     <ClInclude Include="Objects\Landscape\Skybox.h" />
     <ClInclude Include="Objects\Landscape\Terrain.h" />
     <ClInclude Include="Objects\Landscape\TerrainEditor.h" />
@@ -331,6 +332,7 @@
     <ClCompile Include="Objects\HellfireDescent\Character\ThrowerEnemy.cpp" />
     <ClCompile Include="Objects\HellfireDescent\MapEditor\CubeMapEditor.cpp" />
     <ClCompile Include="Objects\HellfireDescent\MapEditor\MapManager.cpp" />
+    <ClCompile Include="Objects\HellfireDescent\MapEditor\Portal.cpp" />
     <ClCompile Include="Objects\Landscape\Skybox.cpp" />
     <ClCompile Include="Objects\Landscape\Terrain.cpp" />
     <ClCompile Include="Objects\Landscape\TerrainEditor.cpp" />

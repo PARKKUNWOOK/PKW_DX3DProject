@@ -39,6 +39,11 @@ void Snow::GUIRender()
     ImGui::ColorEdit3("Color", (float*)&buffer->GetData()->color);
 }
 
+void Snow::SetActive(bool active)
+{
+    isActive = active;
+}
+
 void Snow::Create()
 {
     particleCount = SIZE;
