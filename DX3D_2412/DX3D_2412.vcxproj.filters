@@ -330,22 +330,22 @@
     <ClInclude Include="Scenes\HellfireDescentScenes\Room\MonsterRoomScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\HellfireDescent\Character\ThrowerEnemy.h">
+    <ClInclude Include="Objects\HellfireDescent\Character\Enemy\ThrowerEnemy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\HellfireDescent\Character\PlayerManager.h">
+    <ClInclude Include="Objects\HellfireDescent\Character\Player\PlayerManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\HellfireDescent\Character\Player.h">
+    <ClInclude Include="Objects\HellfireDescent\Character\Player\Player.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\HellfireDescent\Character\EnemyManager.h">
+    <ClInclude Include="Objects\HellfireDescent\Character\Enemy\EnemyManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\HellfireDescent\Character\Enemy.h">
+    <ClInclude Include="Objects\HellfireDescent\Character\Enemy\Enemy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\HellfireDescent\Character\AssaultEnemy.h">
+    <ClInclude Include="Objects\HellfireDescent\Character\Enemy\AssaultEnemy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Objects\HellfireDescent\MapEditor\MapManager.h">
@@ -656,22 +656,22 @@
     <ClCompile Include="Scenes\HellfireDescentScenes\Room\MonsterRoomScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\HellfireDescent\Character\ThrowerEnemy.cpp">
+    <ClCompile Include="Objects\HellfireDescent\Character\Enemy\ThrowerEnemy.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\HellfireDescent\Character\PlayerManager.cpp">
+    <ClCompile Include="Objects\HellfireDescent\Character\Player\PlayerManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\HellfireDescent\Character\Player.cpp">
+    <ClCompile Include="Objects\HellfireDescent\Character\Player\Player.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\HellfireDescent\Character\EnemyManager.cpp">
+    <ClCompile Include="Objects\HellfireDescent\Character\Enemy\EnemyManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\HellfireDescent\Character\Enemy.cpp">
+    <ClCompile Include="Objects\HellfireDescent\Character\Enemy\Enemy.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\HellfireDescent\Character\AssaultEnemy.cpp">
+    <ClCompile Include="Objects\HellfireDescent\Character\Enemy\AssaultEnemy.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\HellfireDescent\MapEditor\MapManager.cpp">

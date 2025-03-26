@@ -16,4 +16,5 @@ public:
 
 private:
 	bool isTouchingPortal = false;
+	Skybox* skybox;
 };

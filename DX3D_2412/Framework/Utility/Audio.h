@@ -37,6 +37,11 @@ public:
 
     bool IsPlaySound(string key);
 
+    bool IsExist(string key)
+    {
+        return sounds.count(key) > 0;
+    }
+
 private:
     System* soundSystem;
 

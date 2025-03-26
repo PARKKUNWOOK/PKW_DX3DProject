@@ -4,6 +4,7 @@
 StartRoomScene::StartRoomScene()
 {
 	MapManager::Get()->Load("Resources/TextData/Pacman.map");
+    //skybox = new Skybox(L"Resources/Textures/Landscape/Snow_ENV.dds");
 }
 
 StartRoomScene::~StartRoomScene()
@@ -30,6 +31,7 @@ void StartRoomScene::PreRender()
 
 void StartRoomScene::Render()
 {
+    //skybox->Render();
 	MapManager::Get()->Render();
 
 	PlayerManager::Get()->Render();
@@ -62,6 +64,14 @@ void StartRoomScene::CheckSceneTransition()
             {
                 SCENE->Remove("Start");
                 SCENE->Add("Monster");
+
+                if (!Audio::Get()->IsPlaySound("BGM"))
+                {
+                    if (!Audio::Get()->IsExist("BGM"))
+                        Audio::Get()->Add("BGM", "Resources/Sounds/HellfireDescentSound/At_Doom's_Gate.mp3", true);
+                
+                    Audio::Get()->Play("BGM", 0.3f);
+                }
 
                 Vector3 target = MapManager::Get()->GetDoorX(1)->GetLocalPosition();
                 Player::Get()->SetLocalPosition(target + Vector3(0, 0, -3));

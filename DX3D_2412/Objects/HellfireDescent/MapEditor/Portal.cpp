@@ -5,7 +5,6 @@ Portal::Portal(Vector3 size)
     collider = new BoxCollider(size);
     collider->SetActive(false);
     
-
     SetActive(false);
 }
 
