@@ -70,7 +70,7 @@ void StartRoomScene::CheckSceneTransition()
                     if (!Audio::Get()->IsExist("BGM"))
                         Audio::Get()->Add("BGM", "Resources/Sounds/HellfireDescentSound/At_Doom's_Gate.mp3", true);
                 
-                    Audio::Get()->Play("BGM", 0.3f);
+                    Audio::Get()->Play("BGM");
                 }
 
                 Vector3 target = MapManager::Get()->GetDoorX(1)->GetLocalPosition();

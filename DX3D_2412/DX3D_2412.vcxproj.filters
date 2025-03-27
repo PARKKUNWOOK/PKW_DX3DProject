@@ -354,10 +354,10 @@
     <ClInclude Include="Objects\HellfireDescent\MapEditor\CubeMapEditor.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Shooting\BulletManager.h">
+    <ClInclude Include="Objects\HellfireDescent\Bullet\BulletManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Shooting\Bullet.h">
+    <ClInclude Include="Objects\HellfireDescent\Bullet\Bullet.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Objects\UI\UIManager.h">
@@ -373,6 +373,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Objects\HellfireDescent\MapEditor\Portal.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\HellfireDescent\Bullet\PlayerBullet.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -680,10 +683,10 @@
     <ClCompile Include="Objects\HellfireDescent\MapEditor\CubeMapEditor.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Shooting\BulletManager.cpp">
+    <ClCompile Include="Objects\HellfireDescent\Bullet\BulletManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Shooting\Bullet.cpp">
+    <ClCompile Include="Objects\HellfireDescent\Bullet\Bullet.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\UI\UIManager.cpp">
@@ -699,6 +702,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\HellfireDescent\MapEditor\Portal.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\HellfireDescent\Bullet\PlayerBullet.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

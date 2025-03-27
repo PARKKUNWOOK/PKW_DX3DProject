@@ -3,12 +3,12 @@
 
 ModelExportScene::ModelExportScene()
 {
-    string name = "AFO";
+    string name = "Unmaykr";
     string extension = "fbx";
     string file = "Resources/Models/FBX/" + name + "." + extension;
 
     exporter = new ModelExporter(name, file);
-    //exporter->ExportMaterial();
+    exporter->ExportMaterial();
     exporter->ExportMesh();
     delete exporter;
 

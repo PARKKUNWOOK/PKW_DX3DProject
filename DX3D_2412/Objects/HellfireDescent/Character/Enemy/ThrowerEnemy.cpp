@@ -59,9 +59,9 @@ void ThrowerEnemy::Attack(Player* player)
 		throwAttackFrameCount = static_cast<int>(attackCooldown / DELTA);
 
 		Audio::Get()->Add("ThrowerAttackVoice", "Resources/Sounds/HellfireDescentSound/ThrowerEnemyAttackVoice.ogg");
-		Audio::Get()->Play("ThrowerAttackVoice");
+		Audio::Get()->Play("ThrowerAttackVoice", 3.0f);
 		Audio::Get()->Add("ThrowerAttack", "Resources/Sounds/HellfireDescentSound/ThrowerEnemyAttack.ogg");
-		Audio::Get()->Play("ThrowerAttack");
+		Audio::Get()->Play("ThrowerAttack", 3.0f);
 		// 모델 애니메이션을 "Throw"로 변경
 		model->PlayClip(1);
 
@@ -110,12 +110,12 @@ void ThrowerEnemy::AttackAction()
 			if (curHp == 0)
 			{
 				Audio::Get()->Add("ThrowerDeath", "Resources/Sounds/HellfireDescentSound/ThrowerEnemyDeath.ogg");
-				Audio::Get()->Play("ThrowerDeath");
+				Audio::Get()->Play("ThrowerDeath", 3.0f);
 			}
 			else
 			{
 				Audio::Get()->Add("ThrowerDamage", "Resources/Sounds/HellfireDescentSound/ThrowerEnemyDamage.ogg");
-				Audio::Get()->Play("ThrowerDamage");
+				Audio::Get()->Play("ThrowerDamage", 3.0f);
 			}
 			return;
 		}

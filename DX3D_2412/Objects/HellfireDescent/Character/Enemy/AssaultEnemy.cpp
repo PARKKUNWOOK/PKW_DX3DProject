@@ -45,9 +45,9 @@ void AssaultEnemy::Attack(Player* player)
 		if (!isDying)
 		{
 			Audio::Get()->Add("AssaultAttackVoice", "Resources/Sounds/HellfireDescentSound/AssaultEnemyAttackVoice.ogg");
-			Audio::Get()->Play("AssaultAttackVoice");
+			Audio::Get()->Play("AssaultAttackVoice", 3.0f);
 			Audio::Get()->Add("AssaultAttack", "Resources/Sounds/HellfireDescentSound/AssaultEnemyAttack.ogg");
-			Audio::Get()->Play("AssaultAttack");
+			Audio::Get()->Play("AssaultAttack", 5.0f);
 			model->PlayClip(1);
 			isAssaultAttacking = true;
 			assaultAttackFrameCount = 1500;
@@ -96,12 +96,12 @@ void AssaultEnemy::AttackAction()
 			if (curHp == 0)
 			{
 				Audio::Get()->Add("AssaultDeath", "Resources/Sounds/HellfireDescentSound/AssaultEnemyDeath.ogg");
-				Audio::Get()->Play("AssaultDeath");
+				Audio::Get()->Play("AssaultDeath", 3.0f);
 			}
 			else
 			{
 				Audio::Get()->Add("AssaultDamage", "Resources/Sounds/HellfireDescentSound/AssaultEnemyDamage.ogg");
-				Audio::Get()->Play("AssaultDamage");
+				Audio::Get()->Play("AssaultDamage", 3.0f);
 			}
 			return;
 		}

@@ -1,0 +1,14 @@
+<Material Name="rocket_basebarrel">
+    <Shader Vertex="Light/Light.hlsl" Pixel="Light/Light.hlsl"/>
+    <Texture>
+        <DiffuseMap Diffuse="Resources\Textures\Model\Rocket_Launcher\rocket_base.png"/>
+        <SpecularMap Specular="Resources\Textures\Model\Rocket_Launcher\rocket_remote_g.png"/>
+        <NormalMap Normal="Resources\Textures\Model\Rocket_Launcher\rocket_remote_n.png"/>
+    </Texture>
+    <Property Shininess="0" HasNormalMap="1">
+        <Diffuse R="1" G="1" B="1" A="1"/>
+        <Specular R="1" G="1" B="1" A="1"/>
+        <Ambient R="1" G="1" B="1" A="1"/>
+        <Emissive R="0" G="0" B="0" A="1"/>
+    </Property>
+</Material>

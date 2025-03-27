@@ -3,7 +3,7 @@
 
 ModelRenderScene::ModelRenderScene()
 {
-	model = new Model("Ghost");
+	model = new Model("Bullet");
 	//model->SetShader(L"Model/Model.hlsl");
 }
 

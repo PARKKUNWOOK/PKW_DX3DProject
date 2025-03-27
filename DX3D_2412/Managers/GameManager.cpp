@@ -67,18 +67,18 @@ void GameManager::Update()
 	Timer::Get()->Update();
 	Audio::Get()->Update();
 
-	if (KEY->Down('Z'))
-	{
-		SCENE->Remove("Monster");
-		SCENE->Add("Start");
-	}
-	
-	if (KEY->Down('X'))
-	{
-		SCENE->Remove("Start");
-		SCENE->Add("Monster");
-	}
-	
+	//if (KEY->Down('Z'))
+	//{
+	//	SCENE->Remove("Monster");
+	//	SCENE->Add("Start");
+	//}
+	//
+	//if (KEY->Down('X'))
+	//{
+	//	SCENE->Remove("Start");
+	//	SCENE->Add("Monster");
+	//}
+	//
 	//if (KEY->Down('C'))
 	//{
 	//	SCENE->Remove("Monster");
