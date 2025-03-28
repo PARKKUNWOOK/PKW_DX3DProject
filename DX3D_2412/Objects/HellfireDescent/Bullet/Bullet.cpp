@@ -1,18 +1,16 @@
 #include "Framework.h"
 
-Bullet::Bullet() : SphereCollider(0.2f)
+Bullet::Bullet(Transform* transform) : SphereCollider(0.9f)
 {
-	sphere = new Sphere(0.2f);
-	sphere->SetParent(this);
-	sphere->GetMaterial()->SetDiffuseMap(L"Resources/Textures/Block/Block1.png");
-	//sphere->GetMaterial()->GetData()->diffuse = { 1, 0, 0, 1 };
-	//sphere->GetMaterial()->GetData()->ambient = { 1, 0, 0, 1 };
-	//sphere->GetMaterial()->GetData()->emissive = { 1, 0, 0, 1 };
+	SetTag(transform->GetTag() + "_Collider");
+	transform->SetParent(this);
+	transform->SetTag("Bullet_0");
+	transform->Load();
 }
 
 Bullet::~Bullet()
 {
-	delete sphere;
+	
 }
 
 void Bullet::Update()
@@ -36,17 +34,16 @@ void Bullet::Update()
 	}
 
 	UpdateWorld();
-	sphere->UpdateWorld();
 }
 
 void Bullet::Render()
 {
 	Collider::Render();
-	sphere->Render();
 }
 
 void Bullet::Edit()
 {
+	Transform::Edit();
 }
 
 void Bullet::Fire(Vector3 pos, Vector3 dir, bool isPlayer)
@@ -56,12 +53,17 @@ void Bullet::Fire(Vector3 pos, Vector3 dir, bool isPlayer)
 	lifeTime = 0.0f;
 	isPlayerBullet = isPlayer;
 
+	localRotation.y = atan2(dir.x, dir.z);
+	localRotation.y += 4.75f;
+	localRotation.z = asin(dir.y);
+
 	SetActive(true);
 }
 
 bool Bullet::EnemyCollisionCheck(Enemy* enemy)
 {
 	if (!IsActive() || !enemy->IsActive()) return false;
+	if (enemy->GetCurrentHealth() <= 0) return false;
 
 	if (Intersects(enemy))
 	{

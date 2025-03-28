@@ -375,9 +375,6 @@
     <ClInclude Include="Objects\HellfireDescent\MapEditor\Portal.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\HellfireDescent\Bullet\PlayerBullet.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DX3D_2412.cpp">
@@ -702,9 +699,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\HellfireDescent\MapEditor\Portal.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects\HellfireDescent\Bullet\PlayerBullet.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -21,6 +21,7 @@ public:
 	const vector<Bullet*>& GetBullets() { return bullets; }
 
 private:
-	ModelInstancing* playerModelInstancing;
+	ModelInstancing* playerBulletInstancing;
+	ModelInstancing* enemyBulletInstancing;
 	vector<Bullet*> bullets;
 };

@@ -1,5 +1,12 @@
 #pragma once
 
+enum class FireMode
+{
+	Pistol = 1,
+	Heavy_Cannon,
+	ChainGun
+};
+
 class Player : public SphereCollider
 {
 private:
@@ -30,6 +37,7 @@ public:
 private:
 	void Control();
 	void Fire();
+	void FireBullet();
 	void Jump();
 	void Move();
 	void SetCursor();
@@ -52,4 +60,14 @@ private:
 	POINT clientCenterPos;
 
 	Vector3 knockbackDir;
+
+	FireMode fireMode = FireMode::Pistol;
+
+	float bulletInterval = 0.5f;
+	float bulletTimer = 0.0f;
+
+	float minigunStartInterval = 1.0f;
+	float minigunMinInterval = 0.05f;
+	float minigunDecreaseRate = 1.0f;
+	float minigunElapsed = 0.0f;
 };

@@ -3,7 +3,7 @@
 
 ModelExportScene::ModelExportScene()
 {
-    string name = "Unmaykr";
+    string name = "Rocket";
     string extension = "fbx";
     string file = "Resources/Models/FBX/" + name + "." + extension;
 

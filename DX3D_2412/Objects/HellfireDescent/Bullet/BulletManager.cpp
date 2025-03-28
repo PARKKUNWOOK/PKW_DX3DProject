@@ -2,22 +2,30 @@
 
 BulletManager::BulletManager()
 {
-	playerModelInstancing = new ModelInstancing("Bullet", SIZE);
+	playerBulletInstancing = new ModelInstancing("Bullet", SIZE);
+	enemyBulletInstancing = new ModelInstancing("FireBall", SIZE);
 
-	bullets.reserve(SIZE);
+	bullets.reserve(SIZE * 2);
 
 	FOR(SIZE)
 	{
-		Bullet* bullet = new Bullet();
-		bullet->SetActive(false);
+		Bullet* playerBullet = new Bullet(playerBulletInstancing->Add());
+		playerBullet->SetActive(false);
+		playerBullet->Fire(Vector3(), Vector3(), true);
+		playerBullet->SetLocalScale(0.1f, 0.1f, 0.1f);
+		bullets.push_back(playerBullet);
 
-		bullets.push_back(bullet);
+		Bullet* enemyBullet = new Bullet(enemyBulletInstancing->Add());
+		enemyBullet->SetActive(false);
+		enemyBullet->Fire(Vector3(), Vector3(), false);
+		enemyBullet->SetLocalScale(0.3f, 0.3f, 0.3f);
+		bullets.push_back(enemyBullet);
 	}
 }
 
 BulletManager::~BulletManager()
 {
-	delete playerModelInstancing;
+	delete playerBulletInstancing;
 }
 
 void BulletManager::Update()
@@ -25,7 +33,8 @@ void BulletManager::Update()
 	for (Bullet* bullet : bullets)
 		bullet->Update();
 
-	playerModelInstancing->Update();
+	playerBulletInstancing->Update();
+	enemyBulletInstancing->Update();
 }
 
 void BulletManager::Render()
@@ -33,29 +42,24 @@ void BulletManager::Render()
 	for (Bullet* bullet : bullets)
 		bullet->Render();
 
-	playerModelInstancing->Render();
+	playerBulletInstancing->Render();
+	enemyBulletInstancing->Render();
 }
 
 void BulletManager::Edit()
 {
+	playerBulletInstancing->Edit();
+
 	for (Bullet* bullet : bullets)
 		bullet->Edit();
-	playerModelInstancing->Edit();
 }
 
 void BulletManager::Fire(Vector3 pos, Vector3 direction, bool isPlayer)
 {
-	for (Bullet*& bullet : bullets)
+	for (Bullet* bullet : bullets)
 	{
-		if (!bullet->IsActive())
+		if (!bullet->IsActive() && bullet->IsPlayerBullet() == isPlayer)
 		{
-			if (isPlayer)
-			{
-				// 기존 bullet 해제 후 playerBullet로 대체
-				delete bullet;
-				bullet = new PlayerBullet(playerModelInstancing->Add());
-			}
-
 			bullet->Fire(pos, direction, isPlayer);
 			return;
 		}

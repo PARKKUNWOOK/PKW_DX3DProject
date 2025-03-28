@@ -55,6 +55,22 @@ void Player::Update()
     CAM->SetLocalRotation(Vector3(camPitch, playerRot.y, 0.0f));
 
     BulletManager::Get()->Update();
+    bulletTimer += DELTA;
+
+    if (KEY->Down('1'))
+    {
+        fireMode = FireMode::Pistol;
+    }
+    if (KEY->Down('2'))
+    {
+        fireMode = FireMode::Heavy_Cannon;
+        bulletInterval = 0.1f;
+    }
+    if (KEY->Down('3'))
+    {
+        fireMode = FireMode::ChainGun;
+        bulletInterval = minigunStartInterval;
+    }
 }
 
 void Player::Render()
@@ -118,14 +134,70 @@ void Player::Control()
 
 void Player::Fire()
 {
-    if (KEY->Down(VK_LBUTTON))
-    {
-        Vector3 firePosition = GetLocalPosition();
-        Vector3 fireDirection = CAM->GetForward();
-        fireDirection.Normalize();
+    bool isFiring = KEY->Press(VK_LBUTTON);
+    bool isClicked = KEY->Down(VK_LBUTTON);
 
-        BulletManager::Get()->Fire(firePosition, fireDirection, true);
+    switch (fireMode)
+    {
+    case FireMode::Pistol:
+        if (isClicked && bulletTimer >= bulletInterval)
+        {
+            FireBullet();
+            bulletTimer = 0.0f;
+        }
+        break;
+
+    case FireMode::Heavy_Cannon:
+        if (isFiring && bulletTimer >= bulletInterval)
+        {
+            FireBullet();
+            bulletTimer = 0.0f;
+        }
+        break;
+
+    case FireMode::ChainGun:
+        if (isFiring)
+        {
+            minigunElapsed += DELTA;
+
+            bulletInterval = minigunStartInterval * exp(-1.0f * minigunElapsed);
+
+            if (bulletInterval < minigunMinInterval)
+                bulletInterval = minigunMinInterval;
+
+            if (bulletTimer >= bulletInterval)
+            {
+                FireBullet();
+                bulletTimer = 0.0f;
+            }
+        }
+        else
+        {
+            bulletInterval = minigunStartInterval;
+            minigunElapsed = 0.0f;
+        }
+        break;
     }
+
+    //if (KEY->Down(VK_LBUTTON) && bulletTimer >= bulletInterval)
+    //{
+    //    Vector3 firePosition = GetLocalPosition();
+    //    Vector3 fireDirection = CAM->GetForward();
+    //    fireDirection.Normalize();
+    //
+    //    BulletManager::Get()->Fire(firePosition, fireDirection, true);
+    //
+    //    bulletTimer = 0.0f;
+    //}
+}
+
+void Player::FireBullet()
+{
+    Vector3 firePosition = GetLocalPosition();
+    Vector3 fireDirection = CAM->GetForward();
+    fireDirection.Normalize();
+
+    BulletManager::Get()->Fire(firePosition, fireDirection, true);
 }
 
 void Player::Jump()

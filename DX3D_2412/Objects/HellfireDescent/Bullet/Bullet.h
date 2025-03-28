@@ -5,25 +5,25 @@ class Player;
 
 class Bullet : public SphereCollider
 {
-protected:
+private:
 	const float LIFE_TIME = 3.0f;
 
 public:
-	Bullet();
+	Bullet(Transform* transform);
 	~Bullet();
 
-	virtual void Update();
-	virtual void Render();
+	void Update();
+	void Render();
 	void Edit();
 
-	virtual void Fire(Vector3 pos, Vector3 dir, bool isPlayer);
+	void Fire(Vector3 pos, Vector3 dir, bool isPlayer);
 	bool EnemyCollisionCheck(Enemy* enemy);
 	bool PlayerCollisionCheck(Player* player);
 
 	bool IsPlayerBullet() { return isPlayerBullet; }
 
-protected:
-	Sphere* sphere;
+private:
+	Transform* transform;
 	Vector3 direction;
 
 	float speed = 10.0f;

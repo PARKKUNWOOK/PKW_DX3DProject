@@ -191,7 +191,6 @@ typedef function<void(int)> IntParamEvent;
 #include "Objects/Character/Ghost.h"
 
 #include "Objects/HellfireDescent/Bullet/Bullet.h"
-#include "Objects/HellfireDescent/Bullet/PlayerBullet.h"
 #include "Objects/HellfireDescent/Bullet/BulletManager.h"
 
 #include "Objects/HellfireDescent/Character/Player/Player.h"
