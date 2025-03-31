@@ -375,6 +375,21 @@
     <ClInclude Include="Objects\HellfireDescent\MapEditor\Portal.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Objects\HellfireDescent\Bullet\RocketLauncher.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\HellfireDescent\Bullet\Unmaykr.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\HellfireDescent\Bullet\CombatShotgun.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\HellfireDescent\Bullet\BFG9000.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\HellfireDescent\Bullet\PlasmaRifle.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DX3D_2412.cpp">
@@ -699,6 +714,21 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\HellfireDescent\MapEditor\Portal.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\HellfireDescent\Bullet\RocketLauncher.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\HellfireDescent\Bullet\Unmaykr.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\HellfireDescent\Bullet\CombatShotgun.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\HellfireDescent\Bullet\BFG9000.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\HellfireDescent\Bullet\PlasmaRifle.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

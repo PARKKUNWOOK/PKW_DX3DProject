@@ -5,7 +5,7 @@ PlayerManager::PlayerManager()
 	player = new Player();
 	player->SetLocalPosition(1, 5, 1);
 
-	EnemyManager::Get()->SpawnEnemies(1, player);
+	EnemyManager::Get()->SpawnEnemies(10, player);
 }
 
 PlayerManager::~PlayerManager()
@@ -29,4 +29,5 @@ void PlayerManager::PostRender()
 
 void PlayerManager::Edit()
 {
+	player->Edit();
 }

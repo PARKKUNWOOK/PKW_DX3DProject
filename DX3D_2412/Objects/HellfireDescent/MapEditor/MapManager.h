@@ -18,7 +18,7 @@ public:
 	void Load(string file);
 
 	float GetHeight(const Vector3& pos) const;
-	void ResolveCollisions(Player* player);
+	Vector3 ResolveCollisions(Player* player, float& totalOverlab);
 	
 	void OpenDoorX(int index);
 	void OpenDoorZ(int index);

@@ -3,7 +3,7 @@
 
 ModelRenderScene::ModelRenderScene()
 {
-	model = new Model("Bullet");
+	model = new Model("RedBullet");
 	//model->SetShader(L"Model/Model.hlsl");
 }
 

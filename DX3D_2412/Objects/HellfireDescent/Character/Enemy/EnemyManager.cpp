@@ -112,6 +112,19 @@ bool EnemyManager::IsAllDead()
     return assaultEnemies.empty() && throwerEnemies.empty();
 }
 
+vector<Enemy*> EnemyManager::GetAllEnemies()
+{
+    vector<Enemy*> all;
+
+    for (AssaultEnemy* enemy : assaultEnemies)
+        all.push_back(enemy);
+
+    for (ThrowerEnemy* enemy : throwerEnemies)
+        all.push_back(enemy);
+
+    return all;
+}
+
 Vector3 EnemyManager::GetRandomSpawnPosition()
 {
     Vector2 mapSize = MapManager::Get()->GetMapSize();

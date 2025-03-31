@@ -21,9 +21,8 @@ ThrowerEnemy::ThrowerEnemy()
 	model->PlayClip(0);
 
 	speed = 1.0f;
-	maxHp = curHp = 3;
-
-	
+	//maxHp = curHp = 3;
+	maxHp = curHp = 20;
 }
 
 ThrowerEnemy::~ThrowerEnemy()
@@ -70,7 +69,7 @@ void ThrowerEnemy::Attack(Player* player)
 		fireDirection.Normalize();
 
 		Vector3 firePosition = GetLocalPosition() + fireDirection * 1.0f;
-		BulletManager::Get()->Fire(firePosition, fireDirection, false);
+		BulletManager::Get()->FireEnemyBullet(firePosition, fireDirection);
 	}
 }
 
@@ -88,10 +87,6 @@ void ThrowerEnemy::AttackAction()
 			{
 				model->PlayClip(0);
 			}
-			else
-			{
-				TakeDamage(1);
-			}
 		}
 	}
 	else
@@ -105,8 +100,8 @@ void ThrowerEnemy::AttackAction()
 
 		if (bullet->IsPlayerBullet() && bullet->EnemyCollisionCheck(this))
 		{
+			TakeDamage(bullet->GetDamage());
 			bullet->SetActive(false);
-			TakeDamage(1);
 			if (curHp == 0)
 			{
 				Audio::Get()->Add("ThrowerDeath", "Resources/Sounds/HellfireDescentSound/ThrowerEnemyDeath.ogg");

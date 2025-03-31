@@ -55,6 +55,8 @@ void Enemy::Edit()
 {
     Collider::Edit();
     if (model) model->Edit();
+
+    ImGui::Text("HP: %d / %d", curHp, maxHp);
 }
 
 void Enemy::SetTarget(Transform* target)
@@ -64,7 +66,7 @@ void Enemy::SetTarget(Transform* target)
 
 void Enemy::TakeDamage(int damage)
 {
-    if (curHp <= 0 || isDying) return;
+    if (curHp <= 0) return;
 
     curHp -= damage;
     if (curHp < 0) curHp = 0;

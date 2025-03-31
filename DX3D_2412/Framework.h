@@ -191,6 +191,11 @@ typedef function<void(int)> IntParamEvent;
 #include "Objects/Character/Ghost.h"
 
 #include "Objects/HellfireDescent/Bullet/Bullet.h"
+#include "Objects/HellfireDescent/Bullet/RocketLauncher.h"
+#include "Objects/HellfireDescent/Bullet/Unmaykr.h"
+#include "Objects/HellfireDescent/Bullet/CombatShotgun.h"
+#include "Objects/HellfireDescent/Bullet/PlasmaRifle.h"
+#include "Objects/HellfireDescent/Bullet/BFG9000.h"
 #include "Objects/HellfireDescent/Bullet/BulletManager.h"
 
 #include "Objects/HellfireDescent/Character/Player/Player.h"

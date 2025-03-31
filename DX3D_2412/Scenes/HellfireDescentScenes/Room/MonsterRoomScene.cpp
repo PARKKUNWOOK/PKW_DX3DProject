@@ -52,6 +52,7 @@ void MonsterRoomScene::PostRender()
 
 void MonsterRoomScene::GUIRender()
 {
+    PlayerManager::Get()->Edit();
     EnemyManager::Get()->Edit();
 }
 

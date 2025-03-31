@@ -17,10 +17,15 @@ Player::Player()
 
     CAM->SetLocalPosition(0, 0, 0);
     CAM->SetLocalRotation(0, 0, 0);
+
+    combatShotgun = new CombatShotgun();
+    plasmaRifle = new PlasmaRifle();
 }
 
 Player::~Player()
 {
+    delete combatShotgun;
+    delete plasmaRifle;
 }
 
 void Player::Update()
@@ -57,20 +62,7 @@ void Player::Update()
     BulletManager::Get()->Update();
     bulletTimer += DELTA;
 
-    if (KEY->Down('1'))
-    {
-        fireMode = FireMode::Pistol;
-    }
-    if (KEY->Down('2'))
-    {
-        fireMode = FireMode::Heavy_Cannon;
-        bulletInterval = 0.1f;
-    }
-    if (KEY->Down('3'))
-    {
-        fireMode = FireMode::ChainGun;
-        bulletInterval = minigunStartInterval;
-    }
+    ChangeWeapon();
 }
 
 void Player::Render()
@@ -85,6 +77,29 @@ void Player::PostRender()
 
 void Player::Edit()
 {
+    ImGui::Text("HP: %d / %d", curHp, maxHp);
+
+    const char* weaponName = "";
+    switch (fireMode)
+    {
+    case FireMode::Pistol:          weaponName = "Pistol"; break;
+    case FireMode::HeavyCannon:     weaponName = "Heavy Cannon"; break;
+    case FireMode::ChainGun:        weaponName = "Chaingun"; break;
+    case FireMode::RocketLauncher:  weaponName = "Rocket Launcher"; break;
+    case FireMode::Unmaykr:         weaponName = "Unmaykr"; break;
+    case FireMode::CombatShotgun:   weaponName = "Combat Shotgun"; break;
+    case FireMode::PlasmaRifle:     weaponName = "Plasma Rifle"; break;
+    case FireMode::BFG9000:         weaponName = "BFG9000"; break;
+    }
+
+    ImGui::Text("Current Weapon: %s", weaponName);
+
+    if (fireMode == FireMode::BFG9000)
+    {
+        ImGui::Text("[BFG9000]");
+        ImGui::Text("Charging: %s", bfgCharging ? "Yes" : "No");
+        ImGui::Text("Charge Time: %.2f", bfgChargeTime);
+    }
 }
 
 void Player::TakeDamage(int damage, Vector3 knockbackDir)
@@ -132,29 +147,73 @@ void Player::Control()
     }
 }
 
+void Player::ChangeWeapon()
+{
+    if (KEY->Down('1'))
+    {
+        fireMode = FireMode::Pistol;
+    }
+    if (KEY->Down('2'))
+    {
+        fireMode = FireMode::HeavyCannon;
+        bulletInterval = 0.1f;
+    }
+    if (KEY->Down('3'))
+    {
+        fireMode = FireMode::ChainGun;
+        bulletInterval = minigunStartInterval;
+    }
+    if (KEY->Down('4'))
+    {
+        fireMode = FireMode::RocketLauncher;
+    }
+    if (KEY->Down('5'))
+    {
+        fireMode = FireMode::Unmaykr;
+        bulletInterval = 0.1f;
+    }
+    if (KEY->Down('6'))
+    {
+        fireMode = FireMode::CombatShotgun;
+        bulletInterval = 2.0f;
+    }
+    if (KEY->Down('7'))
+    {
+        fireMode = FireMode::PlasmaRifle;
+        bulletInterval = 1.0f;
+    }
+    if (KEY->Down('8'))
+    {
+        fireMode = FireMode::BFG9000;
+        bulletInterval = 0.1f;
+    }
+}
+
 void Player::Fire()
 {
     bool isFiring = KEY->Press(VK_LBUTTON);
     bool isClicked = KEY->Down(VK_LBUTTON);
+
+    Vector3 firePosition = GetLocalPosition();
+    Vector3 fireDirection = CAM->GetForward();
+    fireDirection.Normalize();
 
     switch (fireMode)
     {
     case FireMode::Pistol:
         if (isClicked && bulletTimer >= bulletInterval)
         {
-            FireBullet();
+            BulletManager::Get()->Fire(firePosition, fireDirection, true);
             bulletTimer = 0.0f;
         }
         break;
-
-    case FireMode::Heavy_Cannon:
+    case FireMode::HeavyCannon:
         if (isFiring && bulletTimer >= bulletInterval)
         {
-            FireBullet();
+            BulletManager::Get()->Fire(firePosition, fireDirection, true);
             bulletTimer = 0.0f;
         }
         break;
-
     case FireMode::ChainGun:
         if (isFiring)
         {
@@ -167,7 +226,7 @@ void Player::Fire()
 
             if (bulletTimer >= bulletInterval)
             {
-                FireBullet();
+                BulletManager::Get()->Fire(firePosition, fireDirection, true);
                 bulletTimer = 0.0f;
             }
         }
@@ -177,27 +236,73 @@ void Player::Fire()
             minigunElapsed = 0.0f;
         }
         break;
+    case FireMode::RocketLauncher:
+        if (isClicked && bulletTimer >= rocketInterval)
+        //if (isClicked)
+        {
+            BulletManager::Get()->FireRocketLauncher(firePosition, fireDirection);
+            bulletTimer = 0.0f;
+        }
+        break;
+    case FireMode::Unmaykr:
+        if (isFiring && bulletTimer >= bulletInterval)
+        {
+            BulletManager::Get()->FireUnmaykr(firePosition, fireDirection);
+            bulletTimer = 0.0f;
+        }
+        break;
+    case FireMode::CombatShotgun:
+        if (isClicked && bulletTimer >= bulletInterval)
+        {
+            if (combatShotgun != nullptr)
+                combatShotgun->Fire(firePosition, fireDirection, true);
+            bulletTimer = 0.0f;
+        }
+        break;
+    case FireMode::PlasmaRifle:
+        if (isClicked && bulletTimer >= bulletInterval)
+        {
+            if (plasmaRifle != nullptr)
+                plasmaRifle->Fire(firePosition, fireDirection, true);
+            bulletTimer = 0.0f;
+        }
+        break;
+    case FireMode::BFG9000:
+    {
+        static bool isCharging = false;
+        static float chargeTime = 0.0f;
+
+        if (KEY->Down(VK_LBUTTON))
+        {
+            isCharging = true;
+            chargeTime = 0.0f;
+        }
+
+        if (KEY->Press(VK_LBUTTON) && isCharging)
+        {
+            chargeTime += DELTA;
+        }
+
+        if (KEY->Up(VK_LBUTTON) && isCharging)
+        {
+            isCharging = false;
+            
+            if (bulletTimer >= (chargeTime >= 3.0f ? 3.0f : 0.5f))
+            {
+                bool chargedShot = chargeTime >= 3.0f;
+            
+                BulletManager::Get()->FireBFG9000(firePosition, fireDirection, true, chargedShot);
+            
+                bulletTimer = 0.0f;
+            }
+            
+            chargeTime = 0.0f;
+        }
+        this->bfgCharging = isCharging;
+        this->bfgChargeTime = chargeTime;
     }
-
-    //if (KEY->Down(VK_LBUTTON) && bulletTimer >= bulletInterval)
-    //{
-    //    Vector3 firePosition = GetLocalPosition();
-    //    Vector3 fireDirection = CAM->GetForward();
-    //    fireDirection.Normalize();
-    //
-    //    BulletManager::Get()->Fire(firePosition, fireDirection, true);
-    //
-    //    bulletTimer = 0.0f;
-    //}
-}
-
-void Player::FireBullet()
-{
-    Vector3 firePosition = GetLocalPosition();
-    Vector3 fireDirection = CAM->GetForward();
-    fireDirection.Normalize();
-
-    BulletManager::Get()->Fire(firePosition, fireDirection, true);
+    break;
+    }
 }
 
 void Player::Jump()
@@ -225,9 +330,10 @@ void Player::Move()
     newPosition.x = horizontalPosition.x;
     newPosition.z = horizontalPosition.z;
 
-    SetLocalPosition(newPosition);
+    float totalOverlab = 0.0f;
+    Vector3 dir = MapManager::Get()->ResolveCollisions(this, totalOverlab);
 
-    MapManager::Get()->ResolveCollisions(this);
+    SetLocalPosition(newPosition + dir * totalOverlab);
 }
 
 void Player::SetCursor()

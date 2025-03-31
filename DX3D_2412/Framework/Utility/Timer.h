@@ -16,6 +16,8 @@ public:
 
     void SetScale(float scale) { this->scale = scale; }
 
+    float GetTotalTime() const { return totalTime; }
+
 private:
     float timeScale = 0.0f;
     float elapsedTime = 0.0f;
@@ -28,4 +30,6 @@ private:
 
     int frameRate = 0;
     int frameCount = 0;
+
+    float totalTime = 0.0f;
 };

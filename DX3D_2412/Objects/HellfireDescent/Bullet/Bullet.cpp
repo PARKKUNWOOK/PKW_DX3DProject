@@ -67,7 +67,6 @@ bool Bullet::EnemyCollisionCheck(Enemy* enemy)
 
 	if (Intersects(enemy))
 	{
-		enemy->TakeDamage(damage);
 		return true;
 	}
 

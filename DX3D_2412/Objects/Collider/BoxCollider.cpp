@@ -168,7 +168,60 @@ bool BoxCollider::PushBox(BoxCollider* collider, RaycastHit* hit)
 
 bool BoxCollider::PushSphere(SphereCollider* collider, RaycastHit* hit)
 {
-    return false;
+    if (!IsActive()) return false;
+
+    ObbDesc box;
+    GetObb(box);
+
+    //구와 박스 사이 가장 가까운 점 찾기
+    Vector3 closestPointToSphere = box.center;
+
+    for (int i = 0; i < 3; i++)
+    {
+        Vector3 direction = collider->GetGlobalPosition() - box.center;
+        float length = Vector3::Dot(box.axis[i], direction);
+
+        float mult = (length < 0.0f) ? -1.0f : 1.0f;
+        length = min(abs(length), box.halfSize[i]);
+        closestPointToSphere += box.axis[i] * length * mult;
+    }
+
+    //구와 박스의 겹친 거리 계산
+    Vector3 sphereCenter = collider->GetGlobalPosition();
+    float distance = Vector3::Distance(sphereCenter, closestPointToSphere);
+    float overlap = collider->Radius() - distance;
+
+    //겹치지 않았다면 반환
+    if (overlap <= 0.0f)
+        return false;
+
+    Vector3 direction = (sphereCenter - closestPointToSphere).GetNormalized();
+
+    int majorAxis = -1;
+    float maxDot = 0.0f;
+
+    //충돌한 방향 계산(가장 영향을 많이 받은 축 찾기)
+    for (int i = 0; i < 3; i++)
+    {
+        float dot = abs(Vector3::Dot(direction, box.axis[i]));
+        if (dot > maxDot)
+        {
+            maxDot = dot;
+            majorAxis = i;
+        }
+    }
+
+    //가장 영향을 받은 축의 반대 방향으로 밀어냄
+    Vector3 pushDirection = box.axis[majorAxis] * (Vector3::Dot(direction, box.axis[majorAxis]) > 0 ? 1.0f : -1.0f);
+
+    //충돌 정보 저장
+    if (hit != nullptr)
+    {
+        hit->normal = pushDirection.GetNormalized();
+        hit->distance = overlap;
+    }
+
+    return true;
 }
 
 bool BoxCollider::PushCapsule(CapsuleCollider* collider, RaycastHit* hit)

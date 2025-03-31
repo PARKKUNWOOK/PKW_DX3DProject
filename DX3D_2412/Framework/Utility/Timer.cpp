@@ -22,6 +22,8 @@ void Timer::Update()
 
     lastTime = curTime;
 
+    totalTime += elapsedTime;
+
     frameCount++;
     oneSecCount += elapsedTime;
 

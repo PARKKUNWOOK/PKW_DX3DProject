@@ -38,6 +38,7 @@ void StoreRoomScene::PostRender()
 
 void StoreRoomScene::GUIRender()
 {
+    PlayerManager::Get()->Edit();
 }
 
 void StoreRoomScene::CheckSceneTransition()

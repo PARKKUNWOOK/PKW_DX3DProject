@@ -21,7 +21,8 @@ AssaultEnemy::AssaultEnemy()
 	model->PlayClip(0);
 
 	speed = 3.0f;
-	maxHp = curHp = 5;
+	//maxHp = curHp = 5;
+	maxHp = curHp = 40;
 }
 
 AssaultEnemy::~AssaultEnemy()
@@ -52,11 +53,6 @@ void AssaultEnemy::Attack(Player* player)
 			isAssaultAttacking = true;
 			assaultAttackFrameCount = 1500;
 		}
-		else
-		{
-			TakeDamage(1);
-		}
-		
 	}
 }
 
@@ -74,10 +70,6 @@ void AssaultEnemy::AttackAction()
 			{
 				model->PlayClip(0);
 			}
-			else
-			{
-				TakeDamage(1);
-			}
 		}
 	}
 	else
@@ -91,8 +83,8 @@ void AssaultEnemy::AttackAction()
 
 		if (bullet->IsPlayerBullet() && bullet->EnemyCollisionCheck(this))
 		{
+			TakeDamage(bullet->GetDamage());
 			bullet->SetActive(false);
-			TakeDamage(1);
 			if (curHp == 0)
 			{
 				Audio::Get()->Add("AssaultDeath", "Resources/Sounds/HellfireDescentSound/AssaultEnemyDeath.ogg");

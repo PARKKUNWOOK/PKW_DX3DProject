@@ -114,7 +114,7 @@ void SphereCollider::MakeMesh()
 
 bool SphereCollider::PushBox(BoxCollider* collider, RaycastHit* hit)
 {
-    return false;
+    return collider->PushSphere(this, hit);
 }
 
 bool SphereCollider::PushSphere(SphereCollider* collider, RaycastHit* hit)

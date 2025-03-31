@@ -14,6 +14,7 @@ public:
 	void Edit();
 	void SpawnEnemies(int count, Player* player);
 	bool IsAllDead();
+	vector<Enemy*> GetAllEnemies();
 
 private:
 	Vector3 GetRandomSpawnPosition();

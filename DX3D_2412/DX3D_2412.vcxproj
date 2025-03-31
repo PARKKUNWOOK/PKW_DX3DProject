@@ -208,6 +208,11 @@
     <ClInclude Include="Objects\Collider\Collider.h" />
     <ClInclude Include="Objects\Collider\RectCollider.h" />
     <ClInclude Include="Objects\Collider\SphereCollider.h" />
+    <ClInclude Include="Objects\HellfireDescent\Bullet\BFG9000.h" />
+    <ClInclude Include="Objects\HellfireDescent\Bullet\CombatShotgun.h" />
+    <ClInclude Include="Objects\HellfireDescent\Bullet\PlasmaRifle.h" />
+    <ClInclude Include="Objects\HellfireDescent\Bullet\RocketLauncher.h" />
+    <ClInclude Include="Objects\HellfireDescent\Bullet\Unmaykr.h" />
     <ClInclude Include="Objects\HellfireDescent\Character\Enemy\AssaultEnemy.h" />
     <ClInclude Include="Objects\HellfireDescent\Character\Enemy\Enemy.h" />
     <ClInclude Include="Objects\HellfireDescent\Character\Enemy\EnemyManager.h" />
@@ -324,6 +329,11 @@
     <ClCompile Include="Objects\Collider\Collider.cpp" />
     <ClCompile Include="Objects\Collider\RectCollider.cpp" />
     <ClCompile Include="Objects\Collider\SphereCollider.cpp" />
+    <ClCompile Include="Objects\HellfireDescent\Bullet\BFG9000.cpp" />
+    <ClCompile Include="Objects\HellfireDescent\Bullet\CombatShotgun.cpp" />
+    <ClCompile Include="Objects\HellfireDescent\Bullet\PlasmaRifle.cpp" />
+    <ClCompile Include="Objects\HellfireDescent\Bullet\RocketLauncher.cpp" />
+    <ClCompile Include="Objects\HellfireDescent\Bullet\Unmaykr.cpp" />
     <ClCompile Include="Objects\HellfireDescent\Character\Enemy\AssaultEnemy.cpp" />
     <ClCompile Include="Objects\HellfireDescent\Character\Enemy\Enemy.cpp" />
     <ClCompile Include="Objects\HellfireDescent\Character\Enemy\EnemyManager.cpp" />

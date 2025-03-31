@@ -3,8 +3,13 @@
 enum class FireMode
 {
 	Pistol = 1,
-	Heavy_Cannon,
-	ChainGun
+	HeavyCannon,
+	ChainGun,
+	RocketLauncher,
+	Unmaykr,
+	CombatShotgun,
+	PlasmaRifle,
+	BFG9000
 };
 
 class Player : public SphereCollider
@@ -36,8 +41,8 @@ public:
 
 private:
 	void Control();
+	void ChangeWeapon();
 	void Fire();
-	void FireBullet();
 	void Jump();
 	void Move();
 	void SetCursor();
@@ -64,10 +69,17 @@ private:
 	FireMode fireMode = FireMode::Pistol;
 
 	float bulletInterval = 0.5f;
+	float rocketInterval = 3.0f;
 	float bulletTimer = 0.0f;
 
 	float minigunStartInterval = 1.0f;
 	float minigunMinInterval = 0.05f;
 	float minigunDecreaseRate = 1.0f;
 	float minigunElapsed = 0.0f;
+
+	CombatShotgun* combatShotgun = nullptr;
+	PlasmaRifle* plasmaRifle = nullptr;
+
+	bool bfgCharging = false;
+	float bfgChargeTime = 0.0f;
 };

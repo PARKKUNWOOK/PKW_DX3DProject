@@ -146,21 +146,20 @@ float MapManager::GetHeight(const Vector3& pos) const
 	return maxHeight;
 }
 
-void MapManager::ResolveCollisions(Player* player)
+Vector3 MapManager::ResolveCollisions(Player* player, float& totalOverlab)
 {
 	SphereCollider* playerCollider = player;
 	Vector3 playerPos = player->GetLocalPosition();
+	Vector3 totalPushDirection = Vector3::Zero();
+	RaycastHit hit;
 
 	for (Cube* wall : walls)
 	{
 		BoxCollider* wallCollider = wall->GetCollider();
-		if (wallCollider->IsSphereCollision(playerCollider))
+		if (wallCollider->PushSphere(playerCollider, &hit))
 		{
-			Vector3 pushDirection = playerPos - wall->GetLocalPosition();
-			pushDirection.Normalize();
-
-			player->SetLocalPosition(playerPos + pushDirection * 0.1f);
-			wall->SetLocalPosition(wall->GetLocalPosition() - pushDirection * 0.1f);
+			totalPushDirection += hit.normal * hit.distance;
+			totalOverlab += hit.distance;
 		}
 	}
 
@@ -169,13 +168,10 @@ void MapManager::ResolveCollisions(Player* player)
 		if (IsDoorXOpen(i)) continue;
 
 		BoxCollider* doorCollider = doorxs[i]->GetCollider();
-		if (doorCollider->IsSphereCollision(playerCollider))
+		if (doorCollider->PushSphere(playerCollider, &hit))
 		{
-			Vector3 pushDirection = playerPos - doorxs[i]->GetLocalPosition();
-			pushDirection.Normalize();
-
-			player->SetLocalPosition(playerPos + pushDirection * 0.1f);
-			doorxs[i]->SetLocalPosition(doorxs[i]->GetLocalPosition() - pushDirection * 0.1f);
+			totalPushDirection += hit.normal * hit.distance;
+			totalOverlab += hit.distance;
 		}
 	}
 
@@ -184,15 +180,14 @@ void MapManager::ResolveCollisions(Player* player)
 		if (IsDoorZOpen(i)) continue;
 
 		BoxCollider* doorCollider = doorzs[i]->GetCollider();
-		if (doorCollider->IsSphereCollision(playerCollider))
+		if (doorCollider->PushSphere(playerCollider, &hit))
 		{
-			Vector3 pushDirection = playerPos - doorzs[i]->GetLocalPosition();
-			pushDirection.Normalize();
-
-			player->SetLocalPosition(playerPos + pushDirection * 0.1f);
-			doorzs[i]->SetLocalPosition(doorzs[i]->GetLocalPosition() - pushDirection * 0.1f);
+			totalPushDirection += hit.normal * hit.distance;
+			totalOverlab += hit.distance;
 		}
 	}
+
+	return totalPushDirection.GetNormalized();
 }
 
 void MapManager::OpenDoorX(int index)
