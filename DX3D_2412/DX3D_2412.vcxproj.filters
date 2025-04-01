@@ -375,19 +375,28 @@
     <ClInclude Include="Objects\HellfireDescent\MapEditor\Portal.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\HellfireDescent\Bullet\RocketLauncher.h">
+    <ClInclude Include="Objects\HellfireDescent\Weapon\RocketLauncher.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\HellfireDescent\Bullet\Unmaykr.h">
+    <ClInclude Include="Objects\HellfireDescent\Weapon\Unmaykr.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\HellfireDescent\Bullet\CombatShotgun.h">
+    <ClInclude Include="Objects\HellfireDescent\Weapon\CombatShotgun.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\HellfireDescent\Bullet\BFG9000.h">
+    <ClInclude Include="Objects\HellfireDescent\Weapon\BFG9000.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\HellfireDescent\Bullet\PlasmaRifle.h">
+    <ClInclude Include="Objects\HellfireDescent\Weapon\PlasmaRifle.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\HellfireDescent\Weapon\Weapon.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\HellfireDescent\Weapon\Pistol.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\HellfireDescent\Weapon\WeaponManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -716,19 +725,28 @@
     <ClCompile Include="Objects\HellfireDescent\MapEditor\Portal.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\HellfireDescent\Bullet\RocketLauncher.cpp">
+    <ClCompile Include="Objects\HellfireDescent\Weapon\RocketLauncher.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\HellfireDescent\Bullet\Unmaykr.cpp">
+    <ClCompile Include="Objects\HellfireDescent\Weapon\Unmaykr.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\HellfireDescent\Bullet\CombatShotgun.cpp">
+    <ClCompile Include="Objects\HellfireDescent\Weapon\CombatShotgun.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\HellfireDescent\Bullet\BFG9000.cpp">
+    <ClCompile Include="Objects\HellfireDescent\Weapon\BFG9000.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\HellfireDescent\Bullet\PlasmaRifle.cpp">
+    <ClCompile Include="Objects\HellfireDescent\Weapon\PlasmaRifle.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\HellfireDescent\Weapon\Weapon.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\HellfireDescent\Weapon\Pistol.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\HellfireDescent\Weapon\WeaponManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

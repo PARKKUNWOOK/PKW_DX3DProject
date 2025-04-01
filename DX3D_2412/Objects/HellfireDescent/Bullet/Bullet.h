@@ -1,6 +1,5 @@
 #pragma once
 
-class Enemy;
 class Player;
 
 class Bullet : public SphereCollider
@@ -16,11 +15,9 @@ public:
 	virtual void Render();
 	virtual void Edit();
 
-	virtual void Fire(Vector3 pos, Vector3 dir, bool isPlayer);
-	virtual bool EnemyCollisionCheck(Enemy* enemy);
+	virtual void Fire(Vector3 pos, Vector3 dir);
 	bool PlayerCollisionCheck(Player* player);
 
-	bool IsPlayerBullet() { return isPlayerBullet; }
 	int GetDamage() { return damage; }
 
 protected:
@@ -31,6 +28,4 @@ protected:
 	Vector3 velocity;
 	float lifeTime = 0.0f;
 	int damage = 1;
-
-	bool isPlayerBullet = false;
 };

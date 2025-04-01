@@ -94,11 +94,11 @@ void ThrowerEnemy::AttackAction()
 		FollowTarget();
 	}
 
-	for (Bullet* bullet : BulletManager::Get()->GetBullets())
+	for (Weapon* bullet : WeaponManager::Get()->GetWeapons())
 	{
 		if (!bullet->IsActive()) continue;
 
-		if (bullet->IsPlayerBullet() && bullet->EnemyCollisionCheck(this))
+		if (bullet->EnemyCollisionCheck(this))
 		{
 			TakeDamage(bullet->GetDamage());
 			bullet->SetActive(false);
