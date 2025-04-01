@@ -1,17 +1,5 @@
 #pragma once
 
-enum class FireMode
-{
-	Pistol = 1,
-	HeavyCannon,
-	ChainGun,
-	RocketLauncher,
-	Unmaykr,
-	CombatShotgun,
-	PlasmaRifle,
-	BFG9000
-};
-
 class Player : public SphereCollider
 {
 private:
@@ -66,7 +54,7 @@ private:
 
 	Vector3 knockbackDir;
 
-	FireMode fireMode = FireMode::Pistol;
+	WeaponType currentWeaponType = WeaponType::Pistol;
 
 	float bulletInterval = 0.5f;
 	float rocketInterval = 3.0f;
