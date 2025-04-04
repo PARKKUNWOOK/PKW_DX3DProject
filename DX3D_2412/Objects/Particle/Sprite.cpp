@@ -58,10 +58,18 @@ void Sprite::Play(Vector3 position)
 {
     isActive = true;
     
-    time = 0.0f;
-    curFrameCount = 0;
+    time = 0.099f;
+    curFrameCount = (UINT)-1;
 
     vertex.pos = position;
+    vertex.uv = size;
+
+    vertexBuffer->Update(&vertex, particleCount);
+}
+
+void Sprite::SetSize(Float2 size)
+{
+    this->size = size;
     vertex.uv = size;
 
     vertexBuffer->Update(&vertex, particleCount);

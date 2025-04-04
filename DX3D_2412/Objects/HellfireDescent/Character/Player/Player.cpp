@@ -18,14 +18,14 @@ Player::Player()
     CAM->SetLocalPosition(0, 0, 0);
     CAM->SetLocalRotation(0, 0, 0);
 
-    combatShotgun = new CombatShotgun();
-    plasmaRifle = new PlasmaRifle();
+    viewModel = new WeaponViewModel();
+    Model* pistolModel = new Model("Ballsita");
+    viewModel->SetModel(pistolModel);
 }
 
 Player::~Player()
 {
-    delete combatShotgun;
-    delete plasmaRifle;
+    delete viewModel;
 }
 
 void Player::Update()
@@ -37,6 +37,7 @@ void Player::Update()
 
     SetCursor();
     Control();
+    ChangeWeapon();
     Fire();
     Jump();
     Move();
@@ -61,9 +62,7 @@ void Player::Update()
 
     BulletManager::Get()->Update();
     WeaponManager::Get()->Update();
-    bulletTimer += DELTA;
-    
-    ChangeWeapon();
+    viewModel->Update();
 }
 
 void Player::Render()
@@ -71,6 +70,7 @@ void Player::Render()
     Collider::Render();
     BulletManager::Get()->Render();
     WeaponManager::Get()->Render();
+    viewModel->Render();
 }
 
 void Player::PostRender()
@@ -84,7 +84,7 @@ void Player::Edit()
     const char* weaponName = "";
     switch (currentWeaponType)
     {
-    case WeaponType::Pistol:          weaponName = "Pistol"; break;
+    case WeaponType::Ballsita:          weaponName = "Ballsita"; break;
     case WeaponType::HeavyCannon:     weaponName = "Heavy Cannon"; break;
     case WeaponType::ChainGun:        weaponName = "Chaingun"; break;
     case WeaponType::RocketLauncher:  weaponName = "Rocket Launcher"; break;
@@ -98,9 +98,20 @@ void Player::Edit()
 
     if (currentWeaponType == WeaponType::BFG9000)
     {
-        ImGui::Text("[BFG9000]");
-        ImGui::Text("Charging: %s", bfgCharging ? "Yes" : "No");
-        ImGui::Text("Charge Time: %.2f", bfgChargeTime);
+        Weapon* weapon = WeaponManager::Get()->GetIdleWeaponByType(WeaponType::BFG9000);
+
+        if (weapon != nullptr)
+        {
+            BFG9000* bfg = dynamic_cast<BFG9000*>(weapon);
+            if (bfg != nullptr)
+            {
+                bool charging = bfg->IsCharging();
+                float timer = bfg->GetChargeTime();
+
+                ImGui::Text("BFG Charging: %s", charging ? "True" : "False");
+                ImGui::Text("Charge Time: %.2f sec", timer);
+            }
+        }
     }
 }
 
@@ -151,159 +162,106 @@ void Player::Control()
 
 void Player::ChangeWeapon()
 {
-    if (KEY->Down('1'))
+    WeaponType prevType = currentWeaponType;
+
+    if (KEY->Down('1')) currentWeaponType = WeaponType::Ballsita;
+    if (KEY->Down('2')) currentWeaponType = WeaponType::HeavyCannon;
+    if (KEY->Down('3')) currentWeaponType = WeaponType::ChainGun;
+    if (KEY->Down('4')) currentWeaponType = WeaponType::RocketLauncher;
+    if (KEY->Down('5')) currentWeaponType = WeaponType::Unmaykr;
+    if (KEY->Down('6')) currentWeaponType = WeaponType::CombatShotgun;
+    if (KEY->Down('7')) currentWeaponType = WeaponType::PlasmaRifle;
+    if (KEY->Down('8')) currentWeaponType = WeaponType::BFG9000;
+
+    if (prevType != currentWeaponType)
     {
-        currentWeaponType = WeaponType::Pistol;
-        bulletInterval = 0.5f;
-    }
-    if (KEY->Down('2'))
-    {
-        currentWeaponType = WeaponType::HeavyCannon;
-        bulletInterval = 0.1f;
-    }
-    if (KEY->Down('3'))
-    {
-        currentWeaponType = WeaponType::ChainGun;
-        bulletInterval = minigunStartInterval;
-    }
-    if (KEY->Down('4'))
-    {
-        currentWeaponType = WeaponType::RocketLauncher;
-    }
-    if (KEY->Down('5'))
-    {
-        currentWeaponType = WeaponType::Unmaykr;
-        bulletInterval = 0.1f;
-    }
-    if (KEY->Down('6'))
-    {
-        currentWeaponType = WeaponType::CombatShotgun;
-        bulletInterval = 2.0f;
-    }
-    if (KEY->Down('7'))
-    {
-        currentWeaponType = WeaponType::PlasmaRifle;
-        bulletInterval = 1.0f;
-    }
-    if (KEY->Down('8'))
-    {
-        currentWeaponType = WeaponType::BFG9000;
-        bulletInterval = 0.1f;
+        Model* newModel = nullptr;
+        switch (currentWeaponType)
+        {
+        case WeaponType::Ballsita:          newModel = new Model("Ballsita"); break;
+        case WeaponType::HeavyCannon:     newModel = new Model("Heavy_Cannon"); break;
+        case WeaponType::ChainGun:        newModel = new Model("ChainGun"); break;
+        case WeaponType::RocketLauncher:  newModel = new Model("Rocket_Launcher"); break;
+        case WeaponType::Unmaykr:         newModel = new Model("Unmaykr"); break;
+        case WeaponType::CombatShotgun:   newModel = new Model("Combat_Shotgun"); break;
+        case WeaponType::PlasmaRifle:     newModel = new Model("Plasma_Rifle"); break;
+        case WeaponType::BFG9000:         newModel = new Model("BFG9000"); break;
+        }
+
+        if (newModel != nullptr)
+            viewModel->SetModel(newModel);
     }
 }
 
 void Player::Fire()
 {
-    bool isFiring = KEY->Press(VK_LBUTTON);
-    bool isClicked = KEY->Down(VK_LBUTTON);
+    Weapon* weapon = WeaponManager::Get()->GetIdleWeaponByType(currentWeaponType);
+    if (weapon == nullptr) return;
 
-    Vector3 firePosition = GetLocalPosition();
-    Vector3 fireDirection = CAM->GetForward();
-    fireDirection.Normalize();
+    Ray ray(CAM->GetGlobalPosition(), CAM->GetForward());
+    RaycastHit hit;
+    bool hasHit = false;
+    float minDistance = FLT_MAX;
 
-    switch (currentWeaponType)
+    //1. Enemy 충돌 검사
+    for (Enemy* enemy : EnemyManager::Get()->GetAllEnemies())
     {
-    case WeaponType::Pistol:
-        if (isClicked && bulletTimer >= bulletInterval)
-        {
-            WeaponManager::Get()->Fire(firePosition, fireDirection, WeaponType::Pistol);
-            bulletTimer = 0.0f;
-        }
-        break;
-    case WeaponType::HeavyCannon:
-        if (isFiring && bulletTimer >= bulletInterval)
-        {
-            WeaponManager::Get()->Fire(firePosition, fireDirection, WeaponType::Pistol);
-            bulletTimer = 0.0f;
-        }
-        break;
-    case WeaponType::ChainGun:
-        if (isFiring)
-        {
-            minigunElapsed += DELTA;
+        if (!enemy->IsActive()) continue;
 
-            bulletInterval = minigunStartInterval * exp(-1.0f * minigunElapsed);
-
-            if (bulletInterval < minigunMinInterval)
-                bulletInterval = minigunMinInterval;
-
-            if (bulletTimer >= bulletInterval)
+        RaycastHit tempHit;
+        if (enemy->IsRayCollision(ray, &tempHit))
+        {
+            float distance = (tempHit.point - ray.origin).Magnitude();
+            if (distance < minDistance)
             {
-                WeaponManager::Get()->Fire(firePosition, fireDirection, WeaponType::Pistol);
-                bulletTimer = 0.0f;
+                minDistance = distance;
+                hit = tempHit;
+                hasHit = true;
             }
         }
-        else
-        {
-            bulletInterval = minigunStartInterval;
-            minigunElapsed = 0.0f;
-        }
-        break;
-    case WeaponType::RocketLauncher:
-        if (isClicked && bulletTimer >= rocketInterval)
-        {
-            WeaponManager::Get()->Fire(firePosition, fireDirection, WeaponType::RocketLauncher);
-            bulletTimer = 0.0f;
-        }
-        break;
-    case WeaponType::Unmaykr:
-        if (isFiring && bulletTimer >= bulletInterval)
-        {
-            WeaponManager::Get()->Fire(firePosition, fireDirection, WeaponType::Unmaykr);
-            bulletTimer = 0.0f;
-        }
-        break;
-    case WeaponType::CombatShotgun:
-        if (isClicked && bulletTimer >= bulletInterval)
-        {
-            if (combatShotgun != nullptr)
-                combatShotgun->Fire(firePosition, fireDirection);
-            bulletTimer = 0.0f;
-        }
-        break;
-    case WeaponType::PlasmaRifle:
-        if (isClicked && bulletTimer >= bulletInterval)
-        {
-            if (plasmaRifle != nullptr)
-                plasmaRifle->Fire(firePosition, fireDirection);
-            bulletTimer = 0.0f;
-        }
-        break;
-    case WeaponType::BFG9000:
-    {
-        static bool isCharging = false;
-        static float chargeTime = 0.0f;
-
-        if (KEY->Down(VK_LBUTTON))
-        {
-            isCharging = true;
-            chargeTime = 0.0f;
-        }
-
-        if (KEY->Press(VK_LBUTTON) && isCharging)
-        {
-            chargeTime += DELTA;
-        }
-
-        if (KEY->Up(VK_LBUTTON) && isCharging)
-        {
-            isCharging = false;
-            
-            if (bulletTimer >= (chargeTime >= 3.0f ? 3.0f : 0.5f))
-            {
-                bool chargedShot = chargeTime >= 3.0f;
-            
-                WeaponManager::Get()->FireBFG9000(firePosition, fireDirection, chargedShot);
-            
-                bulletTimer = 0.0f;
-            }
-            
-            chargeTime = 0.0f;
-        }
-        this->bfgCharging = isCharging;
-        this->bfgChargeTime = chargeTime;
     }
-    break;
+
+    //2. Wall/문 충돌 검사
+    if (!hasHit)
+    {
+        for (Cube* wall : MapManager::Get()->GetWalls())
+        {
+            RaycastHit tempHit;
+            if (wall->GetCollider()->IsRayCollision(ray, &tempHit))
+            {
+                float distance = (tempHit.point - ray.origin).Magnitude();
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    hit = tempHit;
+                    hasHit = true;
+                }
+            }
+        }
+
+        for (Cube* door : MapManager::Get()->GetDoors())
+        {
+            RaycastHit tempHit;
+            if (door->GetCollider()->IsRayCollision(ray, &tempHit))
+            {
+                float distance = (tempHit.point - ray.origin).Magnitude();
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    hit = tempHit;
+                    hasHit = true;
+                }
+            }
+        }
+    }
+
+    if (hasHit)
+    {
+        Vector3 muzzlePos = viewModel->GetMuzzleWorldPosition(currentWeaponType);
+        Vector3 direction = (hit.point - muzzlePos).GetNormalized();
+
+        weapon->SetFireContext(muzzlePos, direction);
+        weapon->HandleInput();
     }
 }
 

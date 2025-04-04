@@ -5,10 +5,12 @@ StartRoomScene::StartRoomScene()
 {
 	MapManager::Get()->Load("Resources/TextData/Pacman.map");
     //skybox = new Skybox(L"Resources/Textures/Landscape/Snow_ENV.dds");
+    UIManager::Get();
 }
 
 StartRoomScene::~StartRoomScene()
 {
+    UIManager::Delete();
 }
 
 void StartRoomScene::Update()
@@ -31,14 +33,15 @@ void StartRoomScene::PreRender()
 
 void StartRoomScene::Render()
 {
-    //skybox->Render();
 	MapManager::Get()->Render();
+    //skybox->Render();
 
 	PlayerManager::Get()->Render();
 }
 
 void StartRoomScene::PostRender()
 {
+    UIManager::Get()->Render();
 }
 
 void StartRoomScene::GUIRender()

@@ -6,6 +6,7 @@ public:
 	PlasmaRifle();
 	~PlasmaRifle();
 
+	void HandleInput() override;
 	void Fire(Vector3 pos, Vector3 dir);
 
 private:

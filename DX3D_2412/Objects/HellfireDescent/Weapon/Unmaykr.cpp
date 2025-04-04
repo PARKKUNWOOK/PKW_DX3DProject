@@ -6,10 +6,12 @@ Unmaykr::Unmaykr(Transform* transform)
 
     SetTag(transform->GetTag() + "_Collider");
 	transform->SetParent(this);
+    //transform->SetLocalPosition(Vector3(18.0f, 0.0f, 0.5f));
     transform->SetTag("Unmaykr_0");
 	transform->Load();
 
 	damage = 2;
+    fireInterval = 0.1f;
 }
 
 Unmaykr::~Unmaykr()
@@ -65,4 +67,15 @@ void Unmaykr::Fire(Vector3 pos, Vector3 dir)
 
         if (firedCount >= 3) break;
     }
+}
+
+void Unmaykr::HandleInput()
+{
+    fireTimer += DELTA;
+
+    if (!KEY->Press(VK_LBUTTON)) return;
+    if (fireTimer < fireInterval) return;
+
+    WeaponManager::Get()->Fire(firePosition, fireDirection, weaponType);
+    fireTimer = 0.0f;
 }

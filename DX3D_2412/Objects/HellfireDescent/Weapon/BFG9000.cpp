@@ -12,8 +12,11 @@ BFG9000::BFG9000(Transform* transform)
 
     SetTag(transform->GetTag() + "_Collider");
     transform->SetParent(this);
+    //transform->SetLocalPosition(Vector3(0.0f, 18.0f, 0.0f));
     transform->SetTag("BFG9000_0");
     transform->Load();
+
+    fireInterval = 1.0f;
 }
 
 BFG9000::~BFG9000()
@@ -34,6 +37,7 @@ void BFG9000::Update()
         return;
     }
 
+    fireTimer += DELTA;
     lifeTime += DELTA;
     if (lifeTime > LIFE_TIME)
     {
@@ -60,14 +64,13 @@ void BFG9000::Render()
     Weapon::Render();
 }
 
-void BFG9000::Fire(Vector3 pos, Vector3 dir, bool charged)
+void BFG9000::Fire(Vector3 pos, Vector3 dir)
 {
     localPosition = pos;
     velocity = dir;
     lifeTime = 0.0f;
     exploded = false;
     radius = 0.9f;
-    isCharged = charged;
     rayAttackTimer = 0.0f;
 
     direction = dir;
@@ -82,6 +85,36 @@ void BFG9000::Fire(Vector3 pos, Vector3 dir, bool charged)
     damage = isCharged ? 10 : 2;
 
     SetActive(true);
+}
+
+void BFG9000::HandleInput()
+{
+    fireTimer += DELTA;
+
+    if (KEY->Down(VK_LBUTTON))
+    {
+        isCharging = true;
+        chargeTime = 0.0f;
+    }
+
+    if (KEY->Press(VK_LBUTTON) && isCharging)
+    {
+        chargeTime += DELTA;
+    }
+
+    if (KEY->Up(VK_LBUTTON) && isCharging)
+    {
+        isCharging = false;
+
+        if (fireTimer >= (chargeTime >= 3.0f ? 3.0f : 0.5f))
+        {
+            isCharged = chargeTime >= 3.0f;
+            Fire(firePosition, fireDirection);
+            ResetFireTimer();
+        }
+
+        chargeTime = 0.0f;
+    }
 }
 
 bool BFG9000::EnemyCollisionCheck(Enemy* enemy)

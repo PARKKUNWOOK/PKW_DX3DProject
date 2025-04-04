@@ -3,6 +3,7 @@
 
 StoreRoomScene::StoreRoomScene()
 {
+    UIManager::Get();
 }
 
 StoreRoomScene::~StoreRoomScene()
@@ -34,6 +35,7 @@ void StoreRoomScene::Render()
 
 void StoreRoomScene::PostRender()
 {
+    UIManager::Get()->Render();
 }
 
 void StoreRoomScene::GUIRender()

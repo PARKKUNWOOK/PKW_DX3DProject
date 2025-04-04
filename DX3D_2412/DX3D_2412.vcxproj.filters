@@ -393,10 +393,19 @@
     <ClInclude Include="Objects\HellfireDescent\Weapon\Weapon.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\HellfireDescent\Weapon\Pistol.h">
+    <ClInclude Include="Objects\HellfireDescent\Weapon\Ballsita.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Objects\HellfireDescent\Weapon\WeaponManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\HellfireDescent\Weapon\HeavyCannon.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\HellfireDescent\Weapon\ChainGun.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\HellfireDescent\Weapon\WeaponViewModel.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -743,10 +752,19 @@
     <ClCompile Include="Objects\HellfireDescent\Weapon\Weapon.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\HellfireDescent\Weapon\Pistol.cpp">
+    <ClCompile Include="Objects\HellfireDescent\Weapon\Ballsita.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\HellfireDescent\Weapon\WeaponManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\HellfireDescent\Weapon\HeavyCannon.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\HellfireDescent\Weapon\ChainGun.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\HellfireDescent\Weapon\WeaponViewModel.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

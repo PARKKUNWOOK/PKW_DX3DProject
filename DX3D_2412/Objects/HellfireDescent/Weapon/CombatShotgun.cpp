@@ -4,10 +4,22 @@ CombatShotgun::CombatShotgun()
 {
     weaponType = WeaponType::CombatShotgun;
     damage = 1;
+    fireInterval = 2.0f;
 }
 
 CombatShotgun::~CombatShotgun()
 {
+}
+
+void CombatShotgun::HandleInput()
+{
+    fireTimer += DELTA;
+
+    if (KEY->Down(VK_LBUTTON) && CanFire())
+    {
+        Fire(firePosition, fireDirection);
+        ResetFireTimer();
+    }
 }
 
 void CombatShotgun::Fire(Vector3 pos, Vector3 dir)

@@ -46,6 +46,7 @@ GameManager::GameManager()
 	//SCENE->Create("Start", new WeatherScene());
 	//SCENE->Create("Start", new ParticleEditorScene());
 	//SCENE->Create("Start", new ShadowScene());
+
 	SCENE->Create("Start", new StartRoomScene());
 	SCENE->Create("Monster", new MonsterRoomScene());
 	SCENE->Create("Store", new StoreRoomScene());

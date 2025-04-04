@@ -13,6 +13,8 @@ public:
 
     void Play(Vector3 position);
 
+    void SetSize(Float2 size);
+
 private:
     void Create();
 

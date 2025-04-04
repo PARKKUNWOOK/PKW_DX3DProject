@@ -14,6 +14,6 @@ public:
 
 private:
 	Collider* collider;
-	Particle* particle;
+	Sprite* sprite;
 	//ParticleSystem* particleSystem;
 };

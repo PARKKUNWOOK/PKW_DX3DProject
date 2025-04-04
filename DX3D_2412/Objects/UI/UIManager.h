@@ -16,25 +16,14 @@ public:
 	void Render();	
 	void Edit();
 
-	void Mining();
-	void Build();
-
 	bool IsPopup() { return isPopup; }
 
-	void RefreshQuickSlotIcons();
-
 private:
-	void SelectBlock();
-	void SelectBuildBlock();
-
-	void OpenInventory();
 	void CreateInGameUI();
 
 private:
 	Quad* cursor;
-	Quad* hotBar;
-	Quad* hotBarSelect;
+	Quad* curHpUI;
 
-	bool isPopup = false;	
-	int selectBuildBlockIndex = 0;
+	bool isPopup = false;
 };

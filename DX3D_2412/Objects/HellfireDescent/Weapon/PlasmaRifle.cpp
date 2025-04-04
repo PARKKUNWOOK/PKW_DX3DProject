@@ -4,10 +4,22 @@ PlasmaRifle::PlasmaRifle()
 {
     weaponType = WeaponType::PlasmaRifle;
     damage = 5;
+    fireInterval = 1.0f;
 }
 
 PlasmaRifle::~PlasmaRifle()
 {
+}
+
+void PlasmaRifle::HandleInput()
+{
+    fireTimer += DELTA;
+
+    if (KEY->Down(VK_LBUTTON) && CanFire())
+    {
+        Fire(firePosition, fireDirection);
+        ResetFireTimer();
+    }
 }
 
 void PlasmaRifle::Fire(Vector3 pos, Vector3 dir)

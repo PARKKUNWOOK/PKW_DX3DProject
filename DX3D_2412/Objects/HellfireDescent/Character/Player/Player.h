@@ -52,22 +52,6 @@ private:
 	Vector3 velocity;
 	POINT clientCenterPos;
 
-	Vector3 knockbackDir;
-
-	WeaponType currentWeaponType = WeaponType::Pistol;
-
-	float bulletInterval = 0.5f;
-	float rocketInterval = 3.0f;
-	float bulletTimer = 0.0f;
-
-	float minigunStartInterval = 1.0f;
-	float minigunMinInterval = 0.05f;
-	float minigunDecreaseRate = 1.0f;
-	float minigunElapsed = 0.0f;
-
-	CombatShotgun* combatShotgun = nullptr;
-	PlasmaRifle* plasmaRifle = nullptr;
-
-	bool bfgCharging = false;
-	float bfgChargeTime = 0.0f;
+	WeaponType currentWeaponType = WeaponType::Ballsita;
+	WeaponViewModel* viewModel = nullptr;
 };

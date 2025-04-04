@@ -8,15 +8,21 @@ public:
 
 	void Update() override;
 	void Render() override;
-	void Fire(Vector3 pos, Vector3 dir, bool charged);
-
+	void Fire(Vector3 pos, Vector3 dir);
+	void HandleInput() override;
 	bool EnemyCollisionCheck(Enemy* enemy) override;
+
+	bool IsCharging() const { return isCharging; }
+	float GetChargeTime() const { return chargeTime; }
 
 private:
 	void Explode();
 	void EmitRays();
 
 private:
+	bool isCharging = false;
+	float chargeTime = 0.0f;
+
 	bool isCharged = false;
 	bool exploded = false;
 	float explosionTime = 0.0f;

@@ -4,6 +4,7 @@
 MonsterRoomScene::MonsterRoomScene()
 {
     srand(static_cast<unsigned int>(time(nullptr)));
+    UIManager::Get();
 }
 
 MonsterRoomScene::~MonsterRoomScene()
@@ -48,6 +49,7 @@ void MonsterRoomScene::Render()
 
 void MonsterRoomScene::PostRender()
 {
+    UIManager::Get()->Render();
 }
 
 void MonsterRoomScene::GUIRender()

@@ -209,8 +209,10 @@
     <ClInclude Include="Objects\Collider\RectCollider.h" />
     <ClInclude Include="Objects\Collider\SphereCollider.h" />
     <ClInclude Include="Objects\HellfireDescent\Weapon\BFG9000.h" />
+    <ClInclude Include="Objects\HellfireDescent\Weapon\ChainGun.h" />
     <ClInclude Include="Objects\HellfireDescent\Weapon\CombatShotgun.h" />
-    <ClInclude Include="Objects\HellfireDescent\Weapon\Pistol.h" />
+    <ClInclude Include="Objects\HellfireDescent\Weapon\HeavyCannon.h" />
+    <ClInclude Include="Objects\HellfireDescent\Weapon\Ballsita.h" />
     <ClInclude Include="Objects\HellfireDescent\Weapon\PlasmaRifle.h" />
     <ClInclude Include="Objects\HellfireDescent\Weapon\RocketLauncher.h" />
     <ClInclude Include="Objects\HellfireDescent\Weapon\Unmaykr.h" />
@@ -225,6 +227,7 @@
     <ClInclude Include="Objects\HellfireDescent\MapEditor\Portal.h" />
     <ClInclude Include="Objects\HellfireDescent\Weapon\Weapon.h" />
     <ClInclude Include="Objects\HellfireDescent\Weapon\WeaponManager.h" />
+    <ClInclude Include="Objects\HellfireDescent\Weapon\WeaponViewModel.h" />
     <ClInclude Include="Objects\Landscape\Skybox.h" />
     <ClInclude Include="Objects\Landscape\Terrain.h" />
     <ClInclude Include="Objects\Landscape\TerrainEditor.h" />
@@ -333,8 +336,10 @@
     <ClCompile Include="Objects\Collider\RectCollider.cpp" />
     <ClCompile Include="Objects\Collider\SphereCollider.cpp" />
     <ClCompile Include="Objects\HellfireDescent\Weapon\BFG9000.cpp" />
+    <ClCompile Include="Objects\HellfireDescent\Weapon\ChainGun.cpp" />
     <ClCompile Include="Objects\HellfireDescent\Weapon\CombatShotgun.cpp" />
-    <ClCompile Include="Objects\HellfireDescent\Weapon\Pistol.cpp" />
+    <ClCompile Include="Objects\HellfireDescent\Weapon\HeavyCannon.cpp" />
+    <ClCompile Include="Objects\HellfireDescent\Weapon\Ballsita.cpp" />
     <ClCompile Include="Objects\HellfireDescent\Weapon\PlasmaRifle.cpp" />
     <ClCompile Include="Objects\HellfireDescent\Weapon\RocketLauncher.cpp" />
     <ClCompile Include="Objects\HellfireDescent\Weapon\Unmaykr.cpp" />
@@ -349,6 +354,7 @@
     <ClCompile Include="Objects\HellfireDescent\MapEditor\Portal.cpp" />
     <ClCompile Include="Objects\HellfireDescent\Weapon\Weapon.cpp" />
     <ClCompile Include="Objects\HellfireDescent\Weapon\WeaponManager.cpp" />
+    <ClCompile Include="Objects\HellfireDescent\Weapon\WeaponViewModel.cpp" />
     <ClCompile Include="Objects\Landscape\Skybox.cpp" />
     <ClCompile Include="Objects\Landscape\Terrain.cpp" />
     <ClCompile Include="Objects\Landscape\TerrainEditor.cpp" />

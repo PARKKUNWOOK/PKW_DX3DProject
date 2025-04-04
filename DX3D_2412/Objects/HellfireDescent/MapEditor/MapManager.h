@@ -41,6 +41,13 @@ public:
 	void UpdatePortals();
 	vector<Portal*>& GetPortals() { return portals; }
 
+	const vector<Cube*>& GetWalls() const { return walls; }
+	vector<Cube*> GetDoors() const {
+		vector<Cube*> allDoors = doorxs;
+		allDoors.insert(allDoors.end(), doorzs.begin(), doorzs.end());
+		return allDoors;
+	}
+
 private:
 	Cube* floor;
 	vector<Cube*> walls;
