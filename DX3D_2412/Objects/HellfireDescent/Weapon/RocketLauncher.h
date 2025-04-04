@@ -25,5 +25,4 @@ private:
 	float fireInterval = 0.0f;
 
 	Enemy* hitEnemy = nullptr;
-	Sprite* explosionEffect = nullptr;
 };

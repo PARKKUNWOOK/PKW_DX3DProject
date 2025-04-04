@@ -12,14 +12,10 @@ RocketLauncher::RocketLauncher(Transform* transform)
 
 	damage = 10;
 	fireInterval = 2.0f;
-
-	explosionEffect = new Sprite(L"Resources/Textures/FX/explosion.png", 128.0f, 128.0f, 5, 3, true);
-	explosionEffect->SetSize(Float2(20, 20));
 }
 
 RocketLauncher::~RocketLauncher()
 {
-	delete explosionEffect;
 }
 
 void RocketLauncher::Update()
@@ -46,17 +42,11 @@ void RocketLauncher::Update()
 		Translate(velocity * speed * DELTA);
 		UpdateWorld();
 	}
-
-	if (explosionEffect != nullptr)
-		explosionEffect->Update();
 }
 
 void RocketLauncher::Render()
 {
 	Weapon::Render();
-
-	if (explosionEffect != nullptr)
-		explosionEffect->Render();
 }
 
 void RocketLauncher::HandleInput()
@@ -116,12 +106,6 @@ void RocketLauncher::Explode()
 
 	radius = 999999999.0f;
 	explosionTime = 0.1f;
-
-	if (explosionEffect != nullptr)
-	{
-		explosionEffect->Play(GetGlobalPosition());
-	}
-		
 
 	for (Enemy* enemy : EnemyManager::Get()->GetAllEnemies())
 	{
