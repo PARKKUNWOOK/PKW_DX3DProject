@@ -34,6 +34,7 @@ void MonsterRoomScene::Update()
         MapManager::Get()->CloseDoorZ(1);
         MapManager::Get()->SetMonsterStageCleared(true);
     }
+    EffectManager::Get()->Update();
 }
 
 void MonsterRoomScene::PreRender()
@@ -45,6 +46,7 @@ void MonsterRoomScene::Render()
     MapManager::Get()->Render();
     PlayerManager::Get()->Render();
     EnemyManager::Get()->Render();
+    EffectManager::Get()->Render();
 }
 
 void MonsterRoomScene::PostRender()

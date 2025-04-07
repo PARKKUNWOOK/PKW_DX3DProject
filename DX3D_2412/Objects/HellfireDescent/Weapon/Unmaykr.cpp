@@ -6,7 +6,6 @@ Unmaykr::Unmaykr(Transform* transform)
 
     SetTag(transform->GetTag() + "_Collider");
 	transform->SetParent(this);
-    //transform->SetLocalPosition(Vector3(18.0f, 0.0f, 0.5f));
     transform->SetTag("Unmaykr_0");
 	transform->Load();
 
@@ -61,6 +60,9 @@ void Unmaykr::Fire(Vector3 pos, Vector3 dir)
                 else break;
 
                 unmaykr->Weapon::Fire(pos, fireDir);
+
+                EffectManager::Get()->PlayBulletEffect(unmaykr, BulletEffectType::Red);
+
                 firedCount++;
             }
         }

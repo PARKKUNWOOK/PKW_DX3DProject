@@ -4,7 +4,6 @@
 StartRoomScene::StartRoomScene()
 {
 	MapManager::Get()->Load("Resources/TextData/Pacman.map");
-    //skybox = new Skybox(L"Resources/Textures/Landscape/Snow_ENV.dds");
     UIManager::Get();
 }
 
@@ -25,6 +24,7 @@ void StartRoomScene::Update()
 
 	MapManager::Get()->CloseAllDoorsZ();
 	MapManager::Get()->CloseDoorX(1);
+    EffectManager::Get()->Update();
 }
 
 void StartRoomScene::PreRender()
@@ -34,9 +34,9 @@ void StartRoomScene::PreRender()
 void StartRoomScene::Render()
 {
 	MapManager::Get()->Render();
-    //skybox->Render();
 
 	PlayerManager::Get()->Render();
+    EffectManager::Get()->Render();
 }
 
 void StartRoomScene::PostRender()

@@ -203,6 +203,7 @@ typedef function<void(int)> IntParamEvent;
 #include "Objects/HellfireDescent/Weapon/PlasmaRifle.h"
 #include "Objects/HellfireDescent/Weapon/BFG9000.h"
 #include "Objects/HellfireDescent/Weapon/WeaponViewModel.h"
+#include "Objects/HellfireDescent/Weapon/EffectManager.h"
 #include "Objects/HellfireDescent/Weapon/WeaponManager.h"
 
 #include "Objects/HellfireDescent/Character/Player/Player.h"

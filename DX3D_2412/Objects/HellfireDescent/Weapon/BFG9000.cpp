@@ -12,7 +12,6 @@ BFG9000::BFG9000(Transform* transform)
 
     SetTag(transform->GetTag() + "_Collider");
     transform->SetParent(this);
-    //transform->SetLocalPosition(Vector3(0.0f, 18.0f, 0.0f));
     transform->SetTag("BFG9000_0");
     transform->Load();
 
@@ -85,6 +84,8 @@ void BFG9000::Fire(Vector3 pos, Vector3 dir)
     damage = isCharged ? 10 : 2;
 
     SetActive(true);
+
+    EffectManager::Get()->PlayBulletEffect(this, BulletEffectType::Green);
 }
 
 void BFG9000::HandleInput()

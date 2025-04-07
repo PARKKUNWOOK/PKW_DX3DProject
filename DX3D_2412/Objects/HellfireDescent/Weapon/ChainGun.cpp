@@ -6,7 +6,6 @@ ChainGun::ChainGun(Transform* transform)
 
     SetTag(transform->GetTag() + "_Collider");
     transform->SetParent(this);
-    //transform->SetLocalPosition(Vector3(18.0f, 0.0f, 0.5f));
     transform->SetTag("ChainGun_0");
     transform->Load();
 

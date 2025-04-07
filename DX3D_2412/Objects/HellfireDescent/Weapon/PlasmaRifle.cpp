@@ -59,6 +59,8 @@ void PlasmaRifle::FireChain(Vector3 origin, Vector3 direction, int chainCount, u
 
     if (closestEnemy)
     {
+        EffectManager::Get()->PlayLightningEffect(origin, closestHit.point);
+
         closestEnemy->TakeDamage(damage);
         hitEnemies.insert(closestEnemy);
 

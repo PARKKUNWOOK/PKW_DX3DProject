@@ -30,7 +30,7 @@ WeaponManager::WeaponManager()
 
 		RocketLauncher* rocketLauncher = new RocketLauncher(rocketInstancing->Add());
 		rocketLauncher->SetActive(false);
-		rocketLauncher->SetLocalScale(0.4f, 0.4f, 0.4f);
+		rocketLauncher->SetLocalScale(0.1f, 0.1f, 0.1f);
 		weapons.push_back(rocketLauncher);
 
 		Unmaykr* unmaykr = new Unmaykr(unmaykrInstancing->Add());

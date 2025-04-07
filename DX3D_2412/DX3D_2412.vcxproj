@@ -211,6 +211,7 @@
     <ClInclude Include="Objects\HellfireDescent\Weapon\BFG9000.h" />
     <ClInclude Include="Objects\HellfireDescent\Weapon\ChainGun.h" />
     <ClInclude Include="Objects\HellfireDescent\Weapon\CombatShotgun.h" />
+    <ClInclude Include="Objects\HellfireDescent\Weapon\EffectManager.h" />
     <ClInclude Include="Objects\HellfireDescent\Weapon\HeavyCannon.h" />
     <ClInclude Include="Objects\HellfireDescent\Weapon\Ballsita.h" />
     <ClInclude Include="Objects\HellfireDescent\Weapon\PlasmaRifle.h" />
@@ -338,6 +339,7 @@
     <ClCompile Include="Objects\HellfireDescent\Weapon\BFG9000.cpp" />
     <ClCompile Include="Objects\HellfireDescent\Weapon\ChainGun.cpp" />
     <ClCompile Include="Objects\HellfireDescent\Weapon\CombatShotgun.cpp" />
+    <ClCompile Include="Objects\HellfireDescent\Weapon\EffectManager.cpp" />
     <ClCompile Include="Objects\HellfireDescent\Weapon\HeavyCannon.cpp" />
     <ClCompile Include="Objects\HellfireDescent\Weapon\Ballsita.cpp" />
     <ClCompile Include="Objects\HellfireDescent\Weapon\PlasmaRifle.cpp" />

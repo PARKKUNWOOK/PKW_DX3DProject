@@ -6,7 +6,6 @@ RocketLauncher::RocketLauncher(Transform* transform)
 
 	SetTag(transform->GetTag() + "_Collider");
 	transform->SetParent(this);
-	//transform->SetLocalPosition(Vector3(2.0f, 6.0f, 0.5f));
 	transform->SetTag("RocketLauncher_0");
 	transform->Load();
 
@@ -29,24 +28,26 @@ void RocketLauncher::Update()
 		{
 			SetActive(false);
 		}
+		return;
 	}
-	else
-	{
-		lifeTime += DELTA;
-		if (lifeTime > LIFE_TIME)
-		{
-			SetActive(false);
-			return;
-		}
 
-		Translate(velocity * speed * DELTA);
-		UpdateWorld();
+	lifeTime += DELTA;
+	if (lifeTime > LIFE_TIME)
+	{
+		SetActive(false);
+		return;
 	}
+
+	Translate(velocity * speed * DELTA);
+	UpdateWorld();
+
+	
 }
 
 void RocketLauncher::Render()
 {
 	Weapon::Render();
+	
 }
 
 void RocketLauncher::HandleInput()
@@ -104,8 +105,10 @@ void RocketLauncher::Explode()
 	if (transform)
 		transform->SetActive(false);
 
-	radius = 999999999.0f;
+	radius = 4.0f;
 	explosionTime = 0.1f;
+
+	EffectManager::Get()->PlayExplosion(GetGlobalPosition());
 
 	for (Enemy* enemy : EnemyManager::Get()->GetAllEnemies())
 	{

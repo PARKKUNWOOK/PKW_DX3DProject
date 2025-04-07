@@ -15,6 +15,8 @@ public:
 
     void SetSize(Float2 size);
 
+    bool IsActive() const;
+
 private:
     void Create();
 

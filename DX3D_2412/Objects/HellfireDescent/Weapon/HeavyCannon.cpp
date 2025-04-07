@@ -6,8 +6,6 @@ HeavyCannon::HeavyCannon(Transform* transform)
 
     SetTag(transform->GetTag() + "_Collider");
     transform->SetParent(this);
-    //transform->SetLocalPosition(Vector3(18.5f, -2.0f, -5.4f));
-    //transform->SetLocalPosition(Vector3(18.0f, 0.0f, 0.5f));
     transform->SetTag("HeavyCannon_0");
     transform->Load();
 

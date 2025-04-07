@@ -45,11 +45,11 @@ Vector3 WeaponViewModel::GetMuzzleWorldPosition(WeaponType type)
 	Vector3 localMuzzle;
 
 	if (type == WeaponType::Ballsita)         localMuzzle = Vector3(10.0f, -3.0f, 0.0f);
-	else if (type == WeaponType::HeavyCannon) localMuzzle = Vector3(18.5f, -2.0f, -5.4f);
-	else if (type == WeaponType::ChainGun)    localMuzzle = Vector3(29.0f, -2.0f, -5.4f);
-	else if (type == WeaponType::RocketLauncher) localMuzzle = Vector3(2.0f, 6.0f, 0.5f);
-	else if (type == WeaponType::Unmaykr)     localMuzzle = Vector3(28.0f, -1.5f, -5.0f);
-	else if (type == WeaponType::BFG9000)     localMuzzle = Vector3(5.9f, 21.0f, 2.0f);
+	else if (type == WeaponType::HeavyCannon) localMuzzle = Vector3(10.0f, -1.5f, -5.0f);
+	else if (type == WeaponType::ChainGun)    localMuzzle = Vector3(10.0f, -3.0f, 0.0f);
+	else if (type == WeaponType::RocketLauncher) localMuzzle = Vector3(10.0f, -3.0f, 0.0f);
+	else if (type == WeaponType::Unmaykr)     localMuzzle = Vector3(10.0f, -3.0f, 0.0f);
+	else if (type == WeaponType::BFG9000)     localMuzzle = Vector3(10.0f, -3.0f, 0.0f);
 	else return currentModel->GetGlobalPosition();
 
 	XMMATRIX world = currentModel->GetWorld();
