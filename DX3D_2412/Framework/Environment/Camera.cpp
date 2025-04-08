@@ -34,39 +34,39 @@ void Camera::Update()
 
 void Camera::Edit()
 {
-    if (ImGui::TreeNode("Camera Option"))
-    {
-        Transform::Edit();
-
-        ImGui::DragFloat("MoveSpeed", &moveSpeed);
-        ImGui::DragFloat("RotSpeed", &rotSpeed);
-
-        if (target)
-        {
-            ImGui::DragFloat("Distance", &distance);
-            ImGui::DragFloat("Height", &height);
-
-            ImGui::DragFloat("MoveDamping", &moveDamping, 0.1f);
-            ImGui::DragFloat("RotDamping", &rotDamping, 0.1f);
-
-            ImGui::DragFloat3("FocusOffset", (float*)&focusOffset, 0.1f);
-
-            ImGui::Checkbox("LookAtTargetX", &isLookAtTargetX);
-            ImGui::Checkbox("LookAtTargetY", &isLookAtTargetY);
-
-            ImGui::InputText("File", file, 128);
-
-            if (ImGui::Button("Save"))
-                TargetOptionSave(file);
-
-            ImGui::SameLine();
-
-            if (ImGui::Button("Load"))
-                TargetOptionLoad(file);
-        }
-
-        ImGui::TreePop();
-    }
+    //if (ImGui::TreeNode("Camera Option"))
+    //{
+    //    Transform::Edit();
+    //
+    //    ImGui::DragFloat("MoveSpeed", &moveSpeed);
+    //    ImGui::DragFloat("RotSpeed", &rotSpeed);
+    //
+    //    if (target)
+    //    {
+    //        ImGui::DragFloat("Distance", &distance);
+    //        ImGui::DragFloat("Height", &height);
+    //
+    //        ImGui::DragFloat("MoveDamping", &moveDamping, 0.1f);
+    //        ImGui::DragFloat("RotDamping", &rotDamping, 0.1f);
+    //
+    //        ImGui::DragFloat3("FocusOffset", (float*)&focusOffset, 0.1f);
+    //
+    //        ImGui::Checkbox("LookAtTargetX", &isLookAtTargetX);
+    //        ImGui::Checkbox("LookAtTargetY", &isLookAtTargetY);
+    //
+    //        ImGui::InputText("File", file, 128);
+    //
+    //        if (ImGui::Button("Save"))
+    //            TargetOptionSave(file);
+    //
+    //        ImGui::SameLine();
+    //
+    //        if (ImGui::Button("Load"))
+    //            TargetOptionLoad(file);
+    //    }
+    //
+    //    ImGui::TreePop();
+    //}
 }
 
 void Camera::SetView(UINT slot)

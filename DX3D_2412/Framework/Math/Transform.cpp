@@ -73,15 +73,6 @@ void Transform::Load()
 
 void Transform::UpdateWorld()
 {
-	//Matrix S = XMMatrixScaling(localScale.x, localScale.y, localScale.z);
-	//Matrix R = XMMatrixRotationRollPitchYaw(localRotation.x, localRotation.y, localRotation.z);
-	//Matrix T = XMMatrixTranslation(localPosition.x, localPosition.y, localPosition.z);
-	//
-	//Matrix P = XMMatrixTranslation(pivot.x, pivot.y, pivot.z);
-	//Matrix IP = XMMatrixInverse(nullptr, P);
-	//
-	//world = IP * S * R * T * P;
-
 	world = XMMatrixTransformation(pivot, XMQuaternionIdentity(),
 		localScale, pivot, XMQuaternionRotationRollPitchYawFromVector(localRotation),
 		localPosition);

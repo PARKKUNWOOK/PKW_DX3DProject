@@ -65,19 +65,19 @@ void Environment::Edit()
 {
     mainCamera->Edit();
 
-    if (ImGui::TreeNode("LightOption"))
-    {
-        if (ImGui::Button("Add"))
-            lightBuffer->Get().lightCount++;
-
-        FOR(lightBuffer->Get().lightCount)
-            EditLight(&lightBuffer->Get().lights[i], i);
-
-        ImGui::ColorEdit3("AmbientColor", (float*)&lightBuffer->Get().ambientColor);
-        ImGui::ColorEdit3("AmbientCeilColor", (float*)&lightBuffer->Get().ambientCeil);
-
-        ImGui::TreePop();
-    }
+    //if (ImGui::TreeNode("LightOption"))
+    //{
+    //    if (ImGui::Button("Add"))
+    //        lightBuffer->Get().lightCount++;
+    //
+    //    FOR(lightBuffer->Get().lightCount)
+    //        EditLight(&lightBuffer->Get().lights[i], i);
+    //
+    //    ImGui::ColorEdit3("AmbientColor", (float*)&lightBuffer->Get().ambientColor);
+    //    ImGui::ColorEdit3("AmbientCeilColor", (float*)&lightBuffer->Get().ambientCeil);
+    //
+    //    ImGui::TreePop();
+    //}
 }
 
 void Environment::SetAlphaBlend(bool isAlpha)

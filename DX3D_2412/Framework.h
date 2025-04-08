@@ -186,10 +186,6 @@ typedef function<void(int)> IntParamEvent;
 #include "Objects/Particle/Snow.h"
 #include "Objects/Particle/ParticleSystem.h"
 
-#include "Objects/Test/TestModel.h"
-
-#include "Objects/Character/Ghost.h"
-
 #include "Objects/HellfireDescent/Bullet/Bullet.h"
 #include "Objects/HellfireDescent/Bullet/BulletManager.h"
 

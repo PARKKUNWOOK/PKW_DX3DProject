@@ -144,8 +144,10 @@ void BFG9000::Explode()
     if (transform)
         transform->SetActive(false);
 
-    radius = 999999999.0f;
+    radius = 4.0f;
     explosionTime = 0.1f;
+
+    EffectManager::Get()->PlayBFGExplosion(GetGlobalPosition());
 
     for (Enemy* enemy : EnemyManager::Get()->GetAllEnemies())
     {
@@ -183,6 +185,8 @@ void BFG9000::EmitRays()
                     enemy->TakeDamage(1);
                     lastHit = currentTime;
                 }
+
+                EffectManager::Get()->PlayBFG9000LightningEffect(pos, hit.point);
             }
         }
     }

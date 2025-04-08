@@ -46,7 +46,7 @@ void StartRoomScene::PostRender()
 
 void StartRoomScene::GUIRender()
 {
-    PlayerManager::Get()->Edit();
+    //PlayerManager::Get()->Edit();
 }
 
 void StartRoomScene::CheckSceneTransition()
@@ -69,13 +69,13 @@ void StartRoomScene::CheckSceneTransition()
                 SCENE->Remove("Start");
                 SCENE->Add("Monster");
 
-                //if (!Audio::Get()->IsPlaySound("BGM"))
-                //{
-                //    if (!Audio::Get()->IsExist("BGM"))
-                //        Audio::Get()->Add("BGM", "Resources/Sounds/HellfireDescentSound/At_Doom's_Gate.mp3", true);
-                //
-                //    Audio::Get()->Play("BGM");
-                //}
+                if (!Audio::Get()->IsPlaySound("BGM"))
+                {
+                    if (!Audio::Get()->IsExist("BGM"))
+                        Audio::Get()->Add("BGM", "Resources/Sounds/HellfireDescentSound/At_Doom's_Gate.mp3", true);
+                
+                    Audio::Get()->Play("BGM");
+                }
 
                 Vector3 target = MapManager::Get()->GetDoorX(1)->GetLocalPosition();
                 Player::Get()->SetLocalPosition(target + Vector3(0, 0, -3));

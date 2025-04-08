@@ -16,6 +16,8 @@ public:
 	void Render();	
 	void Edit();
 
+	void UpdateHpUI();
+
 	bool IsPopup() { return isPopup; }
 
 private:
@@ -23,7 +25,8 @@ private:
 
 private:
 	Quad* cursor;
-	Quad* curHpUI;
+	Quad* hpWindowUI;
+	vector<Quad*> hpUI;
 
 	bool isPopup = false;
 };

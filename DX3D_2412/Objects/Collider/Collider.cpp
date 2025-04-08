@@ -1,6 +1,6 @@
 #include "Framework.h"
 
-bool Collider::isDraw = true;
+bool Collider::isDraw = false;
 
 Collider::Collider() : GameObject(L"Basic/Collider.hlsl")
 {

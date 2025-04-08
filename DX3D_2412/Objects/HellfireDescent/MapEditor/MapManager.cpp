@@ -21,7 +21,7 @@ void MapManager::Update()
 		Vector3 position = door->GetLocalPosition();
 		position.y -= 2.0f * DELTA;
 
-		if (position.y < -10.0f) // 특정 위치 아래로 내려가면 제거
+		if (position.y < -10.0f)
 		{
 			door->SetActive(false);
 		}

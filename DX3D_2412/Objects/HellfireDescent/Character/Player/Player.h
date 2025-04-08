@@ -24,8 +24,10 @@ public:
 	void Edit();
 
 	void TakeDamage(int damage, Vector3 knockbackDir);
+	int GetCurrentHp() { return curHp; }
 	bool IsGameOver() { return isGameOver; }
 	SphereCollider* GetCollider() { return this; }
+
 
 private:
 	void Control();

@@ -27,20 +27,39 @@ EffectManager::EffectManager()
 
     for (int i = 0; i < LIGHTNING_POOL_SIZE; i++)
     {
-        Sprite* sprite = new Sprite(L"Resources/Textures/FX/Lightning_8x1.png", 222.0f, 68.0f, 1, 8, false);
+        Sprite* sprite = new Sprite(L"Resources/Textures/FX/Lightning_8x1.png", 68.0f, 222.0f, 8, 1, false);
         sprite->SetSize(Float2(10.0f, 10.0f));
         LightningEffect effect;
         effect.sprite = sprite;
         lightningEffects.push_back(effect);
     }
 
+    for (int i = 0; i < LIGHTNING_POOL_SIZE; i++)
+    {
+        Sprite* hSprite = new Sprite(L"Resources/Textures/FX/GreenLightning_8x1.png", 222.0f, 68.0f, 8, 1, false);
+        hSprite->SetSize(Float2(10.0f, 10.0f));
+        LightningEffect hEffect;
+        hEffect.sprite = hSprite;
+        greenLightningHorizontalEffects.push_back(hEffect);
+
+        Sprite* vSprite = new Sprite(L"Resources/Textures/FX/GreenLightning_1x8.png", 68.0f, 222.0f, 1, 8, false);
+        vSprite->SetSize(Float2(10.0f, 10.0f));
+        LightningEffect vEffect;
+        vEffect.sprite = vSprite;
+        greenLightningVerticalEffects.push_back(vEffect);
+    }
+
     explosionEffect = new Sprite(L"Resources/Textures/FX/explosion.png", 128.0f, 128.0f, 5, 3, true);
     explosionEffect->SetSize(Float2(4, 4));
+
+    bfgExplosionEffect = new Sprite(L"Resources/Textures/FX/explosion_4x4.png", 128, 128, 4, 4, true);
+    bfgExplosionEffect->SetSize(Float2(4, 4));
 }
 
 EffectManager::~EffectManager()
 {
     delete explosionEffect;
+    delete bfgExplosionEffect;
 
     for (int i = 0; i < greenBulletEffects.size(); i++)
         delete greenBulletEffects[i].sprite;
@@ -55,11 +74,40 @@ EffectManager::~EffectManager()
 void EffectManager::Update()
 {
     explosionEffect->Update();
+    bfgExplosionEffect->Update();
 
     UpdateEffects(greenBulletEffects);
     UpdateEffects(redBulletEffects);
 
     for (LightningEffect& e : lightningEffects)
+    {
+        if (!e.active) continue;
+
+        e.lifeTime += DELTA;
+        e.sprite->Update();
+
+        if (e.lifeTime > 1.0f)
+        {
+            e.sprite->Stop();
+            e.active = false;
+        }
+    }
+
+    for (LightningEffect& e : greenLightningHorizontalEffects)
+    {
+        if (!e.active) continue;
+
+        e.lifeTime += DELTA;
+        e.sprite->Update();
+
+        if (e.lifeTime > 1.0f)
+        {
+            e.sprite->Stop();
+            e.active = false;
+        }
+    }
+
+    for (LightningEffect& e : greenLightningVerticalEffects)
     {
         if (!e.active) continue;
 
@@ -97,6 +145,7 @@ void EffectManager::UpdateEffects(vector<FollowEffect>& effects)
 void EffectManager::Render()
 {
     explosionEffect->Render();
+    bfgExplosionEffect->Render();
 
     for (int i = 0; i < greenBulletEffects.size(); i++)
         greenBulletEffects[i].sprite->Render();
@@ -106,11 +155,23 @@ void EffectManager::Render()
 
     for (LightningEffect& e : lightningEffects)
         if (e.active) e.sprite->Render();
+
+    for (LightningEffect& e : greenLightningHorizontalEffects)
+        if (e.active) e.sprite->Render();
+
+    for (LightningEffect& e : greenLightningVerticalEffects)
+        if (e.active) e.sprite->Render();
 }
 
 void EffectManager::PlayExplosion(const Vector3& position)
 {
     explosionEffect->Play(position);
+}
+
+void EffectManager::PlayBFGExplosion(const Vector3& position)
+{
+    if (bfgExplosionEffect != nullptr)
+        bfgExplosionEffect->Play(position);
 }
 
 void EffectManager::PlayBulletEffect(Transform* target, BulletEffectType type)
@@ -162,8 +223,37 @@ void EffectManager::PlayLightningEffect(Vector3& start, Vector3& end)
 
             e.sprite->SetSize(Float2(length, 1.0f));
             e.sprite->Play(mid);
-            //e.sprite->SetRotation(angle);
 
+            break;
+        }
+    }
+}
+
+void EffectManager::PlayBFG9000LightningEffect(const Vector3& start, const Vector3& end)
+{
+    Vector3 dir = end - start;
+    float length = dir.Magnitude();
+    Vector3 mid = (start + end) * 0.5f;
+
+    bool isVertical = abs(dir.y) > abs(dir.x);
+
+    vector<LightningEffect>& pool = isVertical ? greenLightningVerticalEffects : greenLightningHorizontalEffects;
+
+    for (LightningEffect& e : pool)
+    {
+        if (!e.active)
+        {
+            e.start = start;
+            e.end = end;
+            e.lifeTime = 0.0f;
+            e.active = true;
+
+            if (isVertical)
+                e.sprite->SetSize(Float2(1.0f, length));
+            else
+                e.sprite->SetSize(Float2(length, 1.0f));
+
+            e.sprite->Play(mid);
             break;
         }
     }

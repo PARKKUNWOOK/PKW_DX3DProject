@@ -202,7 +202,6 @@
     <ClInclude Include="Objects\Basic\Pyramid.h" />
     <ClInclude Include="Objects\Basic\Quad.h" />
     <ClInclude Include="Objects\Basic\Sphere.h" />
-    <ClInclude Include="Objects\Character\Ghost.h" />
     <ClInclude Include="Objects\Collider\BoxCollider.h" />
     <ClInclude Include="Objects\Collider\CapsuleCollider.h" />
     <ClInclude Include="Objects\Collider\Collider.h" />
@@ -242,35 +241,22 @@
     <ClInclude Include="Objects\Particle\Sprite.h" />
     <ClInclude Include="Objects\HellfireDescent\Bullet\Bullet.h" />
     <ClInclude Include="Objects\HellfireDescent\Bullet\BulletManager.h" />
-    <ClInclude Include="Objects\Test\TestModel.h" />
     <ClInclude Include="Objects\UI\Button.h" />
     <ClInclude Include="Objects\UI\ProgressBar.h" />
     <ClInclude Include="Objects\UI\UIManager.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="Scenes\AStarScene.h" />
-    <ClInclude Include="Scenes\BillboardScene.h" />
-    <ClInclude Include="Scenes\CollisionScene.h" />
     <ClInclude Include="Scenes\CubeMapEditorScene.h" />
     <ClInclude Include="Scenes\GridScene.h" />
     <ClInclude Include="Scenes\HellfireDescentScenes\Room\StoreRoomScene.h" />
-    <ClInclude Include="Scenes\InstancingScene.h" />
-    <ClInclude Include="Scenes\LightScene.h" />
-    <ClInclude Include="Scenes\MapEditorScene.h" />
     <ClInclude Include="Scenes\ModelAnimationScene.h" />
     <ClInclude Include="Scenes\ModelEquipScene.h" />
     <ClInclude Include="Scenes\ModelExportScene.h" />
     <ClInclude Include="Scenes\ModelInstancingScene.h" />
     <ClInclude Include="Scenes\ModelRenderScene.h" />
-    <ClInclude Include="Scenes\OutlineScene.h" />
     <ClInclude Include="Scenes\ParticleEditorScene.h" />
-    <ClInclude Include="Scenes\RenderTargetScene.h" />
     <ClInclude Include="Scenes\Scene.h" />
-    <ClInclude Include="Scenes\ShadowScene.h" />
     <ClInclude Include="Scenes\HellfireDescentScenes\Room\MonsterRoomScene.h" />
     <ClInclude Include="Scenes\HellfireDescentScenes\Room\StartRoomScene.h" />
-    <ClInclude Include="Scenes\TerrainScene.h" />
-    <ClInclude Include="Scenes\WaterScene.h" />
-    <ClInclude Include="Scenes\WeatherScene.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -330,7 +316,6 @@
     <ClCompile Include="Objects\Basic\Pyramid.cpp" />
     <ClCompile Include="Objects\Basic\Quad.cpp" />
     <ClCompile Include="Objects\Basic\Sphere.cpp" />
-    <ClCompile Include="Objects\Character\Ghost.cpp" />
     <ClCompile Include="Objects\Collider\BoxCollider.cpp" />
     <ClCompile Include="Objects\Collider\CapsuleCollider.cpp" />
     <ClCompile Include="Objects\Collider\Collider.cpp" />
@@ -369,33 +354,20 @@
     <ClCompile Include="Objects\Particle\Sprite.cpp" />
     <ClCompile Include="Objects\HellfireDescent\Bullet\Bullet.cpp" />
     <ClCompile Include="Objects\HellfireDescent\Bullet\BulletManager.cpp" />
-    <ClCompile Include="Objects\Test\TestModel.cpp" />
     <ClCompile Include="Objects\UI\Button.cpp" />
     <ClCompile Include="Objects\UI\ProgressBar.cpp" />
     <ClCompile Include="Objects\UI\UIManager.cpp" />
-    <ClCompile Include="Scenes\AStarScene.cpp" />
-    <ClCompile Include="Scenes\BillboardScene.cpp" />
-    <ClCompile Include="Scenes\CollisionScene.cpp" />
     <ClCompile Include="Scenes\CubeMapEditorScene.cpp" />
     <ClCompile Include="Scenes\GridScene.cpp" />
     <ClCompile Include="Scenes\HellfireDescentScenes\Room\StoreRoomScene.cpp" />
-    <ClCompile Include="Scenes\InstancingScene.cpp" />
-    <ClCompile Include="Scenes\LightScene.cpp" />
-    <ClCompile Include="Scenes\MapEditorScene.cpp" />
     <ClCompile Include="Scenes\ModelAnimationScene.cpp" />
     <ClCompile Include="Scenes\ModelEquipScene.cpp" />
     <ClCompile Include="Scenes\ModelExportScene.cpp" />
     <ClCompile Include="Scenes\ModelInstancingScene.cpp" />
     <ClCompile Include="Scenes\ModelRenderScene.cpp" />
-    <ClCompile Include="Scenes\OutlineScene.cpp" />
     <ClCompile Include="Scenes\ParticleEditorScene.cpp" />
-    <ClCompile Include="Scenes\RenderTargetScene.cpp" />
-    <ClCompile Include="Scenes\ShadowScene.cpp" />
     <ClCompile Include="Scenes\HellfireDescentScenes\Room\MonsterRoomScene.cpp" />
     <ClCompile Include="Scenes\HellfireDescentScenes\Room\StartRoomScene.cpp" />
-    <ClCompile Include="Scenes\TerrainScene.cpp" />
-    <ClCompile Include="Scenes\WaterScene.cpp" />
-    <ClCompile Include="Scenes\WeatherScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DX3D_2412.rc" />
